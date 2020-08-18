@@ -11,8 +11,7 @@ public class sayHello : Panel
 	public override void _Ready()
 	{
 		GetNode("Button").Connect("pressed", this, nameof(_OnButtonPressed));
-		
-		
+        
 	}
 	
 	public void _OnButtonPressed() {

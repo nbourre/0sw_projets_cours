@@ -43,6 +43,13 @@
                 "Attach",
                 "Run",
             ]
+        },
+        {
+            "name": "Run home and attach",
+            "configurations": [
+                "Attach",
+                "Run home",
+            ]
         }
     ]
 }
