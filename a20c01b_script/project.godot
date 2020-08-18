@@ -19,6 +19,14 @@ config/name="a20c01b_script"
 run/main_scene="res://sayHello.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "MonoDebuggerQM-1.0.2" )
+
+[logging]
+
+file_logging/enable_file_logging=true
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
