@@ -15,8 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="a20c01d_signals"
-run/main_scene="res://Node2D.tscn"
+config/name="test_particles"
 config/icon="res://icon.png"
 
 [rendering]
