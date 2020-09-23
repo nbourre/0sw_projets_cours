@@ -24,17 +24,30 @@ public class Main : Node
     {
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
+
+        GetNode<AudioStreamPlayer>("Music").Stop();
+
+        GetNode<AudioStreamPlayer>("DeathSound").Play();
+        GetNode<HUD>("HUD").ShowGameOver();
+
+        GetTree().CallGroup("mobs", "queue_free");
     }
 
     public void NewGame()
     {
         _score = 0;
 
+        var hud = GetNode<HUD>("HUD");
+        hud.UpdateScore(_score);
+        hud.ShowMessage("Get Ready!");
+
         var player = GetNode<Player>("Player");
         var startPosition = GetNode<Position2D>("StartPosition");
         player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
+
+        GetNode<AudioStreamPlayer>("Music").Play();
     }
     public void OnStartTimerTimeout()
     {
@@ -45,6 +58,7 @@ public class Main : Node
     public void OnScoreTimerTimeout()
     {
         _score++;
+        GetNode<HUD>("HUD").UpdateScore(_score);
     }
 
     public void OnMobTimerTimeout()
