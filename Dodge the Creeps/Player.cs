@@ -12,6 +12,8 @@ public class Player : Area2D
 
     private Vector2 _screenSize;
 
+    private Vector2 _target;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -24,25 +26,29 @@ public class Player : Area2D
     {
         var velocity = new Vector2();
 
-        if (Input.IsActionPressed("ui_right")) 
-        {
-            velocity.x += 1;
-        }        
-
-        if (Input.IsActionPressed("ui_left")) 
-        {
-            velocity.x -= 1;
+        if (Position.DistanceTo(_target) > 10) {
+            velocity = _target - Position;
         }
 
-        if (Input.IsActionPressed("ui_down")) 
-        {
-            velocity.y += 1;
-        }
+        // if (Input.IsActionPressed("ui_right")) 
+        // {
+        //     velocity.x += 1;
+        // }        
 
-        if (Input.IsActionPressed("ui_up")) 
-        {
-            velocity.y -= 1;
-        }
+        // if (Input.IsActionPressed("ui_left")) 
+        // {
+        //     velocity.x -= 1;
+        // }
+
+        // if (Input.IsActionPressed("ui_down")) 
+        // {
+        //     velocity.y += 1;
+        // }
+
+        // if (Input.IsActionPressed("ui_up")) 
+        // {
+        //     velocity.y -= 1;
+        // }
 
         var animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 
@@ -80,7 +86,15 @@ public class Player : Area2D
     public void Start(Vector2 pos)
     {
         Position = pos;
+        _target = pos;
         Show();
         GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+    }
+
+    public override void _Input(InputEvent @event) {
+        if (@event is InputEventScreenTouch eventMouseButton &&
+                eventMouseButton.Pressed) {
+                    _target = (@event as InputEventScreenTouch).Position;
+        }
     }
 }
