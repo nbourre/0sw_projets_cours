@@ -22,6 +22,8 @@ public class Player : KinematicBody2D
                             - Input.GetActionStrength("ui_left");
         input_vector.y = Input.GetActionStrength("ui_down") 
                             - Input.GetActionStrength("ui_up");
+        
+        input_vector = input_vector.Normalized();
 
         return input_vector;
     }
@@ -31,12 +33,12 @@ public class Player : KinematicBody2D
         var input_vector = GetInput();
 
         if (input_vector != Vector2.Zero) {
-            Velocity = input_vector;
+            Velocity = input_vector * MAX_SPEED;
         } else {
             Velocity = Vector2.Zero;
         }
 
-        MoveAndCollide(Velocity * delta * MAX_SPEED);
+        MoveAndCollide(Velocity * delta);
     }
 
 }
