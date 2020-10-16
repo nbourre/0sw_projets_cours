@@ -13,30 +13,28 @@ public class Player : KinematicBody2D
         
     }
 
-    public void GetInput()
+    public Vector2 GetInput()
     {
-        Velocity = new Vector2();
+        var input_vector = Vector2.Zero;
+        input_vector.x = Input.GetActionStrength("ui_right") 
+                            - Input.GetActionStrength("ui_left");
+        input_vector.y = Input.GetActionStrength("ui_down") 
+                            - Input.GetActionStrength("ui_up");
 
-        if (Input.IsActionPressed("ui_right"))
-            Velocity.x += 1;
-
-        if (Input.IsActionPressed("ui_left"))
-            Velocity.x -= 1;
-
-        if (Input.IsActionPressed("ui_down"))
-            Velocity.y += 1;
-
-        if (Input.IsActionPressed("ui_up"))
-            Velocity.y -= 1;
-
-        Velocity = Velocity.Normalized() * Speed;
+        return input_vector;
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        GetInput();
-        
-        Velocity = MoveAndSlide(Velocity);
+        var input_vector = GetInput();
+
+        if (input_vector != Vector2.Zero) {
+            Velocity = input_vector;
+        } else {
+            Velocity = Vector2.Zero;
+        }
+
+        MoveAndCollide(Velocity);
     }
 
 }
