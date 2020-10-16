@@ -5,6 +5,8 @@ public class Player : KinematicBody2D
 {
     [Export]
     public int Speed = 200;
+
+    const int MAX_SPEED = 100;
     public Vector2 Velocity = Vector2.Zero;
 
     // Called when the node enters the scene tree for the first time.
@@ -34,7 +36,7 @@ public class Player : KinematicBody2D
             Velocity = Vector2.Zero;
         }
 
-        MoveAndCollide(Velocity);
+        MoveAndCollide(Velocity * delta * MAX_SPEED);
     }
 
 }
