@@ -7,6 +7,7 @@ public class Player : KinematicBody2D
     public int Speed = 200;
 
     const int MAX_SPEED = 100;
+    const int ACCELERATION = 200;
     public Vector2 Velocity = Vector2.Zero;
 
     // Called when the node enters the scene tree for the first time.
@@ -33,7 +34,7 @@ public class Player : KinematicBody2D
             var input_vector = GetInput();
 
             if (input_vector != Vector2.Zero) {
-                Velocity = input_vector * MAX_SPEED;
+                Velocity += input_vector * ACCELERATION * delta;
             } else {
                 Velocity = Vector2.Zero;
             }
