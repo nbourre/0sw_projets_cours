@@ -16,13 +16,13 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 6.75
-height = 13.0
+radius = 4.49403
+height = 3.29468
 
 [node name="World" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 89.25, 63 )
+position = Vector2( 88.9159, 64.1136 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -32,5 +32,11 @@ __meta__ = {
 frames = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( -1, 0 )
+position = Vector2( -0.89566, 8.66206 )
+rotation = -1.5708
 shape = SubResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 0, 240, 320, 240, 320, 0, 248, 16, 272, 64, 232, 128, 256, 176, 160, 184, 112, 152, 72, 184, 48, 144, 72, 120, 40, 72, 72, 24, 72, 0 )
