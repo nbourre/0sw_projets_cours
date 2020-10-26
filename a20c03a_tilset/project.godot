@@ -15,18 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="a20c02b_playerMovement"
-run/main_scene="res://World.tscn"
+config/name="a20c03a_tilset"
 config/icon="res://icon.png"
-
-[display]
-
-window/size/width=320
-window/size/height=240
-window/size/test_width=800
-window/size/test_height=600
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
 
 [rendering]
 

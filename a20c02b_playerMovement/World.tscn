@@ -1,40 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Player.png" type="Texture" id=1]
-[ext_resource path="res://Player.cs" type="Script" id=2]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 4.49403
-height = 3.29468
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 
 [node name="World" type="Node2D"]
 
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 88.9159, 64.1136 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
-frames = SubResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( -0.89566, 8.66206 )
-rotation = -1.5708
-shape = SubResource( 3 )
+[node name="Player" parent="." instance=ExtResource( 1 )]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
