@@ -11,11 +11,16 @@ public class Player : KinematicBody2D
     const int FRICTION = 25;
     public Vector2 Velocity = Vector2.Zero;
 
+    public AnimationPlayer AnimationPlayer;
+
+    
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        AnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
     }
+
     public Vector2 GetInput()
     {
         var input_vector = Vector2.Zero;
@@ -36,8 +41,15 @@ public class Player : KinematicBody2D
         if (input_vector != Vector2.Zero) {
             // Velocity += input_vector * ACCELERATION * delta;
             // Velocity = Velocity.Clamped(MAX_SPEED * delta);
+            if (input_vector.x > 0) {
+                AnimationPlayer.Play("RunRight");
+            } else {
+                AnimationPlayer.Play("RunLeft");
+            }
+
             Velocity = Velocity.MoveToward(input_vector * MAX_SPEED, ACCELERATION);
         } else {
+            AnimationPlayer.Play("IdleRight");
             Velocity = Velocity.MoveToward(Vector2.Zero, FRICTION);
         }
 
