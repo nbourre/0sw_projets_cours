@@ -15,12 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="a20c03a_tileset"
-config/icon="res://assets/icon.png"
-
-[display]
-
-window/size/resizable=false
+config/name="a20c04a_gridBasedMovement"
+config/icon="res://icon.png"
 
 [rendering]
 
