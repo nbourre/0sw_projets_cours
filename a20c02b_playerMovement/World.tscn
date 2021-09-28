@@ -21,7 +21,7 @@ height = 13.0
 [node name="World" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 89.25, 63 )
+position = Vector2( 112, 112 )
 __meta__ = {
 "_edit_group_": true
 }
