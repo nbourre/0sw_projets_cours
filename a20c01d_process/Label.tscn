@@ -3,11 +3,14 @@
 [ext_resource path="res://Label.cs" type="Script" id=1]
 
 [node name="Label" type="Label"]
-anchor_right = 0.217
-margin_left = 21.0
-margin_top = 18.0
-margin_right = -101.208
-margin_bottom = 32.0
+anchor_left = 0.348
+anchor_top = 0.215
+anchor_right = 0.57
+anchor_bottom = 0.387
+margin_left = -253.352
+margin_top = -62.0
+margin_right = -380.68
+margin_bottom = -151.2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
