@@ -1,3 +1,4 @@
 {
-    "workbench.colorTheme": "Default Light+"
+    "workbench.colorTheme": "Visual Studio 2019 Dark",
+    "godot_tools.editor_path": "c:\\_data\\outils\\Godot_v3.3.3-stable_mono_win64\\Godot_v3.3.3-stable_mono_win64.exe"
 }
