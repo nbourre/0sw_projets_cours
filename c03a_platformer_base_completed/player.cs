@@ -59,6 +59,8 @@ public class player : KinematicBody2D
             // On ne regarde qu'un seul fois et non le maintient de la touche
             if (Input.IsActionJustPressed("ui_jump")) {
                 motion.y = -JUMPFORCE;
+                GD.Print($"motion.y = {motion.y}");
+                Console.WriteLine($"motion.y = {motion.y}");
             }
 
         if (!IsOnFloor()) {
@@ -66,7 +68,6 @@ public class player : KinematicBody2D
                 animPlayer.Play("jump");
             } else if (motion.y > 0) {
                 animPlayer.Play("fall");
-                Console.WriteLine("test");
             }
         }
 
