@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/DirtAutoTile.tres" type="TileSet" id=1]
+
+[node name="world_platform" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 131076, 0, 1, 131077, 0, 65536, 131078, 0, 196613, 196612, 0, 65537, 196613, 0, 131072, 196614, 0, 65547, 196615, 0, 196613, 196616, 0, 196609, 196617, 0, 196609, 196618, 0, 196609, 196619, 0, 196610 )
