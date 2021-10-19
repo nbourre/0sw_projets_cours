@@ -9,6 +9,10 @@ public class player : KinematicBody2D
 
     Vector2 input_vector = new Vector2();
     public Vector2 Velocity = Vector2.Zero;
+    public Vector2 PreviousPosition = Vector2.Zero;
+
+    [Signal]
+    public delegate void OnMoving(Vector2 previous, Vector2 current);
 
     
 
@@ -33,14 +37,21 @@ public class player : KinematicBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
+        
+
         input_vector = getInput();
 
         if (input_vector != Vector2.Zero) {
             Velocity = Velocity.MoveToward(input_vector * MAX_SPEED, ACCELERATION);
+            EmitSignal(nameof(OnMoving), PreviousPosition, this.Position);
         } else {
             Velocity = Velocity.MoveToward(Vector2.Zero, FRICTION);
         }
 
         Velocity = MoveAndSlide(Velocity);
+        PreviousPosition.x =  this.Position.x;
+        PreviousPosition.y =  this.Position.y;        
     }
+
+
 }

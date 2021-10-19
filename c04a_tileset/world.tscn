@@ -11,3 +11,5 @@ script = ExtResource( 3 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 445, 281 )
+
+[connection signal="OnMoving" from="player" to="." method="OnPlayerMoving"]
