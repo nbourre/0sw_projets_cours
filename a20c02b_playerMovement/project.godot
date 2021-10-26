@@ -8,11 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[  ]
-_global_script_class_icons={
-
-}
-
 [application]
 
 config/name="a20c02b_playerMovement"
@@ -25,6 +20,10 @@ window/size/height=240
 window/size/test_width=800
 window/size/test_height=600
 window/stretch/mode="2d"
+
+[gdnative]
+
+singletons=[  ]
 
 [rendering]
 
