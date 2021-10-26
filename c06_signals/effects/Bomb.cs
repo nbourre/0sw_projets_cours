@@ -23,6 +23,7 @@ public class Bomb : Node2D
     }
 
     public void Explode() {
+
         EmitSignal(nameof(OnExplode), Position);
         this.QueueFree();
     }
