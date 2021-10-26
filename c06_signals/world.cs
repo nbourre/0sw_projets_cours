@@ -5,18 +5,19 @@ using System.Collections.Generic;
 public class world : Node2D
 {
     Explosion explosion;
-    Node2D bombs;
+    Node2D bombsContainer;
     PackedScene bombScene;
+    List<Bomb> bombs;
     
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         explosion = GetNode<Explosion>("EffectsLayer/Explosion");
-        //bombs = new List<Bomb>();
+        bombs = new List<Bomb>();
         bombScene = GD.Load<PackedScene>("res://effects/Bomb.tscn");
 
-        bombs = GetNode<Node2D>("bombs");
+        bombsContainer = GetNode<Node2D>("bombs");
     }
 
     public override void _Input(InputEvent @event)
@@ -35,10 +36,22 @@ public class world : Node2D
     }
 
     private void AddBomb(Vector2 position) {
+        // TODO : Validate position before adding
+
         var createdBomb = (Bomb)bombScene.Instance();
         createdBomb.Position = position;
-        bombs.AddChild(createdBomb, true);
+        
+       
+        
+        bombsContainer.CallDeferred("add_child", createdBomb);
+        bombs.Add(createdBomb);
+
+        GD.Print($"Nb children : {bombsContainer.GetChildCount()}");
     } 
+
+
+
+    
 
     public override void _Process(float delta)
     {
