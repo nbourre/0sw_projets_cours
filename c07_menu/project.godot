@@ -8,15 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
-_global_script_class_icons={
-
-}
-
 [application]
 
-config/name="a20c01f_signals_coded"
+config/name="c07_menu"
 config/icon="res://icon.png"
+
+[physics]
+
+common/enable_pause_aware_picking=true
 
 [rendering]
 
