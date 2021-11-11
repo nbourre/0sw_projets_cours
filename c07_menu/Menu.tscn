@@ -41,6 +41,9 @@ margin_right = 63.0
 margin_bottom = 68.0
 focus_neighbour_bottom = NodePath("../StartButton")
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="onStartButtonPressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="onOptionsButtonPressed"]
