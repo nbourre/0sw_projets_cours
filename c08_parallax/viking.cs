@@ -62,6 +62,20 @@ public class viking : KinematicBody2D
 
         var input_vector = GetInput();
 
+        if (IsOnFloor()) {
+            velocity.y = 0;
+            if (Input.IsActionJustPressed("jump")) {
+                velocity.y = MAX_JUMP;
+                
+                GD.Print("Jumping");
+                GD.Print($"Velocity.y : {velocity.y}");
+            } else {
+                if (input_vector != Vector2.Zero) {
+                    animTree.Set("parameters/movement/current", 1);
+                }
+            }
+        }
+
         velocity.y += gravity;
 
         if (velocity.y > MAXFALLSPEED) {
@@ -85,19 +99,7 @@ public class viking : KinematicBody2D
         }
 
 
-        if (IsOnFloor()) {
-            velocity.y = 0;
-            if (Input.IsActionJustPressed("jump")) {
-                velocity.y = MAX_JUMP;
-                
-                GD.Print("Jumping");
-                GD.Print($"Velocity.y : {velocity.y}");
-            } else {
-                if (input_vector != Vector2.Zero) {
-                    animTree.Set("parameters/movement/current", 1);
-                }
-            }
-        }
+
 
         if (!IsOnFloor()){
             if (velocity.y < 0) {
