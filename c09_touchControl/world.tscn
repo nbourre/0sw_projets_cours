@@ -4,7 +4,7 @@
 [ext_resource path="res://world.cs" type="Script" id=2]
 [ext_resource path="res://viking.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/tiles.tres" type="TileSet" id=4]
-[ext_resource path="res://TouchControl.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ControlesTactiles.tscn" type="PackedScene" id=5]
 
 [node name="world" type="Node2D"]
 script = ExtResource( 2 )
@@ -28,4 +28,4 @@ current = true
 limit_bottom = 1100
 smoothing_enabled = true
 
-[node name="TouchControls" parent="." instance=ExtResource( 5 )]
+[node name="ControlesTactiles" parent="." instance=ExtResource( 5 )]
