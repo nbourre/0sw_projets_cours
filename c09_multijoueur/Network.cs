@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
+
+// Source : https://www.youtube.com/watch?v=lpkaMKE081M
 
 public class Network : Node
 {
@@ -9,6 +12,7 @@ public class Network : Node
     public string IPAddress { get; set; }
 
     private static NetworkedMultiplayerENet server;
+    private static NetworkedMultiplayerENet client;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -23,22 +27,36 @@ public class Network : Node
             IPAddress = IP.GetLocalAddresses()[3].ToString();
         }
 
-        GD.Print(IPAddress);
+        // Get the IP with access to the internet
+        // Source : https://stackoverflow.com/questions/13725844/how-to-get-ip-address-of-network-adapter-used-to-access-the-internet
+        System.Net.IPAddress ip = System.Net.Dns.GetHostEntry(System.Environment.MachineName)
+            .AddressList.Where(i => i.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).FirstOrDefault();
 
-        foreach (var ip in IP.GetLocalAddresses())
-        {
-            if (ip.ToString().Contains("192.168"))
-            {
-                IPAddress = ip.ToString();
-            }
-        }
+        GD.Print($"Device with internet : {ip.ToString()}");
+
+        IPAddress = ip.ToString();
+
+        // foreach (var ip in IP.GetLocalAddresses())
+        // {   
+        //     if (ip.ToString().Split('.').Length != 4)
+        //     {
+        //         continue;
+        //     }
+
+        //     if (ip.ToString().Contains("10.10"))
+        //     {
+        //         IPAddress = ip.ToString();
+        //     }
+        // }
 
         GD.Print(IPAddress);
 
         GetTree().Connect("connected_to_server", this, nameof(OnConnectedToServer));
         GetTree().Connect("server_disconnected", this, nameof(OnDisconnectedFromServer));
-        GetTree().Connect("network_peer_packet", this, nameof(OnPeerPacket));
+
+
     }
+
 
     public void CreateServer() {
         server = new NetworkedMultiplayerENet();
@@ -47,9 +65,11 @@ public class Network : Node
         GetTree().NetworkPeer = server;
     }
 
-    private void OnPeerPacket()
-    {
-        GD.Print("Packet received");
+    public void JoinServer() {
+        client = new NetworkedMultiplayerENet();
+        client.CreateClient(IPAddress, DEFAULT_PORT);
+
+        GetTree().NetworkPeer = client;
     }
 
     private void OnDisconnectedFromServer()
@@ -62,9 +82,4 @@ public class Network : Node
         GD.Print("Peer connected");
     }
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
 }

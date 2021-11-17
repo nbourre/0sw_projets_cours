@@ -11,6 +11,9 @@ script = ExtResource( 2 )
 [node name="Multiplayer_configure" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Create_server" type="Button" parent="Multiplayer_configure"]
 anchor_left = 0.5
@@ -52,6 +55,9 @@ margin_bottom = 221.0
 custom_fonts/font = ExtResource( 1 )
 align = 1
 placeholder_text = "enter IP address"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
