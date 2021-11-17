@@ -20,7 +20,6 @@ public class Network_setup : Control
         GetTree().Connect("network_peer_connected", this, nameof(_player_connected));
         GetTree().Connect("network_peer_disconnected", this, nameof(_player_disconnected));
         GetTree().Connect("connected_to_server", this, nameof(_connected_to_server));
-
         
         device_ip_address.Text = network.IPAddress;
 
@@ -30,7 +29,6 @@ public class Network_setup : Control
     public void _player_connected(int id)
     {
         GD.Print("Player connected: " + id);
-        //GetTree().ChangeScene("res://Scenes/Multiplayer/Multiplayer_game.tscn");
     }
 
     public void _player_disconnected(int id)
@@ -41,7 +39,6 @@ public class Network_setup : Control
     public void _connected_to_server()
     {
         GD.Print("Connected to server");
-        //GetTree().ChangeScene("res://Scenes/Multiplayer/Multiplayer_game.tscn");
     }
 
     public void _on_Create_server_pressed() {
