@@ -36,25 +36,10 @@ public class Network : Node
 
         IPAddress = ip.ToString();
 
-        // foreach (var ip in IP.GetLocalAddresses())
-        // {   
-        //     if (ip.ToString().Split('.').Length != 4)
-        //     {
-        //         continue;
-        //     }
-
-        //     if (ip.ToString().Contains("10.10"))
-        //     {
-        //         IPAddress = ip.ToString();
-        //     }
-        // }
-
         GD.Print(IPAddress);
 
         GetTree().Connect("connected_to_server", this, nameof(OnConnectedToServer));
         GetTree().Connect("server_disconnected", this, nameof(OnDisconnectedFromServer));
-
-
     }
 
 

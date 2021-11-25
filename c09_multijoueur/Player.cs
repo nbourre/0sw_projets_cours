@@ -4,10 +4,11 @@ using System;
 public class Player : KinematicBody2D
 {
     const float speed = 300;
-    Vector2 velocity = new Vector2();
+    public Vector2 Velocity {get;set;} = new Vector2();
     Tween tween;
 
     private Vector2 puppetPosition;
+
     [Puppet]
     public Vector2 PuppetPosition {
         get => puppetPosition;
@@ -20,7 +21,11 @@ public class Player : KinematicBody2D
     }
 
     [Puppet]
-    double puppetRotation;
+    float PuppetRotation = 0.0f;
+
+    [Puppet]
+    public Vector2 PuppetVelocity {get; set;}
+    
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -35,19 +40,27 @@ public class Player : KinematicBody2D
             var x_input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
             var y_input = Input.GetActionStrength("down") - Input.GetActionStrength("up");
 
-            velocity = new Vector2(x_input, y_input).Normalized() * speed;
+            Velocity = new Vector2(x_input, y_input).Normalized() * speed;
 
-            MoveAndSlide(velocity);
+            MoveAndSlide(Velocity);
             
             LookAt(GetGlobalMousePosition());
         }
         else {
+            RotationDegrees = Mathf.Lerp(RotationDegrees, PuppetRotation, delta * 8f);
+
+            // Permet d'extrapoler la position du puppet lorsque l'on ne reçoit pas de paquet
+            if (! tween.IsActive()) {
+                MoveAndSlide(PuppetVelocity * speed);
+            }
         }
     }
 
     public void _on_NetworkTickRate_timeout() {
         if (IsNetworkMaster()){
             RsetUnreliable(nameof(PuppetPosition), GlobalPosition);
+            RsetUnreliable(nameof(PuppetVelocity), Velocity);
+            RsetUnreliable(nameof(PuppetRotation), RotationDegrees);
         }
     }
 }
