@@ -43,14 +43,18 @@ public class Network_setup : Control
 
     public void _player_disconnected(int id)
     {
-        var disconnected_player = Players.GetChild(id);
-
-        if (disconnected_player != null)
+        foreach (Node2D player in Players.GetChildren())
         {
-            GD.Print($"Removing player {id} from Queue");
-            disconnected_player.QueueFree();
-            
+            GD.Print($"Player id : {player.Name}");
         }
+        // var disconnected_player = Players.GetChild(id);
+
+        // if (disconnected_player != null)
+        // {
+        //     GD.Print($"Removing player {id} from Queue");
+        //     disconnected_player.QueueFree();
+            
+        // }
 
         GD.Print("Player disconnected: " + id);
     }
