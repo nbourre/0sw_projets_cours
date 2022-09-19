@@ -183,7 +183,7 @@ input_1/name = "run"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=18]
-graph_offset = Vector2( 0, 327.5 )
+graph_offset = Vector2( 0, 3.5 )
 nodes/Animation/node = SubResource( 14 )
 nodes/Animation/position = Vector2( 460, 80 )
 "nodes/Animation 2/node" = SubResource( 11 )
@@ -199,7 +199,7 @@ nodes/in_air_state/position = Vector2( 980, 80 )
 nodes/movement/node = SubResource( 17 )
 nodes/movement/position = Vector2( 680, 80 )
 nodes/output/position = Vector2( 1160, 80 )
-node_connections = [ "output", 0, "in_air_state", "movement", 0, "Animation", "movement", 1, "Animation 2", "in_air_state", 0, "movement", "in_air_state", 1, "in_air", "in_air", 0, "Animation 3", "in_air", 1, "Animation 4" ]
+node_connections = [ "output", 0, "in_air_state", "movement", 0, "Animation", "movement", 1, "Animation 2", "in_air", 0, "Animation 3", "in_air", 1, "Animation 4", "in_air_state", 0, "movement", "in_air_state", 1, "in_air" ]
 
 [node name="viking" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -208,7 +208,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 hframes = 9
 vframes = 6
-frame = 2
+frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -233,4 +233,4 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/in_air/current = 1
 parameters/in_air_state/current = 0
-parameters/movement/current = 0
+parameters/movement/current = 1
