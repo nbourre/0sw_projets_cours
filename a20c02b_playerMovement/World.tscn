@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.png" type="Texture" id=1]
+[ext_resource path="res://Player.cs" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -22,6 +23,7 @@ height = 13.0
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 89.25, 63 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -32,3 +34,8 @@ frames = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2( -1, 0 )
 shape = SubResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 41.5914, 41.1218, 44.5563, 173.354, 114.526, 193.514, 239.05, 194.7, 272.849, 168.017, 261.582, 43.4937, 295.974, 44.6796, 298.939, 211.896, 68.8679, 217.826, 11.943, 206.56, 11.943, 40.5288 )
