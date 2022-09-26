@@ -5,11 +5,6 @@
 [ext_resource path="res://2d_animation_frog_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://Node2D.cs" type="Script" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 220, 0, 20, 30 )
-
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
@@ -20,17 +15,22 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 120, 0, 20, 30 )
 
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 220, 0, 20, 30 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "stop",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "run",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "stop",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=5]
