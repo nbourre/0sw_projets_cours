@@ -24,6 +24,8 @@ public class player : KinematicBody2D
 
     bool facing_right = true;
 
+    float dir = 0;
+
 
     Vector2 motion = new Vector2();
 
@@ -36,9 +38,65 @@ public class player : KinematicBody2D
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
+    void jump() {
+        if (motion.y >= 0) {
+            currentState = State.STATE_FALLING;
+            animPlayer.Play("fall");
+        } else {
+            animPlayer.Play("jump");
+        }      
+    }
+
+    void fall() {
+        if (IsOnFloor()) {
+            currentState = State.STATE_IDLE;
+            animPlayer.Play("Idle");
+        }
+    }
+
+    void idle() {
+        if (dir != 0) {
+            currentState = State.STATE_RUNNING;
+            animPlayer.Play("Run");
+        }
+        JumpCheck();
+        FallCheck(); 
+    }
+
+    void FallCheck() {
+        if (!IsOnFloor()) {
+            if (motion.y > 0) {
+                currentState = State.STATE_FALLING;
+                animPlayer.Play("fall");
+            }
+        }  
+    }
+
+    void JumpCheck() {
+        if (Input.IsActionJustPressed("ui_jump")) {
+            currentState = State.STATE_JUMPING;
+            motion.y = -JUMPFORCE;
+            animPlayer.Play("jump");
+        }         
+    }
+
+    void run(){
+        if (dir > 0) {
+            facing_right = true;
+        } else if (dir < 0) {
+            facing_right = false;
+        } else {
+            currentState = State.STATE_IDLE;
+            motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
+            animPlayer.Play("Idle");
+        }
+        JumpCheck(); 
+        FallCheck();
+    }
+
     public override void _PhysicsProcess(float delta)
     {
-        var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+        dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
 
         motion.x += ACCEL * dir;
         motion.y += GRAVITY;
@@ -48,65 +106,24 @@ public class player : KinematicBody2D
         } else {
             currentSprite.FlipH = true;
         }
-
+        
         switch(currentState) {
             case State.STATE_FALLING:
-                if (IsOnFloor()) {
-                    currentState = State.STATE_IDLE;
-                    animPlayer.Play("Idle");
-                }
+                fall();
                 break;
-            case State.STATE_IDLE:                
-                if (dir != 0) {
-                    currentState = State.STATE_RUNNING;
-                    animPlayer.Play("Run");
-                }
-                if (Input.IsActionJustPressed("ui_jump")) {
-                    currentState = State.STATE_JUMPING;
-                    motion.y = -JUMPFORCE;
-                    animPlayer.Play("jump");
-                }
-                if (!IsOnFloor()) {
-                    if (motion.y > 0) {
-                        currentState = State.STATE_FALLING;
-                        animPlayer.Play("fall");
-                    }
-                }                
+            case State.STATE_IDLE:
+                idle();            
                 break;
             case State.STATE_JUMPING:
-                if (motion.y >= 0) {
-                    currentState = State.STATE_FALLING;
-                    animPlayer.Play("fall");
-                } else {
-                    animPlayer.Play("jump");
-                }                
+                jump();          
                 break;
             case State.STATE_RUNNING:                
-                if (dir > 0) {
-                    facing_right = true;
-                } else if (dir < 0) {
-                    facing_right = false;
-                } else {
-                    currentState = State.STATE_IDLE;
-                    motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
-                    animPlayer.Play("Idle");
-                }
-                if (!IsOnFloor()) {
-                    if (motion.y > 0) {
-                        currentState = State.STATE_FALLING;
-                        animPlayer.Play("fall");
-                    }
-                }
-                if (Input.IsActionJustPressed("ui_jump")) {
-                    currentState = State.STATE_JUMPING;
-                    motion.y = -JUMPFORCE;
-                    animPlayer.Play("jump");
-                }                
+                run();              
                 break;
             default:
-                animPlayer.Play("Idle");
+                idle();
                 break;
-        }
+        }        
 
         motion.x = Mathf.Lerp(motion.x, MAXSPEED * motion.x > 0 ? 1 : -1, (ACCEL * 1f) / MAXSPEED);
 
@@ -114,7 +131,5 @@ public class player : KinematicBody2D
             motion.y = MAXFALLSPEED;
         }
         motion = MoveAndSlide(motion, UP);
-
-
     }    
 }
