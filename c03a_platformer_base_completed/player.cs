@@ -40,7 +40,7 @@ public class player : KinematicBody2D
             currentSprite.FlipH = true;
         }
 
-         motion.x = motion.Clamped(MAXSPEED).x;
+        
 
         if (Input.IsActionPressed("ui_left")) {
             motion.x -= ACCEL;
@@ -55,13 +55,14 @@ public class player : KinematicBody2D
             animPlayer.Play("Idle");
         }
 
-        if (IsOnFloor())
+        if (IsOnFloor()) {
             // On ne regarde qu'un seul fois et non le maintient de la touche
             if (Input.IsActionJustPressed("ui_jump")) {
                 motion.y = -JUMPFORCE;
                 GD.Print($"motion.y = {motion.y}");
                 Console.WriteLine($"motion.y = {motion.y}");
             }
+        }
 
         if (!IsOnFloor()) {
             if (motion.y < 0) {
@@ -70,6 +71,13 @@ public class player : KinematicBody2D
                 animPlayer.Play("fall");
             }
         }
+
+        // Bug : Si on saute, le X est automatiquement réduit, car l'impulsion est trop forte
+        // motion.x = motion.LimitLength(MAXSPEED).x;
+
+        motion.x = Mathf.Lerp(motion.x, MAXSPEED * motion.x > 0 ? 1 : -1, (ACCEL * 1f) / MAXSPEED);
+
+
 
         motion = MoveAndSlide(motion, UP);
     }
