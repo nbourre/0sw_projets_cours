@@ -25,6 +25,7 @@ public class player : KinematicBody2D
     bool facing_right = true;
 
     float dir = 0;
+    float delta = 0;
 
 
     Vector2 motion = new Vector2();
@@ -80,6 +81,7 @@ public class player : KinematicBody2D
         }         
     }
 
+
     void run(){
         if (dir > 0) {
             facing_right = true;
@@ -90,12 +92,14 @@ public class player : KinematicBody2D
             motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
             animPlayer.Play("Idle");
         }
+
         JumpCheck(); 
         FallCheck();
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        this.delta = delta;
         dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
 
         motion.x += ACCEL * dir;
