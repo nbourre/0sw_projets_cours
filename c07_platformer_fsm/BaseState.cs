@@ -4,15 +4,15 @@ using System.Collections.Generic;
 public class State : Node
 {
     /// <summary>
-    /// # Reference to the state machine, to call its `transition_to()` method directly.
-    /// That's one unorthodox detail of our state implementation, as it adds a dependency between the
-    /// state and the state machine objects, but we found it to be most efficient for our needs.
-    /// The state machine node will set it.
+    /// # Reference à la `StateMachine` pour appeler sa méthode `transition_to()` directement.
+    /// C'est notre triche pour l'implémentation du DP État, car cela ajoute une dépendance entre
+    /// l'état et l'objet `StateMachine`, mais une méthode efficace pour nos besoins
+    /// La machine à état qui l'assignera.
     /// </summary>
     public StateMachine _stateMachine = null;
 
     /// <summary>
-    /// Virtual function. Receives events from the `_unhandled_input()` callback.
+    /// Fonction virtuelle. Reçoit les événements de `_unhandled_input()`.
     /// </summary>
     /// <param name="inputEvent"></param>
     public virtual void HandleInputs(InputEvent inputEvent)
@@ -21,7 +21,7 @@ public class State : Node
     }
 
     /// <summary>
-    /// Virtual function. Corresponds to the `_process()` callback.
+    /// Fonction virtuel correspondant à `_process()`.
     /// </summary>
     /// <param name="delta"></param>
     public virtual void Update(float delta)
@@ -30,7 +30,7 @@ public class State : Node
     }
 
     /// <summary>
-    /// Virtual function. Corresponds to the `_physics_process()` callback.
+    /// Fonction virtuel correspondant à `_PhysicsProcess()`
     /// </summary>
     /// <param name="delta"></param>
     public virtual void PhysicsUpdate(float delta)
@@ -39,8 +39,8 @@ public class State : Node
     }
 
     /// <summary>
-    /// Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
-    /// is a dictionary with arbitrary data the state can use to initialize itself.
+    /// Fonction virtuelle. Appelée par la machine à état pour modifier l'état courant. Le paramètre `msg`
+    /// est un dictionnaire avec des données arbitraires que l'état peut utiliser pour initialiser.
     /// </summary>
     /// <param name="message"></param>
     public virtual void Enter(Dictionary<string, bool> message = null)
@@ -49,8 +49,8 @@ public class State : Node
     }
 
     /// <summary>
-    /// Virtual function. Called by the state machine before changing the active state. Use this function
-    /// to clean up the state.
+    /// Fonction virtuelle. Appelée par la machine à état avant de changer l'état courant. Utilisez cette
+    /// fonction pour nettoyer les ressources utilisées par l'état.
     /// </summary>
     public virtual void Exit()
     {
