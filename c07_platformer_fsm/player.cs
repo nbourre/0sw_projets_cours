@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class player : KinematicBody2D
+public class Player : KinematicBody2D
 {
 
     enum State {
