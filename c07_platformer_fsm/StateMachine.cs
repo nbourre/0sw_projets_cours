@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 public class StateMachine : Node
 {
     /// <summary>
-    /// Emitted when transitioning to a new state.
+    /// Émis lorsque l'état a changé
     /// </summary>
     /// <param name="stateName"></param>
     /// <returns></returns>
@@ -17,13 +17,13 @@ public class StateMachine : Node
     public delegate void Transitioned(string stateName);
 
     /// <summary>
-    /// Path to the initial active state. We export it to be able to pick the initial state in the inspector.
+    /// Chemin vers l'état initial. On doit le configurer dans l'inspecteur.
     /// </summary>
     [Export]
     public NodePath InitialState;
 
     /// <summary>
-    /// The current active state. At the start of the game, we get the `initial_state`.
+    /// L'état courant. On doit configurer l'état dans l'inspecteur.
     /// </summary>
     public State State;
 
@@ -35,12 +35,11 @@ public class StateMachine : Node
         Task.Run(async () => await ToSignal(Owner, "ready"));
         GD.Print("StateMachine: Waiting for owner to be ready.");
 
-        // The state machine assigns itself to the State objects' state_machine property.
+        // On assigne à chaque enfant la machine à états
         foreach (State child in GetChildren())
         {
             child._stateMachine = this;
         }
-        GD.Print("Oups!");
 
         State.Enter();
 
