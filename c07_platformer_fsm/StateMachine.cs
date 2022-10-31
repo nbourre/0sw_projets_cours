@@ -29,17 +29,22 @@ public class StateMachine : Node
 
     public override void _Ready()
     {
+        
         State = GetNode<State>(InitialState);
 
         Task.Run(async () => await ToSignal(Owner, "ready"));
+        GD.Print("StateMachine: Waiting for owner to be ready.");
 
         // The state machine assigns itself to the State objects' state_machine property.
         foreach (State child in GetChildren())
         {
             child._stateMachine = this;
         }
+        GD.Print("Oups!");
 
         State.Enter();
+
+        GD.Print("StateMachine: Ready");
     }
 
     /// <summary>
@@ -70,6 +75,7 @@ public class StateMachine : Node
     /// <param name="message"></param>
     public void TransitionTo(string targetStateName, Dictionary<string, bool> message = null)
     {
+        GD.Print("Transitioning to " + targetStateName);
         //  Safety check, you could use an assert() here to report an error if the state name is incorrect.
         //  We don't use an assert here to help with code reuse. If you reuse a state in different state machines
         //  but you don't want them all, they won't be able to transition to states that aren't in the scene tree.
