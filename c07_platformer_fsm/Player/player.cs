@@ -3,16 +3,6 @@ using System;
 
 public class Player : KinematicBody2D
 {
-
-    enum State {
-        STATE_JUMPING,
-        STATE_IDLE,
-        STATE_RUNNING,
-        STATE_FALLING
-    };
-    
-    State currentState = State.STATE_IDLE;
-
     Vector2 UP = new Vector2(0, -1);
     public int GRAVITY = 400;
     public int MAXFALLSPEED = 200;
