@@ -2,15 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-// The GD tutorial has this class named "Jump.gd". However, in C#, 
-// the name of a class is also its type, and should always be the node's 
-// name to avoid problems down the line.
 public class FallState : PlayerState
 {
-    /// <summary>
-    /// If we get a message asking us to jump, we jump.
-    /// </summary>
-    /// <param name="message"></param>
     public override void Enter(Dictionary<string, bool> message = null)
     {
         _player.animPlayer.Play("Fall");
