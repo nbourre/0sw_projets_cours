@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilesheet_complete_2X.png-6d547401f9e98c84052401106ebf9ddd.stex"
+path="res://.import/viking2.png-d17bc00f3b666364518fc8532596477f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/tilesheet_complete_2X.png"
-dest_files=[ "res://.import/tilesheet_complete_2X.png-6d547401f9e98c84052401106ebf9ddd.stex" ]
+source_file="res://assets/viking2.png"
+dest_files=[ "res://.import/viking2.png-d17bc00f3b666364518fc8532596477f.stex" ]
 
 [params]
 
