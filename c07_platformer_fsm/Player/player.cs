@@ -3,7 +3,6 @@ using System;
 
 public class Player : KinematicBody2D
 {
-    Vector2 UP = new Vector2(0, -1);
     public int GRAVITY = 400;
     public int MAXFALLSPEED = 200;
     public int MAXSPEED = 100;
@@ -34,5 +33,6 @@ public class Player : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {
         currentSprite.FlipH = !facing_right;
+        
     }    
 }
