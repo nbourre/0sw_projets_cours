@@ -4,23 +4,26 @@ using System.Linq;
 
 public class Map : Node
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
+    /// Noeud enfant qui est un TileMap
     TileMap tileMap;
     TileSet tileSet;
+    /// <summary>
+    /// Dictionnaire contenant les différents types de tuiles
+    /// Le nom de la tuile est la clé et la valeur est le ID de la tuile
+    /// </summary>
     Dictionary<string, int> tileMapDictionary = new Dictionary<string, int>();
-
+    
     int startTile;
     int endTile;
     int middleTile;
 
     bool debug = true;
 
+    /// <summary>
+    /// Objet pour le générateur de bruit
+    /// </summary>
     OpenSimplexNoise noise;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         tileMap = GetNode<TileMap>("TileMap");
@@ -28,11 +31,13 @@ public class Map : Node
 
         GD.Randomize();
         noise = new OpenSimplexNoise();
+        noise.Seed = (int)Mathf.Abs(GD.Randi());
         
         loadRessources();
         GenerateMap();
     }
 
+    
     public void loadRessources() {
         var ids = tileSet.GetTilesIds();
 
@@ -51,14 +56,12 @@ public class Map : Node
 
     public void GenerateMap()
     {
-        tileMap.Clear();
-
-        
+        tileMap.Clear();       
 
         float xOffset = 0f;
-        float xIncrement = 1;
+        float xIncrement = 0.35f;
 
-        int yStart = 8;
+        int yStart = 10;
         int yLevel = yStart;
         int yEnd = yStart;
 
@@ -68,14 +71,16 @@ public class Map : Node
         int xStart = 0;
         int xEnd = xStart + platformLength;
         int gapLength = 2;
+        var noiseValue = yStart;
+        var noiseValuePrevious = yStart;
 
-        for (int j = 0; j < nbPlatforms; j++)
+        for (int i = 0; i < nbPlatforms; i++)
         {
-            var noiseValue = noise.GetNoise1d(xOffset) * 90 + yStart;
+            
             tileMap.SetCell(xStart, (int)noiseValue, startTile);
             yEnd = (int)noiseValue;
 
-            GD.Print($"Platform : {j}, xStart: {xStart}, xEnd: {xEnd}, length: {platformLength}, noiseValue: {(int)noiseValue}");
+            GD.Print($"Platform : {i}, xStart: {xStart}, xEnd: {xEnd}, length: {platformLength}, noiseValue: {(int)noiseValue}");
 
           
             for (int x = xStart + 1; x < xEnd; x++)
@@ -93,12 +98,12 @@ public class Map : Node
             xEnd += platformLength;
             xOffset += xIncrement;
 
-            
+            noiseValue = (int)(noise.GetNoise1d(xOffset) * 50) + yStart;
         }        
     }
 
     private float MapValue(float value, float fromLow, float fromHigh, float toLow, float toHigh) 
-{
+    {
         return (value - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
     }
 }
