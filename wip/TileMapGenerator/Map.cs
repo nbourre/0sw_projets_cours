@@ -2,6 +2,13 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
+public struct Platform 
+{
+    public int Height { get; set; }
+    public int Length { get; set; }
+    public int Gap { get; set; }
+};
+
 public class Map : Node
 {
     /// Noeud enfant qui est un TileMap
@@ -12,6 +19,8 @@ public class Map : Node
     /// Le nom de la tuile est la clé et la valeur est le ID de la tuile
     /// </summary>
     Dictionary<string, int> tileMapDictionary = new Dictionary<string, int>();
+
+    List<Platform> platforms = new List<Platform>();
     
     int startTile;
     int endTile;
@@ -35,6 +44,7 @@ public class Map : Node
         
         loadRessources();
         GenerateMap();
+        Render();
     }
 
     
@@ -59,7 +69,7 @@ public class Map : Node
         tileMap.Clear();       
 
         float xOffset = 0f;
-        float xIncrement = 0.35f;
+        float xIncrement = 10f;
 
         int yStart = 10;
         int yLevel = yStart;
@@ -76,34 +86,47 @@ public class Map : Node
 
         for (int i = 0; i < nbPlatforms; i++)
         {
+            Platform platform = new Platform();
+
+            platform.Length = platformLength;
+            platform.Gap = gapLength;
+            platform.Height = noiseValue;
+
+            platforms.Add(platform);
+
+            platformLength = (int)GD.RandRange(5, 10);
+            gapLength = (int)GD.RandRange(2, 5);
+            noiseValue = (int)(MapValue(noise.GetNoise1d(xOffset), -1.0f, 1.0f, -20f, 20f)) + yStart;
+            xOffset += xIncrement;
+
+        }        
+    }
+
+    private void Render() {
+        int xStart = 0;
+        foreach (var platform in platforms) {
             
-            tileMap.SetCell(xStart, (int)noiseValue, startTile);
-            yEnd = (int)noiseValue;
+            int xEnd = xStart + platform.Length;
+            int yStart = platform.Height;
+            int yEnd = yStart;
 
-            GD.Print($"Platform : {i}, xStart: {xStart}, xEnd: {xEnd}, length: {platformLength}, noiseValue: {(int)noiseValue}");
+            tileMap.SetCell(xStart, yStart, startTile);
 
-          
             for (int x = xStart + 1; x < xEnd; x++)
             {
-                tileMap.SetCell(x, (int)noiseValue, middleTile);                
+                tileMap.SetCell(x, yStart, middleTile);
             }
 
             tileMap.SetCell(xEnd, yEnd, endTile);
-            
-            platformLength = (int)GD.RandRange(5, 10);
-            gapLength = (int)GD.RandRange(2, 5);
 
-            yStart = yEnd;
-            xStart = xEnd + gapLength;
-            xEnd += platformLength;
-            xOffset += xIncrement;
-
-            noiseValue = (int)(noise.GetNoise1d(xOffset) * 50) + yStart;
-        }        
+            xStart = xEnd + platform.Gap;
+        }
     }
 
     private float MapValue(float value, float fromLow, float fromHigh, float toLow, float toHigh) 
     {
-        return (value - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+        var result = (value - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+        GD.Print($"MapValue: {value} => {result}");
+        return result;
     }
 }
