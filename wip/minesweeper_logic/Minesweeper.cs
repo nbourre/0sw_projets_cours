@@ -205,14 +205,28 @@ class Minesweeper
     public string ToString(bool showAll = false)
     {
         string result = "";
+        result += GetHeader();
+
         for (int j = 0; j < Height; j++)
         {
+            result += j.ToString("D2") + "|";
             for (int i = 0; i < Width; i++)
             {
                 result += board[j][i].ToString(showAll);
             }
             result += "\n";
         }
+        return result;
+    }
+
+    private string GetHeader()
+    {
+        string result = "   ";
+        for (int i = 0; i < Width; i++)
+        {
+            result += i.ToString() + " ";
+        }
+        result += "\n";
         return result;
     }
     
