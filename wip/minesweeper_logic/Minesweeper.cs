@@ -14,15 +14,25 @@ class Minesweeper
 
         public override string ToString()
         {
-            if (IsMine)
+            return ToString(false);
+        }
+
+        public string ToString(bool show = false) {
+            if (IsRevealed || show)
             {
-                return "X";
+                if (IsMine)
+                {
+                    return "X";
+                }
+                else
+                {
+                    return AdjacentMines.ToString();
+                }
             }
             else
             {
-                return AdjacentMines.ToString();
-            }
-        
+                return " ";
+            }       
         }
     }
 
@@ -91,9 +101,7 @@ class Minesweeper
     /// <returns>Number of adjacent mines</returns>
     /// <remarks>Return -1 if the cell is a mine</remarks>
     /// <exception cref="ArgumentOutOfRangeException">If the cell is out of the board</exception>
-    /// <exception cref="NullReferenceException">If the board is not generated</exception>
     /// <exception cref="InvalidOperationException">If the board is not generated</exception>
-    /// <exception cref="IndexOutOfRangeException">If the cell is out of the board</exception>
     private int GetAdjacentMines(int x, int y)
     {
         if (board == null)
@@ -125,14 +133,18 @@ class Minesweeper
         return count;
     }
 
-    override public string ToString()
+    public override string ToString() {
+        return ToString(false);
+    }
+
+    public string ToString(bool showAll = false)
     {
         string result = "";
         for (int j = 0; j < Height; j++)
         {
             for (int i = 0; i < Width; i++)
             {
-                result += board[j][i].ToString();
+                result += board[j][i].ToString(showAll);
             }
             result += "\n";
         }
