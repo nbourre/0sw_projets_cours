@@ -14,21 +14,15 @@ class Minesweeper
 
         public override string ToString()
         {
-            if (IsRevealed)
+            if (IsMine)
             {
-                if (IsMine)
-                {
-                    return "X";
-                }
-                else
-                {
-                    return AdjacentMines.ToString();
-                }
+                return "X";
             }
             else
             {
-                return " ";
+                return AdjacentMines.ToString();
             }
+        
         }
     }
 
@@ -76,13 +70,14 @@ class Minesweeper
     /// </summary>
     private void GenerateNumbers() 
     {
-        for (int j = 0; j < sizeY; j++)
+        for (int j = 0; j < Height; j++)
         {
-            for (int i = 0; i < sizeX; i++)
+            for (int i = 0; i < Width; i++)
             {
                 if (!board[j][i].IsMine)
                 {
                     board[j][i].AdjacentMines = GetAdjacentMines(i, j);
+                    //Console.WriteLine($"Cell {i},{j} has {board[j][i].AdjacentMines} adjacent mines");
                 }
             }
         }
@@ -106,7 +101,7 @@ class Minesweeper
             throw new InvalidOperationException("The board is not generated");
         }
 
-        if (x < 0 || x >= sizeX || y < 0 || y >= sizeY)
+        if (x < 0 || x >= Width || y < 0 || y >= Height)
         {
             throw new ArgumentOutOfRangeException("The cell is out of the board");
         }
@@ -117,7 +112,7 @@ class Minesweeper
         {
             for (int i = x - 1; i <= x + 1; i++)
             {
-                if (i >= 0 && i < sizeX && j >= 0 && j < sizeY)
+                if (i >= 0 && i < Width && j >= 0 && j < Height)
                 {
                     if (board[j][i].IsMine)
                     {
@@ -133,9 +128,9 @@ class Minesweeper
     override public string ToString()
     {
         string result = "";
-        for (int j = 0; j < sizeY; j++)
+        for (int j = 0; j < Height; j++)
         {
-            for (int i = 0; i < sizeX; i++)
+            for (int i = 0; i < Width; i++)
             {
                 result += board[j][i].ToString();
             }
