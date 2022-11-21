@@ -5,12 +5,27 @@ class Minesweeper
 
     public int Width { get; set; } = 10;
     public int Height { get; set; } = 10;
-    public double Density { get; set; } = 0.15;
+
+    private double density = 0.15;
+    public double Density
+    {
+        get => density;
+        set
+        {
+            if (value < 0 || value > 1)
+                throw new ArgumentOutOfRangeException("Density must be between 0 and 1");
+            density = value;
+            GenerateBoard();
+        }
+    }
+
     public class Cell
     {
         public bool IsMine { get; set; } = false;
         public bool IsRevealed { get; set; } = false;
         public int AdjacentMines { get; set; }
+
+        public bool IsMarked { get; set; } = false;
 
         public override string ToString()
         {
@@ -22,11 +37,15 @@ class Minesweeper
             {
                 if (IsMine)
                 {
-                    return "X";
+                    return "X ";
                 }
+                else if (IsMarked)
+                {
+                    return "M ";
+                }                
                 else
                 {
-                    return AdjacentMines.ToString();
+                    return AdjacentMines.ToString() + " ";
                     //return AdjacentMines != 0 ? AdjacentMines.ToString() : " ";
                 }
             }
@@ -45,6 +64,53 @@ class Minesweeper
         GenerateBoard();
     }
 
+    public void Reset()
+    {
+        GenerateBoard();
+    }
+
+    public void Mark (int x, int y)
+    {
+        if (x < 0 || x >= Width || y < 0 || y >= Height)
+            throw new ArgumentOutOfRangeException("Coordinates out of bounds");
+
+        board[x][y].IsRevealed = true;
+    }
+
+    public void Reveal(int x, int y)
+    {
+        if (x < 0 || x >= Width || y < 0 || y >= Height)
+            throw new ArgumentOutOfRangeException("Coordinates out of bounds");
+
+        board[y][x].IsRevealed = true;
+
+        if (board[y][x].AdjacentMines == 0)
+        {
+            for (int i = x - 1; i <= x + 1; i++)
+            {
+                for (int j = y - 1; j <= y + 1; j++)
+                {
+                    if (i >= 0 && i < Width && j >= 0 && j < Height)
+                    {
+                        if (!board[j][i].IsRevealed && !board[j][i].IsMine)
+                        {
+                            Reveal(i, j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    public void Resize(int sizeX, int sizeY)
+    {
+        Width = sizeX;
+        Height = sizeY;
+        GenerateBoard();
+    }
+
     /// <summary>
     /// Function that generate the minesweeper board
     /// </summary>
@@ -52,25 +118,23 @@ class Minesweeper
     {
         int nbCells = Width * Height;
 
-        if (board == null)
+        board = new List<List<Cell>>();
+        for (int j = 0; j < Height; j++)
         {
-            board = new List<List<Cell>>();
-            for (int j = 0; j < Height; j++)
+            board.Add(new List<Cell>());
+            for (int i = 0; i < Width; i++)
             {
-                board.Add(new List<Cell>());
-                for (int i = 0; i < Width; i++)
-                {
-                    var cell = new Cell();
+                var cell = new Cell();
 
-                    // Randomly generate mines
-                    if (random.Next(0, 100) < (Density * 100))
-                    {
-                        cell.IsMine = true;
-                    }
-                    board[j].Add(cell);
+                // Randomly generate mines
+                if (random.Next(0, 100) < (Density * 100))
+                {
+                    cell.IsMine = true;
                 }
+                board[j].Add(cell);
             }
         }
+
 
         // Calculate the number of adjacent mines
         GenerateNumbers();
