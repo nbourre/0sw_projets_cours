@@ -27,6 +27,7 @@ class Minesweeper
                 else
                 {
                     return AdjacentMines.ToString();
+                    //return AdjacentMines != 0 ? AdjacentMines.ToString() : " ";
                 }
             }
             else
