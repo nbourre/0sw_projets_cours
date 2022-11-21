@@ -1,4 +1,5 @@
 # Description
+Jeu de démineur incomplet. Voir les exercices suivants pour le compléter.
 
 # Exercices
 1. Afficher la liste des commandes disponibles en premier lieu.
