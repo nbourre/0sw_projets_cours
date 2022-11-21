@@ -6,6 +6,9 @@ class Minesweeper
     public int Width { get; set; } = 10;
     public int Height { get; set; } = 10;
 
+    public bool IsGameOver { get; set; } = false;
+    public bool IsGameWon { get; set; } = false;
+
     private double density = 0.15;
     public double Density
     {
@@ -38,20 +41,20 @@ class Minesweeper
                 if (IsMine)
                 {
                     return "X ";
-                }
-                else if (IsMarked)
-                {
-                    return "M ";
-                }                
+                }              
                 else
                 {
                     return AdjacentMines.ToString() + " ";
                     //return AdjacentMines != 0 ? AdjacentMines.ToString() : " ";
                 }
             }
+            else if (IsMarked)
+            {
+                return "M ";
+            }  
             else
             {
-                return " ";
+                return "  ";
             }       
         }
     }
@@ -74,7 +77,7 @@ class Minesweeper
         if (x < 0 || x >= Width || y < 0 || y >= Height)
             throw new ArgumentOutOfRangeException("Coordinates out of bounds");
 
-        board[x][y].IsRevealed = true;
+        board[x][y].IsMarked = !board[x][y].IsMarked;
     }
 
     public void Reveal(int x, int y)
@@ -99,6 +102,9 @@ class Minesweeper
                     }
                 }
             }
+        } else if (board[y][x].IsMine)
+        {
+            IsGameOver = true;
         }
     }
 

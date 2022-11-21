@@ -15,7 +15,7 @@ while (!quit)
         Console.Clear();
         Console.WriteLine(ms);
     }
-    
+
     showHelp = false;
 
     Console.WriteLine("Entrer la commande (h pour aide) : ");
@@ -41,6 +41,17 @@ while (!quit)
         case "q":
             quit = true;
             break;
+    }
+
+    if (ms.IsGameOver)
+    {
+        Console.WriteLine("Game Over");
+        quit = true;
+    }
+    else if (ms.IsGameWon)
+    {
+        Console.WriteLine("Tu as gagné!");
+        quit = true;
     }
 }
 
