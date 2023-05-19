@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwp3iiyjtyehu"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_2k7ro"]
+
+[node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_2k7ro")
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-1, -1)
+polygon = PackedVector2Array(1, -15, 8.18544, -7.81455, 17, 1, 1, 17, -15, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -17, 17, 0, 0, 17, -17, 0)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

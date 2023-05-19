@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cswdrjy7vdnhf"]
+
+[ext_resource type="Script" path="res://Bullet.gd" id="1_q8eoq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shrh7"]
+size = Vector2(17, 10)
+
+[node name="Bullet" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_q8eoq")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -4, 6, -2, 6, 2, 0, 4, -10, 3, -10, -3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-10, -3, 0, -4, 6, -2, 6, 2, 0, 4, -10, 3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_shrh7")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
