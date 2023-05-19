@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_cydd6"]
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_cydd6")
 metadata/_edit_group_ = true
 
@@ -14,3 +15,11 @@ polygon = PackedVector2Array(1, -15, 17, 1, 1, 17, -15, 17, -15, -15)
 polygon = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 16, -16, -16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-17, -17, 1, -17, 17, 0, 1, 17, -17, 17)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
