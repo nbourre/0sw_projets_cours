@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://wx4b4t31wqsx"]
+
+[ext_resource type="Texture2D" uid="uid://1m8lw3sytg1u" path="res://2d_animation_frog_spritesheet.png" id="1_5th06"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oju7t"]
+atlas = ExtResource("1_5th06")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq8wf"]
+atlas = ExtResource("1_5th06")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsjll"]
+atlas = ExtResource("1_5th06")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ed1eg"]
+atlas = ExtResource("1_5th06")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72omx"]
+atlas = ExtResource("1_5th06")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mepla"]
+atlas = ExtResource("1_5th06")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdla4"]
+atlas = ExtResource("1_5th06")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t63hu"]
+atlas = ExtResource("1_5th06")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yexbo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oju7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kq8wf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsjll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ed1eg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72omx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mepla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdla4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t63hu")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1ewe"]
+radius = 16.0
+height = 56.0
+
+[node name="world" type="Node2D"]
+
+[node name="frog" type="CharacterBody2D" parent="."]
+position = Vector2(220, 64)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="frog"]
+sprite_frames = SubResource("SpriteFrames_yexbo")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="frog"]
+position = Vector2(1, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_m1ewe")
