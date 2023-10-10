@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://daga1ipm17po5"]
+[gd_scene load_steps=6 format=3 uid="uid://daga1ipm17po5"]
 
 [ext_resource type="Texture2D" uid="uid://b1p04doa55hx2" path="res://Player.png" id="1"]
+[ext_resource type="Script" path="res://Player.cs" id="1_ecbtd"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("1")
@@ -25,8 +26,10 @@ height = 13.0
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(89.25, 63)
+script = ExtResource("1_ecbtd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+scale = Vector2(4, 4)
 sprite_frames = SubResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
