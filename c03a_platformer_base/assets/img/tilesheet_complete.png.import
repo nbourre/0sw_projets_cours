@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7pymf0gdj8uu"
-path="res://.godot/imported/viking2.png-e16001611d48b1006378b35ab7254397.ctex"
+uid="uid://jhft1edk8lfx"
+path="res://.godot/imported/tilesheet_complete.png-ee45926bbdf3489da174c2a6c8994807.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/viking2.png"
-dest_files=["res://.godot/imported/viking2.png-e16001611d48b1006378b35ab7254397.ctex"]
+source_file="res://assets/img/tilesheet_complete.png"
+dest_files=["res://.godot/imported/tilesheet_complete.png-ee45926bbdf3489da174c2a6c8994807.ctex"]
 
 [params]
 
