@@ -1,23 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://bamd052n575y6"]
+[gd_scene load_steps=7 format=3 uid="uid://bamd052n575y6"]
 
 [ext_resource type="Texture2D" uid="uid://c67dx7u6m0sfj" path="res://wall_tile.png" id="1_n8jdg"]
 [ext_resource type="PackedScene" uid="uid://cmxbvegddblyc" path="res://Player.tscn" id="1_re7wg"]
 [ext_resource type="PackedScene" uid="uid://bwp3iiyjtyehu" path="res://enemy.tscn" id="2_mkmrx"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ldl2y"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xjnrq"]
 texture = ExtResource("1_n8jdg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ldl2y")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSet" id="TileSet_idt56"]
 tile_size = Vector2i(32, 32)
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_xjnrq")
 
 [node name="world" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0, 0.329412, 0.0117647, 1)
+scale = Vector2(250, 250)
+texture = ExtResource("1_n8jdg")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_idt56")

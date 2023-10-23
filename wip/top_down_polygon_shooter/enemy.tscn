@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwp3iiyjtyehu"]
+[gd_scene load_steps=3 format=3 uid="uid://bwp3iiyjtyehu"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_2k7ro"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bjr5y"]
+polygon = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
@@ -18,5 +21,9 @@ polygon = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(0, -17, 17, 0, 0, 17, -17, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_bjr5y")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

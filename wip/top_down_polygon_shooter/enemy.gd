@@ -8,7 +8,7 @@ var speed = 5
 func _ready():
 	player = get_parent().get_node("Player")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var direction = (player.position - position)
 	direction = direction.normalized() * speed
 	
@@ -22,6 +22,7 @@ func _physics_process(delta):
 
 func _on_area_2d_area_entered(area):
 	if "Bullet" in area.get_parent().name:
+		hp -= 1;
 		area.get_parent().queue_free()
 		queue_free();
 	
