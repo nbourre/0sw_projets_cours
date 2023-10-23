@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class player : KinematicBody2D
+public partial class player : CharacterBody2D
 {
     Vector2 UP = new Vector2(0, -1);
     const int GRAVITY = 20;
@@ -17,21 +17,21 @@ public class player : KinematicBody2D
 
     Vector2 motion = new Vector2();
 
-    Sprite currentSprite;
+    Sprite2D currentSprite;
     AnimationPlayer animPlayer;
         // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        currentSprite = GetNode<Sprite>("Sprite");
+        currentSprite = GetNode<Sprite2D>("Sprite2D");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
-        motion.y += GRAVITY;
+        motion.Y += GRAVITY;
 
-        if(motion.y > MAXFALLSPEED) {
-            motion.y = MAXFALLSPEED;
+        if(motion.Y > MAXFALLSPEED) {
+            motion.Y = MAXFALLSPEED;
         }
 
         if (facing_right) {
@@ -43,43 +43,43 @@ public class player : KinematicBody2D
         
 
         if (Input.IsActionPressed("ui_left")) {
-            motion.x -= ACCEL;
+            motion.X -= ACCEL;
             facing_right = false;
             animPlayer.Play("Run");
         } else if (Input.IsActionPressed("ui_right")) {
-            motion.x += ACCEL;
+            motion.X += ACCEL;
             facing_right = true;
             animPlayer.Play("Run");
         } else {
-            motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
+            motion = motion.Lerp(Vector2.Zero, 0.2f);
             animPlayer.Play("Idle");
         }
 
         if (IsOnFloor()) {
             // On ne regarde qu'un seul fois et non le maintient de la touche
             if (Input.IsActionJustPressed("ui_jump")) {
-                motion.y = -JUMPFORCE;
-                GD.Print($"motion.y = {motion.y}");
-                Console.WriteLine($"motion.y = {motion.y}");
+                motion.Y = -JUMPFORCE;
+                GD.Print($"motion.Y = {motion.Y}");
+                Console.WriteLine($"motion.Y = {motion.Y}");
             }
         }
 
         if (!IsOnFloor()) {
-            if (motion.y < 0) {
+            if (motion.Y < 0) {
                 animPlayer.Play("jump");
-            } else if (motion.y > 0) {
+            } else if (motion.Y > 0) {
                 animPlayer.Play("fall");
             }
         }
 
         // Bug : Si on saute, le X est automatiquement réduit, car l'impulsion est trop forte
-        // motion.x = motion.LimitLength(MAXSPEED).x;
+        // motion.X = motion.LimitLength(MAXSPEED).X;
 
-        motion.x = Mathf.Lerp(motion.x, MAXSPEED * motion.x > 0 ? 1 : -1, (ACCEL * 1f) / MAXSPEED);
+        motion.X = Mathf.Lerp(motion.X, MAXSPEED * motion.X > 0 ? 1 : -1, (ACCEL * 1f) / MAXSPEED);
 
+        Velocity = motion;
 
-
-        motion = MoveAndSlide(motion, UP);
+        MoveAndSlide();
     }
 
 
