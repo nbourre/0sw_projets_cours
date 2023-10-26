@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmxbvegddblyc"]
+[gd_scene load_steps=2 format=3 uid="uid://cmxbvegddblyc"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_cydd6"]
 [ext_resource type="Texture2D" uid="uid://my2esya7p48f" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="2_5dfwi"]
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
-script = ExtResource("1_cydd6")
 metadata/_edit_group_ = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
