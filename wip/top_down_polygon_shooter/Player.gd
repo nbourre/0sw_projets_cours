@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var acceleration = 0.1
 @export var friction = 0.05
 
-
+# TODO : Ajouter timer au jeu
 var bullet_speed = 1000
 var bullet = preload("res://Bullet.tscn")
 
