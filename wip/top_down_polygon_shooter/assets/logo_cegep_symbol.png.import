@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfo4g44ryixuq"
-path="res://.godot/imported/logo_cegep_symbol.png-f972f319340d2f974098418ae1249c43.ctex"
+path="res://.godot/imported/logo_cegep_symbol.png-f3d352650df596fd9e71367a6cdf36d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://logo_cegep_symbol.png"
-dest_files=["res://.godot/imported/logo_cegep_symbol.png-f972f319340d2f974098418ae1249c43.ctex"]
+source_file="res://assets/logo_cegep_symbol.png"
+dest_files=["res://.godot/imported/logo_cegep_symbol.png-f3d352650df596fd9e71367a6cdf36d0.ctex"]
 
 [params]
 

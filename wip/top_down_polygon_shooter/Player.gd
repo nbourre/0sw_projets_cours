@@ -1,47 +1,28 @@
 extends CharacterBody2D
 
-@export var speed = 1000
-@export var acceleration = 0.1
-@export var friction = 0.05
 
-# TODO : Ajouter timer au jeu
-var bullet_speed = 1000
-var bullet = preload("res://Bullet.tscn")
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
 
-func get_input():
-	var input = Vector2()
-	
-	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	input.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-	
-	return input
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 
 func _physics_process(delta):
-	var direction = get_input()
-	
-	direction = direction.normalized()
-	
-	if (direction.length() > 0):
-		velocity = velocity.lerp(direction * speed, acceleration)
-	else :
-		velocity = velocity.lerp(Vector2.ZERO, friction)
-		
-	look_at(get_global_mouse_position())
-	
-	move_and_slide()
-	
-	if (Input.is_action_just_pressed("fire")) :
-		fire()
-	
-func fire():
-	
-	var bullet_instance = bullet.instantiate()
-	bullet_instance.position = get_global_position() + (Vector2.from_angle(rotation) * 25)
-	bullet_instance.rotation_degrees = rotation_degrees
-	bullet_instance.apply_impulse(Vector2(bullet_speed, 0).rotated(rotation))
-	get_tree().get_root().call_deferred("add_child", bullet_instance)
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
 
-func _on_area_2d_area_entered(area):
-	print(area.get_parent().name)
-	if "Enemy" in area.get_parent().name :
-		var _tmp = get_tree().reload_current_scene()
+	# Handle Jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis("ui_left", "ui_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()

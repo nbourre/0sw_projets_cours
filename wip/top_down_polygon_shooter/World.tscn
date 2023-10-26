@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bamd052n575y6"]
+[gd_scene load_steps=3 format=3 uid="uid://bamd052n575y6"]
 
-[ext_resource type="PackedScene" uid="uid://b5fajm353sfxl" path="res://level.tscn" id="1_phw1f"]
+[ext_resource type="Texture2D" uid="uid://bf37ory33odcr" path="res://assets/logo_cegep.png" id="1_1l6vu"]
+[ext_resource type="PackedScene" uid="uid://cmxbvegddblyc" path="res://Player.tscn" id="1_hynlr"]
 
 [node name="world" type="Node2D"]
 
-[node name="Level" parent="." instance=ExtResource("1_phw1f")]
+[node name="Player" parent="." instance=ExtResource("1_hynlr")]
+position = Vector2(512, 449)
+
+[node name="LogoCegep" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(596, 180)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_1l6vu")
+offset = Vector2(-53.4366, 236.075)

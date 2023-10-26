@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://my2esya7p48f"
-path="res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-65502514064ef8af4bce05336c6482e4.ctex"
+uid="uid://bf37ory33odcr"
+path="res://.godot/imported/logo_cegep.png-7d8ec026668015ee44d154fd15ae5a7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_lights_and_shadows_neutral_point_light.webp"
-dest_files=["res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-65502514064ef8af4bce05336c6482e4.ctex"]
+source_file="res://assets/logo_cegep.png"
+dest_files=["res://.godot/imported/logo_cegep.png-7d8ec026668015ee44d154fd15ae5a7c.ctex"]
 
 [params]
 
