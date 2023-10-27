@@ -42,6 +42,7 @@ func fire():
 	get_tree().get_root().call_deferred("add_child", bullet_instance)
 
 func _on_area_2d_area_entered(area):
-	print(area.get_parent().name)
+	#print(area.get_parent().name)
 	if "Enemy" in area.get_parent().name :
+		# Reset
 		var _tmp = get_tree().reload_current_scene()
