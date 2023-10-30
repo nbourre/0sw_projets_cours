@@ -1,25 +1,25 @@
 using Godot;
 using System;
 
-public class ParallaxBackground : Godot.ParallaxBackground
+public partial class ParallaxBackground : Godot.ParallaxBackground
 {
     [Export]
     float Cloud_Speed = -15f;
 
     ParallaxLayer cloudLayer;
-    Sprite cloudSprite;
+    Sprite2D cloudSprite;
 
     public override void _Ready()
     {        
         cloudLayer = GetNode<ParallaxLayer>("clouds");
-        cloudSprite = cloudLayer.GetNode<Sprite>("Sprite");
+        cloudSprite = cloudLayer.GetNode<Sprite2D>("Sprite2D");
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
        cloudLayer.MotionOffset = 
         new Vector2(
-            cloudLayer.MotionOffset.x + (Cloud_Speed * delta),
+            cloudLayer.MotionOffset.Y + (Cloud_Speed * (float)delta),
              0);          
     }
 }
