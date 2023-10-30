@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dhot5j6kmtm5d"]
+[gd_scene load_steps=20 format=3 uid="uid://dhot5j6kmtm5d"]
 
 [ext_resource type="Texture2D" uid="uid://cd0kgtludqw" path="res://assets/spritesheets/viking2.png" id="1"]
 [ext_resource type="Script" path="res://viking.cs" id="2"]
@@ -162,59 +162,30 @@ _data = {
 "shield": SubResource("10")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="11"]
-animation = &"running"
-
-[sub_resource type="AnimationNodeAnimation" id="12"]
-animation = &"jumping"
-
-[sub_resource type="AnimationNodeAnimation" id="13"]
-animation = &"falling"
-
-[sub_resource type="AnimationNodeAnimation" id="14"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jtc7"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeTransition" id="15"]
-input_0/name = "rising"
-input_0/auto_advance = false
-input_0/reset = true
-input_1/name = "dropping"
-input_1/auto_advance = false
-input_1/reset = true
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0uy0"]
+animation = &"running"
 
-[sub_resource type="AnimationNodeTransition" id="16"]
-input_0/name = "ground"
-input_0/auto_advance = false
-input_0/reset = true
-input_1/name = "air"
-input_1/auto_advance = false
-input_1/reset = true
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lchm8"]
+advance_mode = 2
 
-[sub_resource type="AnimationNodeTransition" id="17"]
-input_0/name = "idle"
-input_0/auto_advance = false
-input_0/reset = true
-input_1/name = "run"
-input_1/auto_advance = false
-input_1/reset = true
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y6mjv"]
+switch_mode = 2
+advance_mode = 2
 
-[sub_resource type="AnimationNodeBlendTree" id="18"]
-nodes/Animation/node = SubResource("14")
-nodes/Animation/position = Vector2(460, 80)
-"nodes/Animation 2/node" = SubResource("11")
-"nodes/Animation 2/position" = Vector2(340, 220)
-"nodes/Animation 3/node" = SubResource("12")
-"nodes/Animation 3/position" = Vector2(460, 360)
-"nodes/Animation 4/node" = SubResource("13")
-"nodes/Animation 4/position" = Vector2(460, 500)
-nodes/in_air/node = SubResource("15")
-nodes/in_air/position = Vector2(680, 360)
-nodes/in_air_state/node = SubResource("16")
-nodes/in_air_state/position = Vector2(980, 80)
-nodes/movement/node = SubResource("17")
-nodes/movement/position = Vector2(680, 80)
-nodes/output/position = Vector2(1160, 80)
-node_connections = [&"output", 0, &"in_air_state", &"in_air", 0, &"Animation 3", &"in_air", 1, &"Animation 4", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"in_air", &"movement", 0, &"Animation", &"movement", 1, &"Animation 2"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0sun7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g4mj8"]
+states/Start/position = Vector2(167, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_7jtc7")
+states/idle/position = Vector2(361, 103.229)
+states/running/node = SubResource("AnimationNodeAnimation_o0uy0")
+states/running/position = Vector2(361, -22.7709)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lchm8"), "idle", "running", SubResource("AnimationNodeStateMachineTransition_y6mjv"), "running", "idle", SubResource("AnimationNodeStateMachineTransition_0sun7")]
+graph_offset = Vector2(0, -153.771)
 
 [node name="viking" type="CharacterBody2D"]
 script = ExtResource("2")
@@ -223,7 +194,7 @@ script = ExtResource("2")
 texture = ExtResource("1")
 hframes = 9
 vframes = 6
-frame = 9
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 6.5)
@@ -235,15 +206,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("18")
+tree_root = SubResource("AnimationNodeStateMachine_g4mj8")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/in_air/current_state = ""
-parameters/in_air/transition_request = ""
-parameters/in_air/current_index = -1
-parameters/in_air_state/current_state = ""
-parameters/in_air_state/transition_request = ""
-parameters/in_air_state/current_index = -1
-parameters/movement/current_state = ""
-parameters/movement/transition_request = ""
-parameters/movement/current_index = -1

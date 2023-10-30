@@ -56,6 +56,7 @@ public partial class viking : CharacterBody2D
     }
 
 
+    // TODO : Continuer la vidéo :https://www.youtube.com/watch?v=WrMORzl3g1U
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
@@ -72,7 +73,8 @@ public partial class viking : CharacterBody2D
                 GD.Print($"Velocity.Y : {velocity.Y}");
             } else {
                 if (input_vector != Vector2.Zero) {
-                    animTree.Set("parameters/movement/current", 1);
+                    animTree.Set("parameters/movement/current_state", 1 );
+                    
                 }
             }
             
@@ -94,18 +96,18 @@ public partial class viking : CharacterBody2D
 
         if (input_vector == Vector2.Zero) {
             velocity = velocity.Lerp(Vector2.Zero, 0.2f);
-            animTree.Set("parameters/movement/current", 0);
+            animTree.Set("parameters/movement/current_state", 0);
         } else {
             velocity.X += ACCELERATION * input_vector.X;
         }
 
         if (!IsOnFloor()){
             if (velocity.Y < 0) {
-                animTree.Set("parameters/in_air/current", 1);
+                animTree.Set("parameters/in_air/current_state", 1);
                 GD.Print("rising");
             } 
             if (velocity.Y > 0) {
-                animTree.Set("parameters/in_air/current", 0);
+                animTree.Set("parameters/in_air/current_state", 0);
             }
         }
 
