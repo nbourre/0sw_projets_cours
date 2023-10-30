@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class world : Node2D
+public partial class world : Node2D
 {
     // Declare member variables here. Examples:
     // private int a = 2;
@@ -13,7 +13,7 @@ public class world : Node2D
         
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
         handleInput();
 

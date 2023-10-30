@@ -1,8 +1,9 @@
 using Godot;
 using System;
+using System.Data;
 
 // Source : https://www.youtube.com/watch?v=OUvpe9FMkLI&t=339s
-public class viking : KinematicBody2D
+public partial class viking : CharacterBody2D
 {
     bool isDebugging = true;
     float MAX_VELOCITY;
@@ -12,11 +13,11 @@ public class viking : KinematicBody2D
     int ACCELERATION = 10;
     int gravity = 20;
 
-    const float debuggingRate = 0.5f;
-    float debuggingAcc = 0;
+    const double debuggingRate = 0.5f;
+    double debuggingAcc = 0;
 
     bool facing_right = true;  
-    Sprite currentSprite;
+    Sprite2D currentSprite;
     Vector2 velocity = Vector2.Zero;
 
     AnimationTree animTree;
@@ -25,7 +26,7 @@ public class viking : KinematicBody2D
     public override void _Ready()
     {
         initValues();
-        currentSprite = GetNode<Sprite>("Sprite");     
+        currentSprite = GetNode<Sprite2D>("Sprite2D");     
         animTree = GetNode<AnimationTree>("AnimationTree");
 
         animTree.Active = true;   
@@ -33,20 +34,20 @@ public class viking : KinematicBody2D
 
     void initValues()
     {
-        MAX_VELOCITY = 80 * Scale.x;
-        MAX_JUMP = -300 * Scale.y;
-        MAXFALLSPEED = 200 * Scale.y;
-        ACCELERATION = 10 * (int)Scale.x;
-        gravity = 20 * (int)Scale.y;
-        HALT_SPEED = 0.325F * Scale.x;
+        MAX_VELOCITY = 80 * Scale.X;
+        MAX_JUMP = -300 * Scale.Y;
+        MAXFALLSPEED = 200 * Scale.Y;
+        ACCELERATION = 10 * (int)Scale.X;
+        gravity = 20 * (int)Scale.Y;
+        HALT_SPEED = 0.325F * Scale.X;
     }
 
     public Vector2 GetInput()
     {
         var input_vector = Vector2.Zero;
-        input_vector.x = Input.GetActionStrength("ui_right") 
+        input_vector.X = Input.GetActionStrength("ui_right") 
                             - Input.GetActionStrength("ui_left");
-        input_vector.y = Input.GetActionStrength("ui_down") 
+        input_vector.Y = Input.GetActionStrength("ui_down") 
                             - Input.GetActionStrength("ui_up");
         
         input_vector = input_vector.Normalized();
@@ -56,68 +57,67 @@ public class viking : KinematicBody2D
 
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         debuggingAcc += delta;
 
         var input_vector = GetInput();
 
         if (IsOnFloor()) {
-            velocity.y = 0;
+            velocity.Y = 0;
             if (Input.IsActionJustPressed("jump")) {
-                velocity.y = MAX_JUMP;
+                velocity.Y = MAX_JUMP;
                 
                 GD.Print("Jumping");
-                GD.Print($"Velocity.y : {velocity.y}");
+                GD.Print($"Velocity.Y : {velocity.Y}");
             } else {
                 if (input_vector != Vector2.Zero) {
                     animTree.Set("parameters/movement/current", 1);
                 }
             }
+            
         }
 
-        velocity.y += gravity;
+        velocity.Y += gravity;
 
-        if (velocity.y > MAXFALLSPEED) {
-            velocity.y = MAXFALLSPEED;
+        if (velocity.Y > MAXFALLSPEED) {
+            velocity.Y = MAXFALLSPEED;
         }
 
-        if (input_vector.x > 0) {
+        if (input_vector.X > 0) {
             facing_right = true;
             currentSprite.FlipH = false;
-        } else  if (input_vector.x < 0){
+        } else  if (input_vector.X < 0){
             facing_right = false;
             currentSprite.FlipH = true;
         }
 
         if (input_vector == Vector2.Zero) {
-            velocity = velocity.LinearInterpolate(Vector2.Zero, 0.2f);
+            velocity = velocity.Lerp(Vector2.Zero, 0.2f);
             animTree.Set("parameters/movement/current", 0);
         } else {
-            velocity.x += ACCELERATION * input_vector.x;
-            
+            velocity.X += ACCELERATION * input_vector.X;
         }
 
-
-
-
         if (!IsOnFloor()){
-            if (velocity.y < 0) {
+            if (velocity.Y < 0) {
                 animTree.Set("parameters/in_air/current", 1);
                 GD.Print("rising");
             } 
-            if (velocity.y > 0) {
+            if (velocity.Y > 0) {
                 animTree.Set("parameters/in_air/current", 0);
             }
         }
 
-        velocity.x = velocity.Clamped (MAX_VELOCITY).x;
-
-        if (Math.Abs(velocity.x) < .01f) {
-            velocity.x = 0;
+        if (Math.Abs(velocity.X) < .01f) {
+            velocity.X = 0;
         }
 
-        velocity = MoveAndSlide(velocity, Vector2.Up);
+        velocity.X = Math.Clamp(velocity.X, -MAX_VELOCITY, MAX_VELOCITY);
+
+        Velocity = velocity;
+
+        MoveAndSlide();
 
         if (debuggingAcc >= debuggingRate) {
             debuggingAcc -= debuggingRate;
@@ -129,8 +129,8 @@ public class viking : KinematicBody2D
     void debugging() {
         if (!isDebugging) return;
 
-        //sdaGD.Print($"Position.y : {Position.y}");
-        GD.Print($"Velocity : ({velocity.x}, {velocity.y})");
+        //sdaGD.Print($"Position.Y : {Position.Y}");
+        GD.Print($"Velocity : ({velocity.X}, {velocity.Y})");
         //GD.Print($"IsOnFloor() : {IsOnFloor()}");
     }
 
