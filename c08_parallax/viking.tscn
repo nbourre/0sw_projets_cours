@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dhot5j6kmtm5d"]
+[gd_scene load_steps=14 format=3 uid="uid://dhot5j6kmtm5d"]
 
 [ext_resource type="Texture2D" uid="uid://cd0kgtludqw" path="res://assets/spritesheets/viking2.png" id="1"]
 [ext_resource type="Script" path="res://viking.cs" id="2"]
@@ -162,65 +162,6 @@ _data = {
 "shield": SubResource("10")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5qr8i"]
-animation = &"falling"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jtc7"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bksbo"]
-animation = &"jumping"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0uy0"]
-animation = &"running"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lchm8"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y6mjv"]
-advance_mode = 2
-advance_condition = &"isRunning"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0sun7"]
-advance_mode = 2
-advance_condition = &"isIdle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2byrc"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"isJumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t3mj2"]
-advance_mode = 2
-advance_condition = &"isFalling"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_72sfx"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"isIdle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_awfub"]
-advance_mode = 2
-advance_condition = &"isJumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jfx0x"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"isFalling"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g4mj8"]
-states/Start/position = Vector2(167, 100)
-states/fall/node = SubResource("AnimationNodeAnimation_5qr8i")
-states/fall/position = Vector2(361, 197.229)
-states/idle/node = SubResource("AnimationNodeAnimation_7jtc7")
-states/idle/position = Vector2(361, 103.229)
-states/jump/node = SubResource("AnimationNodeAnimation_bksbo")
-states/jump/position = Vector2(519, -16.771)
-states/run/node = SubResource("AnimationNodeAnimation_o0uy0")
-states/run/position = Vector2(361, -22.7709)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lchm8"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_y6mjv"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_0sun7"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_2byrc"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_t3mj2"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_72sfx"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_awfub"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_jfx0x")]
-graph_offset = Vector2(0, -153.771)
-
 [node name="viking" type="CharacterBody2D"]
 script = ExtResource("2")
 
@@ -228,7 +169,6 @@ script = ExtResource("2")
 texture = ExtResource("1")
 hframes = 9
 vframes = 6
-frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 6.5)
@@ -238,12 +178,3 @@ shape = SubResource("1")
 libraries = {
 "": SubResource("AnimationLibrary_q3xuu")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_g4mj8")
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/conditions/isFalling = false
-parameters/conditions/isIdle = false
-parameters/conditions/isJumping = false
-parameters/conditions/isRunning = false

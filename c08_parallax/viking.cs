@@ -21,20 +21,13 @@ public partial class viking : CharacterBody2D
     Vector2 velocity = Vector2.Zero;
 
     Vector2 inputVector = Vector2.Zero;
-    AnimationTree animTree;
-
-    AnimationNodeStateMachinePlayback stateMachine;
-
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         initValues();
-        currentSprite = GetNode<Sprite2D>("Sprite2D");     
-        animTree = GetNode<AnimationTree>("AnimationTree");
+        currentSprite = GetNode<Sprite2D>("Sprite2D");
 
-        animTree.Active = true;   
-        stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playback");
     }
 
     void initValues()
@@ -69,6 +62,7 @@ public partial class viking : CharacterBody2D
 
         inputVector = GetInput();
 
+        // Le perso est sur le plancher
         if (IsOnFloor()) {
             velocity.Y = 0;
             if (Input.IsActionJustPressed("jump")) {
@@ -77,9 +71,9 @@ public partial class viking : CharacterBody2D
                 GD.Print($"Velocity.Y : {velocity.Y}");
             } else {
                 if (inputVector != Vector2.Zero) {
-                    stateMachine.Travel("run");
+
                 } else {
-                    stateMachine.Travel("idle");
+
                 }
             }
         }
@@ -107,11 +101,11 @@ public partial class viking : CharacterBody2D
         if (!IsOnFloor()){
             if (velocity.Y < 0) {
                 GD.Print("rising");
-                stateMachine.Travel("jump");
+         
             } 
             if (velocity.Y > 0) {
                 GD.Print("falling");
-                stateMachine.Travel("fall");
+
             }
         }
 
