@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class world : Node2D
+public partial class world : Node2D
 {
     Explosion explosion;
     Node2D bombsContainer;
@@ -15,7 +15,8 @@ public class world : Node2D
     {
         explosion = GetNode<Explosion>("EffectsLayer/Explosion");
         bombs = new List<Bomb>();
-        bombScene = GD.Load<PackedScene>("res://effects/Bomb.tscn");
+        
+        bombScene = ResourceLoader.Load<PackedScene>("res://effects/Bomb.tscn");
 
         bombsContainer = GetNode<Node2D>("bombs");
     }
@@ -38,10 +39,9 @@ public class world : Node2D
     private void AddBomb(Vector2 position) {
         // TODO : Validate position before adding
 
-        var createdBomb = (Bomb)bombScene.Instance();
+        var createdBomb = (Bomb)bombScene.Instantiate();
         createdBomb.Position = position;
-        
-       
+        createdBomb.OnExplode += explosion._on_bomb_OnExplode;
         
         bombsContainer.CallDeferred("add_child", createdBomb);
         bombs.Add(createdBomb);
@@ -53,7 +53,7 @@ public class world : Node2D
 
     
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         
         // if (Input.IsMouseButtonPressed((int)ButtonList.Left)) {

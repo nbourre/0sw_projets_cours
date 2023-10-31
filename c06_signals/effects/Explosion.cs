@@ -1,10 +1,8 @@
 using Godot;
 using System;
 
-public class Explosion : Particles2D
+public partial class Explosion : GpuParticles2D
 {
-
-
     AudioStreamPlayer2D sfx;
 
     // Called when the node enters the scene tree for the first time.
@@ -23,16 +21,8 @@ public class Explosion : Particles2D
     public void _on_bomb_OnExplode(Vector2 position) {
         GD.Print("Boom!");
 
-        Position = new Vector2(position.x, position.y);
+        Position = new Vector2(position.X, position.Y);
         start();
     }
 
-
-
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
