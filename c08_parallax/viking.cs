@@ -20,7 +20,11 @@ public partial class viking : CharacterBody2D
     Sprite2D currentSprite;
     Vector2 velocity = Vector2.Zero;
 
+    Vector2 inputVector = Vector2.Zero;
     AnimationTree animTree;
+
+    AnimationNodeStateMachinePlayback stateMachine;
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -30,6 +34,7 @@ public partial class viking : CharacterBody2D
         animTree = GetNode<AnimationTree>("AnimationTree");
 
         animTree.Active = true;   
+        stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playback");
     }
 
     void initValues()
@@ -62,22 +67,21 @@ public partial class viking : CharacterBody2D
     {
         debuggingAcc += delta;
 
-        var input_vector = GetInput();
+        inputVector = GetInput();
 
         if (IsOnFloor()) {
             velocity.Y = 0;
             if (Input.IsActionJustPressed("jump")) {
                 velocity.Y = MAX_JUMP;
-                
                 GD.Print("Jumping");
                 GD.Print($"Velocity.Y : {velocity.Y}");
             } else {
-                if (input_vector != Vector2.Zero) {
-                    animTree.Set("parameters/movement/current_state", 1 );
-                    
+                if (inputVector != Vector2.Zero) {
+                    stateMachine.Travel("run");
+                } else {
+                    stateMachine.Travel("idle");
                 }
             }
-            
         }
 
         velocity.Y += gravity;
@@ -86,28 +90,28 @@ public partial class viking : CharacterBody2D
             velocity.Y = MAXFALLSPEED;
         }
 
-        if (input_vector.X > 0) {
+        if (inputVector.X > 0) {
             facing_right = true;
             currentSprite.FlipH = false;
-        } else  if (input_vector.X < 0){
+        } else  if (inputVector.X < 0){
             facing_right = false;
             currentSprite.FlipH = true;
         }
 
-        if (input_vector == Vector2.Zero) {
+        if (inputVector == Vector2.Zero) {
             velocity = velocity.Lerp(Vector2.Zero, 0.2f);
-            animTree.Set("parameters/movement/current_state", 0);
         } else {
-            velocity.X += ACCELERATION * input_vector.X;
+            velocity.X += ACCELERATION * inputVector.X;
         }
 
         if (!IsOnFloor()){
             if (velocity.Y < 0) {
-                animTree.Set("parameters/in_air/current_state", 1);
                 GD.Print("rising");
+                stateMachine.Travel("jump");
             } 
             if (velocity.Y > 0) {
-                animTree.Set("parameters/in_air/current_state", 0);
+                GD.Print("falling");
+                stateMachine.Travel("fall");
             }
         }
 
@@ -120,6 +124,7 @@ public partial class viking : CharacterBody2D
         Velocity = velocity;
 
         MoveAndSlide();
+       
 
         if (debuggingAcc >= debuggingRate) {
             debuggingAcc -= debuggingRate;
