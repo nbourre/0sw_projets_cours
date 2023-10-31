@@ -136,7 +136,7 @@ public partial class viking : CharacterBody2D
     void debugging() {
         if (!isDebugging) return;
 
-        //sdaGD.Print($"Position.Y : {Position.Y}");
+        //GD.Print($"Position.Y : {Position.Y}");
         GD.Print($"Velocity : ({velocity.X}, {velocity.Y})");
         //GD.Print($"IsOnFloor() : {IsOnFloor()}");
     }
