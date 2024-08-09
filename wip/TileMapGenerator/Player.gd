@@ -1,11 +1,11 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 const GRAVITY = 35
 const JUMP_FORCE = 700
 const SPEED = 300
 const ACCEL = 0.4
 
-onready var sprite = $Sprite
+@onready var sprite = $Sprite2D
 var state_machine
 var is_dead = false
 var dir = 0
@@ -62,13 +62,19 @@ func _physics_process(_delta):
 	
 	velocity.y += GRAVITY
 	velocity.x = lerp(velocity.x, SPEED * dir, ACCEL)
-	velocity = move_and_slide(velocity, Vector2.UP);
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity;
 
 func _on_Hurtbox_area_entered(area:Area2D):
 	if (area.is_in_group("enemy_hitbox")):
 		velocity.x = lerp(velocity.x, knockback * -facing_right, 0.5)
 		velocity.y = lerp(0, knockup, 0.6)
-		velocity = move_and_slide(velocity, Vector2.UP);
+		set_velocity(velocity)
+		set_up_direction(Vector2.UP)
+		move_and_slide()
+		velocity = velocity;
 		blink()
 
 func blink():
@@ -76,11 +82,11 @@ func blink():
 	$Hurtbox.set_deferred("monitorable", false)
 	
 	sprite.visible = false
-	yield(get_tree().create_timer(0.05), "timeout")
+	await get_tree().create_timer(0.05).timeout
 	sprite.visible = true
-	yield(get_tree().create_timer(0.07), "timeout")
+	await get_tree().create_timer(0.07).timeout
 	sprite.visible = false
-	yield(get_tree().create_timer(0.1), "timeout")
+	await get_tree().create_timer(0.1).timeout
 	sprite.visible = true
 
 	$Hurtbox.set_deferred("monitoring", true)

@@ -1,6 +1,8 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 public struct Platform 
 {
@@ -9,7 +11,7 @@ public struct Platform
     public int Gap { get; set; }
 };
 
-public class Map : Node
+public partial class Map : Node
 {
     /// Noeud enfant qui est un TileMap
     TileMap tileMap;
@@ -31,7 +33,7 @@ public class Map : Node
     /// <summary>
     /// Objet pour le générateur de bruit
     /// </summary>
-    OpenSimplexNoise noise;
+    FastNoiseLite noise;
 
     public override void _Ready()
     {
@@ -39,7 +41,7 @@ public class Map : Node
         tileSet = tileMap.TileSet;
 
         GD.Randomize();
-        noise = new OpenSimplexNoise();
+        noise = new FastNoiseLite();
         noise.Seed = (int)Mathf.Abs(GD.Randi());
         
         loadRessources();
@@ -49,8 +51,14 @@ public class Map : Node
 
     
     public void loadRessources() {
-        var ids = tileSet.GetTilesIds();
-
+        TileSetSource tileSource = tileSet.GetSource(0);
+        
+        
+        for (int i = 0; i < tileSource.GetTilesCount(); i++)
+        {
+            
+        }   
+        // FIXME : For Godot 4
         foreach (var id in ids)  {
             int? idx = id as int?;
             if (idx.HasValue)
@@ -86,17 +94,19 @@ public class Map : Node
 
         for (int i = 0; i < nbPlatforms; i++)
         {
-            Platform platform = new Platform();
-
-            platform.Length = platformLength;
-            platform.Gap = gapLength;
-            platform.Height = noiseValue;
+            Platform platform = new()
+            {
+                Length = platformLength,
+                Gap = gapLength,
+                Height = noiseValue
+            };
 
             platforms.Add(platform);
+            
 
             platformLength = (int)GD.RandRange(5, 10);
             gapLength = (int)GD.RandRange(2, 5);
-            noiseValue = (int)(MapValue(noise.GetNoise1d(xOffset), -1.0f, 1.0f, -20f, 20f)) + yStart;
+            noiseValue = (int)MapValue(noise.GetNoise1D(xOffset), -1.0f, 1.0f, -20f, 20f) + yStart;
             xOffset += xIncrement;
 
         }        
@@ -110,14 +120,14 @@ public class Map : Node
             int yStart = platform.Height;
             int yEnd = yStart;
 
-            tileMap.SetCell(xStart, yStart, startTile);
+            tileMap.SetCell(0, new Vector2I(xStart, yStart), startTile);
 
             for (int x = xStart + 1; x < xEnd; x++)
             {
-                tileMap.SetCell(x, yStart, middleTile);
+                tileMap.SetCell(0, new Vector2I(x, yStart), middleTile);
             }
 
-            tileMap.SetCell(xEnd, yEnd, endTile);
+            tileMap.SetCell(0, new Vector2I(xEnd, yEnd), endTile);
 
             xStart = xEnd + platform.Gap;
         }
