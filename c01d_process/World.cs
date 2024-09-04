@@ -8,14 +8,20 @@ public partial class World : Node2D
 {
     Label labelA;
     Label labelB;
+    Label labelC;
+    Label labelD;
 
     float speedA = 1f;
     float speedB = 1f;
+    float speedC = 60f;
+    float speedD = 60f;
 
     public override void _Ready()
     {
         labelA = GetNode<Label>("LabelA");
         labelB = GetNode<Label>("LabelB");
+        labelC = GetNode<Label>("LabelC");
+        labelD = GetNode<Label>("LabelD");
     }
 
     public override void _Process(double _delta)
@@ -27,11 +33,15 @@ public partial class World : Node2D
         if (labelA.Position.X + labelA.GetRect().Size.X > GetViewportRect().Size.X || labelA.Position.X < 0)
         {
             speedA = -speedA;
-            
-            if (speedA > 0)
-                labelA.HorizontalAlignment = HorizontalAlignment.Right;
-            else
-                labelA.HorizontalAlignment = HorizontalAlignment.Left;
+        }
+
+        // Gestion de LabelC en prenant en compte le delta
+        labelC.Text = $"_Process avec Delta : {delta}";
+        labelC.Position += new Vector2(speedC * delta, 0);
+
+        if (labelC.Position.X + labelC.GetRect().Size.X > GetViewportRect().Size.X || labelC.Position.X < 0)
+        {
+            speedC = -speedC;
         }
         
     }
@@ -45,11 +55,15 @@ public partial class World : Node2D
         if (labelB.Position.X + labelB.GetRect().Size.X > GetViewportRect().Size.X || labelB.Position.X < 0)
         {
             speedB = -speedB;
+        }
 
-            if (speedB > 0)
-                labelB.HorizontalAlignment = HorizontalAlignment.Right;
-            else
-                labelB.HorizontalAlignment = HorizontalAlignment.Left;
+        // Gestion de LabelD en prenant en compte le delta
+        labelD.Text = $"_PhysicsProcess avec Delta : {delta}";
+        labelD.Position += new Vector2(speedD * delta, 0);
+
+        if (labelD.Position.X + labelD.GetRect().Size.X > GetViewportRect().Size.X || labelD.Position.X < 0)
+        {
+            speedD = -speedD;
         }
     }
     
