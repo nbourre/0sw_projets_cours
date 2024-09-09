@@ -58,9 +58,9 @@ public partial class World : Node2D
     public override void _Draw()
     {
 		
-		DrawLine(new Vector2(0.0f, 0.0f), windowSize, Colors.Green, 1.0f);
-    	DrawLine(new Vector2(windowSize.X, 0f), new Vector2(0f, windowSize.Y), Colors.Green, 2.0f);
-    	DrawLine(new Vector2(windowSize.X / 2, 0.0f), new Vector2(windowSize.X / 2, windowSize.Y), Colors.Green, 3.0f);
+		// DrawLine(new Vector2(0.0f, 0.0f), windowSize, Colors.Green, 1.0f);
+    	// DrawLine(new Vector2(windowSize.X, 0f), new Vector2(0f, windowSize.Y), Colors.Green, 2.0f);
+    	// DrawLine(new Vector2(windowSize.X / 2, 0.0f), new Vector2(windowSize.X / 2, windowSize.Y), Colors.Green, 3.0f);
 
 		if (points.Count > 1)
 		{
