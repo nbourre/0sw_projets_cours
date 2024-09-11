@@ -26,6 +26,9 @@ var acceleration : Vector2 = Vector2()
 # Référence à l'élément Sprite (image) du boid
 @onready var sprite = $Image
 
+var debug : bool = false
+var is_chosen : bool = false
+
 # Fonction appelée au démarrage du boid
 func _ready():
 	randomize()
@@ -58,6 +61,9 @@ func _process(delta):
 	# Faire pivoter le sprite en fonction de la direction de la vitesse
 	if velocity.length() > 0:
 		rotation = velocity.angle()  # Faire tourner le boid en fonction de sa direction de mouvement
+	
+	#if (is_chosen and debug):
+		#queue_redraw()
 
 # Appliquer une force sur le boid
 func apply_force(force: Vector2):
@@ -145,3 +151,14 @@ func get_boid_siblings() -> Array:
 		if sibling is Boid:  # Vérifier que l'enfant est bien un boid
 			boids.append(sibling)
 	return boids	
+
+func set_debug(val) -> void:
+	debug = val
+	if (debug) :
+		sprite.modulate = Color(0.25, 0.25, 0.25)
+	else :
+		sprite.modulate = Color.WHITE
+	
+func _draw() -> void:
+	if (is_chosen):
+		draw_circle(location, radius_separation, Color.RED, false)
