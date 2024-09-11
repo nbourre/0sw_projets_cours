@@ -1,8 +1,10 @@
 extends Node2D
 
 @export_range(3, 500, 2) var num_boids : int = 50  # Nombre cible de boids
-
+@export var debugging : bool = false
 @onready var boid_scene = preload("res://boid.tscn")
+
+var previous_debugging_state : bool = false
 
 func _ready():
 	randomize()  # Initialisation aléatoire
@@ -35,8 +37,23 @@ func remove_boids(count: int):
 		current_boids.erase(random_boid)
 		random_boid.queue_free()
 
+func set_debug():
+	var current_boids = get_children().filter(func(n): return n is Boid)
+	
+	for i in range(num_boids):
+		if (i != 0) :
+			current_boids[i].set_debug(debugging)
+			current_boids[i].is_chosen = false
+		else :
+			current_boids[0].is_chosen = debugging
+	
+
 # Cette fonction peut être appelée à tout moment pour ajuster le nombre de boids
 func _process(delta):
 	# Appel d'ajustement pour synchroniser le nombre de boids si le champ change
 	if num_boids != get_children().filter(func(n): return n is Boid).size():
 		adjust_boids()
+		
+	if debugging != previous_debugging_state :
+		previous_debugging_state = debugging
+		set_debug()
