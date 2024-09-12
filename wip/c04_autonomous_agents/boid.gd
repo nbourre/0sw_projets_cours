@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Boid
 
+var max_neighbor : int = 7
+
 # Paramètres de base du boid
 var top_speed : float = 150.0   # Vitesse maximale du boid
 var top_steer : float = 2       # Force de rotation maximale (limite de la direction)
@@ -22,6 +24,10 @@ var radius_cohesion : float = 15 * r    # Rayon pour la cohésion
 var location : Vector2 = Vector2()
 var velocity : Vector2 = Vector2()
 var acceleration : Vector2 = Vector2()
+
+var has_cohesion : bool = true
+var has_separation : bool = true
+var has_alignment : bool = true
 
 # Référence à l'élément Sprite (image) du boid
 @onready var sprite = $Image
@@ -50,9 +56,14 @@ func _process(delta):
 	var cohesion_force = cohesion(boids) * weight_cohesion
 
 	# Appliquer les forces calculées
-	apply_force(separation_force)
-	apply_force(alignment_force)
-	apply_force(cohesion_force)
+	if has_separation :
+		apply_force(separation_force)
+		
+	if has_alignment :
+		apply_force(alignment_force)
+		
+	if has_cohesion :
+		apply_force(cohesion_force)	
 
 	# Mettre à jour la position du boid et gérer la limite de l'écran
 	update_position(delta)
@@ -62,8 +73,7 @@ func _process(delta):
 	if velocity.length() > 0:
 		rotation = velocity.angle()  # Faire tourner le boid en fonction de sa direction de mouvement
 	
-	#if (is_chosen and debug):
-		#queue_redraw()
+	queue_redraw()
 
 # Appliquer une force sur le boid
 func apply_force(force: Vector2):
@@ -93,6 +103,7 @@ func wrap_around_screen():
 func separation(boids: Array) -> Vector2:
 	var steer = Vector2()
 	var total = 0
+	
 	for other in boids:
 		var distance = location.distance_to(other.position)
 		if distance < radius_separation and other != self:
@@ -100,6 +111,9 @@ func separation(boids: Array) -> Vector2:
 			diff = diff.normalized() / distance  # Inverser la direction de la force d'évitement
 			steer += diff
 			total += 1
+			
+		if total > max_neighbor - 1 :
+			break
 	if total > 0:
 		steer /= total  # Moyenne de toutes les forces
 		steer = steer.normalized() * top_speed - velocity  # Calcul du vecteur de direction
@@ -110,11 +124,14 @@ func separation(boids: Array) -> Vector2:
 func alignment(boids: Array) -> Vector2:
 	var average_velocity = Vector2()
 	var total = 0
+	
 	for other in boids:
 		var distance = location.distance_to(other.position)
 		if distance < radius_alignment and other != self:
 			average_velocity += other.velocity  # Ajouter la vitesse des autres boids voisins
 			total += 1
+		if total > max_neighbor - 1 :
+			break
 	if total > 0:
 		average_velocity /= total  # Moyenne des vitesses des boids voisins
 		average_velocity = average_velocity.normalized() * top_speed
@@ -127,11 +144,14 @@ func alignment(boids: Array) -> Vector2:
 func cohesion(boids: Array) -> Vector2:
 	var average_position = Vector2()
 	var total = 0
+
 	for other in boids:
 		var distance = location.distance_to(other.position)
 		if distance < radius_cohesion and other != self:
 			average_position += other.position  # Ajouter les positions des boids voisins
 			total += 1
+		if total > max_neighbor - 1 :
+			break
 	if total > 0:
 		average_position /= total  # Moyenne des positions des boids voisins
 		return seek(average_position)  # Chercher à se rapprocher du centre de la masse
@@ -161,4 +181,12 @@ func set_debug(val) -> void:
 	
 func _draw() -> void:
 	if (is_chosen):
-		draw_circle(location, radius_separation, Color.RED, false)
+		if (has_separation):
+			draw_circle(position - global_position, radius_separation, Color.RED, false)
+			
+		if (has_cohesion):
+			draw_circle(position - global_position, radius_cohesion, Color.GREEN, false)
+			
+		if (has_alignment):
+			draw_circle(position - global_position, radius_alignment, Color.YELLOW, false)
+		

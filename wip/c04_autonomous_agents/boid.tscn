@@ -5,8 +5,7 @@
 
 [node name="Boid" type="Node2D"]
 script = ExtResource("1_ldbva")
-weight_separation = 1.75
-weight_alignment = 1.25
+weight_alignment = 1.5
 
 [node name="Image" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

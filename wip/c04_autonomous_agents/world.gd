@@ -1,14 +1,33 @@
 extends Node2D
 
 @export_range(3, 500, 2) var num_boids : int = 50  # Nombre cible de boids
-@export var debugging : bool = false
-@onready var boid_scene = preload("res://boid.tscn")
+@export var debugging : bool = false :
+	set(value):
+		debugging = value
+		set_debug()
 
-var previous_debugging_state : bool = false
+@export var enable_separation : bool = true :
+	set(value) :
+		enable_separation = value
+		update_forces()
+		
+@export var enable_alignment : bool = true  :
+	set(value) :
+		enable_alignment = value
+		update_forces()		
+		
+@export var enable_cohesion : bool = true  :
+	set(value) :
+		enable_cohesion = value
+		update_forces()
+
+@onready var boid_scene = preload("res://boid.tscn")
 
 func _ready():
 	randomize()  # Initialisation aléatoire
 	adjust_boids()  # Ajuste le nombre de boids initialement
+	set_debug()
+	update_forces()
 
 # Ajuste dynamiquement le nombre de boids pour correspondre à "num_boids"
 func adjust_boids():
@@ -38,6 +57,8 @@ func remove_boids(count: int):
 		random_boid.queue_free()
 
 func set_debug():
+	if not is_node_ready() : return
+	
 	var current_boids = get_children().filter(func(n): return n is Boid)
 	
 	for i in range(num_boids):
@@ -50,10 +71,23 @@ func set_debug():
 
 # Cette fonction peut être appelée à tout moment pour ajuster le nombre de boids
 func _process(delta):
+	manage_inputs()
+	
 	# Appel d'ajustement pour synchroniser le nombre de boids si le champ change
 	if num_boids != get_children().filter(func(n): return n is Boid).size():
 		adjust_boids()
-		
-	if debugging != previous_debugging_state :
-		previous_debugging_state = debugging
-		set_debug()
+
+func manage_inputs() -> void :
+	if (Input.is_action_just_pressed("quit")):
+		get_tree().quit()
+	
+	if (Input.is_action_just_pressed("toggle_debug")):
+		debugging = !debugging
+
+func update_forces() -> void :
+	var current_boids = get_children().filter(func(n): return n is Boid)
+	
+	for boid in current_boids:
+		boid.has_cohesion = enable_cohesion
+		boid.has_alignment = enable_alignment
+		boid.has_separation = enable_separation
