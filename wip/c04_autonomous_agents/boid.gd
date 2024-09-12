@@ -51,18 +51,18 @@ func _process(delta):
 	var boids = get_boid_siblings()  # Récupérer les autres boids dans la scène
 	
 	# Calculer et appliquer les forces de séparation, d'alignement et de cohésion
-	var separation_force = separation(boids) * weight_separation
-	var alignment_force = alignment(boids) * weight_alignment
-	var cohesion_force = cohesion(boids) * weight_cohesion
-
+	
 	# Appliquer les forces calculées
 	if has_separation :
+		var separation_force = separation(boids) * weight_separation
 		apply_force(separation_force)
 		
 	if has_alignment :
+		var alignment_force = alignment(boids) * weight_alignment
 		apply_force(alignment_force)
 		
 	if has_cohesion :
+		var cohesion_force = cohesion(boids) * weight_cohesion
 		apply_force(cohesion_force)	
 
 	# Mettre à jour la position du boid et gérer la limite de l'écran
