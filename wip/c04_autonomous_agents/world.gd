@@ -6,17 +6,17 @@ extends Node2D
 		debugging = value
 		set_debug()
 
-@export var enable_separation : bool = true :
+@export var enable_separation : bool = false :
 	set(value) :
 		enable_separation = value
 		update_forces()
 		
-@export var enable_alignment : bool = true  :
+@export var enable_alignment : bool = false  :
 	set(value) :
 		enable_alignment = value
 		update_forces()		
 		
-@export var enable_cohesion : bool = true  :
+@export var enable_cohesion : bool = false  :
 	set(value) :
 		enable_cohesion = value
 		update_forces()
