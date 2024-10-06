@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Player : KinematicBody2D
+public partial class Player : CharacterBody2D
 {
     public int GRAVITY = 400;
     public int MAXFALLSPEED = 200;
@@ -18,19 +18,19 @@ public class Player : KinematicBody2D
 
     public Vector2 Motion = new Vector2();
 
-    Sprite currentSprite;
+    Sprite2D currentSprite;
     public AnimationPlayer animPlayer;
         // Called when the node enters the scene tree for the first time.
     
     public StateMachine stateMachine;
     public override void _Ready()
     {
-        currentSprite = GetNode<Sprite>("Sprite");
+        currentSprite = GetNode<Sprite2D>("Sprite2D");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         stateMachine = GetNode<StateMachine>("StateMachine");
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
         currentSprite.FlipH = !facing_right;
         

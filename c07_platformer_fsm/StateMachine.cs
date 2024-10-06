@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 /// Generic state machine. Initializes states and delegates engine callbacks
 /// (_physics_process, _unhandled_input) to the active state.
 /// </summary>
-public class StateMachine : Node
+public partial class StateMachine : Node
 {
     /// <summary>
     /// Émis lorsque l'état a changé
@@ -14,7 +14,7 @@ public class StateMachine : Node
     /// <param name="stateName"></param>
     /// <returns></returns>
     [Signal]
-    public delegate void Transitioned(string stateName);
+    public delegate void TransitionedEventHandler(string stateName);
 
     /// <summary>
     /// Chemin vers l'état initial. On doit le configurer dans l'inspecteur.
@@ -32,7 +32,7 @@ public class StateMachine : Node
         
         State = GetNode<State>(InitialState);
 
-        Task.Run(async () => await ToSignal(Owner, "ready"));
+        //Task.Run(async () => await ToSignal(Owner, "ready"));
         GD.Print("StateMachine: Waiting for owner to be ready.");
 
         // On assigne à chaque enfant la machine à états
@@ -55,14 +55,14 @@ public class StateMachine : Node
         State.HandleInputs(@event);
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         State.Update(delta);
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
-        State.PhysicsUpdate(delta);
+        State.PhysicsUpdate((float)delta);
     }
 
     /// <summary>
@@ -86,6 +86,6 @@ public class StateMachine : Node
         State.Exit();
         State = GetNode<State>(targetStateName);
         State.Enter(message);
-        EmitSignal(nameof(Transitioned), State.Name);
+        EmitSignal(SignalName.Transitioned, State.Name);
     }
 }
