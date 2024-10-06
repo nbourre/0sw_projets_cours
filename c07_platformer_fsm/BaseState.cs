@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public class State : Node
+public partial class State : Node
 {
     /// <summary>
     /// # Reference to the state machine, to call its `transition_to()` method directly.
@@ -24,7 +24,7 @@ public class State : Node
     /// Virtual function. Corresponds to the `_process()` callback.
     /// </summary>
     /// <param name="delta"></param>
-    public virtual void Update(float delta)
+    public virtual void Update(double delta)
     {
         return;
     }
