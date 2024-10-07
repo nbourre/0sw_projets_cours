@@ -28,6 +28,8 @@ public partial class player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+
         motion.Y += GRAVITY;
 
         if(motion.Y > MAXFALLSPEED) {
@@ -39,8 +41,6 @@ public partial class player : CharacterBody2D
         } else {
             currentSprite.FlipH = true;
         }
-
-        
 
         if (Input.IsActionPressed("ui_left")) {
             motion.X -= ACCEL;
