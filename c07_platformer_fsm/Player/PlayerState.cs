@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class PlayerState : State
+public partial class PlayerState : State
 {
     /// <summary>
     ///  Typed reference to the player node.
@@ -13,7 +13,7 @@ public class PlayerState : State
     public override void _Ready()
     {
         // The states are children of the `Player` node so their `_ready()` callback will execute first. That's why we wait for the `owner` to be ready first.
-        Task.Run(async () => await ToSignal(Owner, "ready"));
+        // Task.Run(async () => await ToSignal(Owner, "ready"));
 
         // The `as` keyword casts the `owner` variable to the `Player` type. If the `owner` is not a `Player`, we'll get `null`.
         _player = Owner as Player;

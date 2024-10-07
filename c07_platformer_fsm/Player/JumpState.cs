@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // The GD tutorial has this class named "Jump.gd". However, in C#, 
 // the name of a class is also its type, and should always be the node's 
 // name to avoid problems down the line.
-public class JumpState : PlayerState
+public partial class JumpState : PlayerState
 {
     /// <summary>
     /// If we get a message asking us to jump, we jump.
@@ -13,8 +13,11 @@ public class JumpState : PlayerState
     /// <param name="message"></param>
     public override void Enter(Dictionary<string, bool> message = null)
     {
-        _player.Motion.y = -_player.JUMPFORCE;
+        _player.Motion.Y = -_player.JUMPFORCE;
         _player.animPlayer.Play("Jump");
+
+       // Display the name of the current state in the console
+        GD.Print("Entering : " + GetType().Name);
     }
 
     public override void PhysicsUpdate(float delta)
@@ -22,12 +25,14 @@ public class JumpState : PlayerState
         // Horizontal movement
         var inputDirectionX = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
 
-        _player.Motion.x += _player.ACCEL * inputDirectionX;
-        _player.Motion.y += _player.GRAVITY * delta;
+        _player.Motion.X += _player.ACCEL * inputDirectionX;
+        _player.Motion.Y += _player.GRAVITY * delta;
 
-        _player.Motion.x = Mathf.Clamp(_player.Motion.x, -_player.MAXSPEED, _player.MAXSPEED);
+        _player.Motion.X = Mathf.Clamp(_player.Motion.X, -_player.MAXSPEED, _player.MAXSPEED);
 
-        _player.Motion = _player.MoveAndSlide(_player.Motion, Vector2.Up);
+        _player.Velocity = _player.Motion;
+
+        _player.MoveAndSlide();
 
         if (inputDirectionX > 0)
         {
@@ -36,7 +41,7 @@ public class JumpState : PlayerState
             _player.facing_right = false;
         }
 
-        if (_player.Motion.y > 0)
+        if (_player.Motion.Y > 0)
         {
             _stateMachine.TransitionTo("Fall");
         }
