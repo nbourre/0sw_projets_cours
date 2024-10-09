@@ -281,7 +281,7 @@ script = ExtResource("2")
 texture = ExtResource("1")
 hframes = 9
 vframes = 6
-frame = 1
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 6.5)
@@ -295,7 +295,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_g4mj8")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/conditions/isFalling = false
 parameters/conditions/isIdle = false
 parameters/conditions/isJumping = false
