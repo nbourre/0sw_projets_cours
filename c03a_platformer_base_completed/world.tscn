@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://pbgf46rcs4md"]
+[gd_scene load_steps=5 format=4 uid="uid://pbgf46rcs4md"]
 
 [ext_resource type="Texture2D" uid="uid://lpq7tse8jrby" path="res://assets/img/tilesheet_complete_2X.png" id="1_ewenr"]
-[ext_resource type="Texture2D" uid="uid://cxaitdbek2mry" path="res://assets/img/viking2.png" id="2"]
-[ext_resource type="Script" path="res://player.cs" id="3"]
+[ext_resource type="PackedScene" uid="uid://ctarmpurc12tu" path="res://player.tscn" id="2_7ldhd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ert32"]
 texture = ExtResource("1_ewenr")
@@ -292,84 +291,6 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ert32")
-
-[sub_resource type="CapsuleShape2D" id="1"]
-radius = 7.5
-height = 19.0
-
-[sub_resource type="Animation" id="2"]
-resource_name = "Idle"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-
-[sub_resource type="Animation" id="3"]
-resource_name = "Run"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [9, 10, 11, 12, 13, 14]
-}
-
-[sub_resource type="Animation" id="4"]
-resource_name = "fall"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [20, 21, 22]
-}
-
-[sub_resource type="Animation" id="5"]
-resource_name = "jump"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [18, 19]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xkku"]
-_data = {
-"Idle": SubResource("2"),
-"Run": SubResource("3"),
-"fall": SubResource("4"),
-"jump": SubResource("5")
-}
 
 [node name="world" type="Node2D"]
 

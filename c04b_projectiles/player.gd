@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 200
-@export var bullet_scene : PackedScene
+var bullet_scene : PackedScene = preload("res://bullet.tscn")
 
 func get_input():
 	look_at(get_global_mouse_position())
@@ -23,3 +23,4 @@ func shoot():
 	var b = bullet_scene.instantiate()
 	get_parent().add_child(b)
 	b.global_transform = $Muzzle.global_transform
+	#b.position = $Muzzle.position
