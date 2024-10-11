@@ -15,6 +15,12 @@ run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.3", "C#")
 config/icon="res://assets/img/icon.png"
 
+[display]
+
+window/size/viewport_width=2304
+window/size/viewport_height=1296
+window/stretch/scale=4.0
+
 [dotnet]
 
 project/assembly_name="c07_platformer_fsm"
