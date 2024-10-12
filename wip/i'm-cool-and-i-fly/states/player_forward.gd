@@ -10,6 +10,13 @@ func manage_input() -> void:
 	if (dir.length() == 0):
 		Transitioned.emit(self, "idle")		
 
+	if (dir.x < 0):
+		Transitioned.emit(self, "backward")
+	if (dir.y < 0):
+		Transitioned.emit(self, "up")
+	if (dir.y > 0):
+		Transitioned.emit(self, "down")
+
 func enter():
 	anim_player = player.get_animation_player()	
 	

@@ -8,7 +8,14 @@ func manage_input() -> void:
 	var dir : Vector2 = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	if (dir.length() == 0):
-		Transitioned.emit(self, "idle")		
+		Transitioned.emit(self, "idle")	
+	if (dir.x > 0):
+		Transitioned.emit(self, "forward")
+
+	if (dir.y < 0):
+		Transitioned.emit(self, "up")
+	if (dir.y > 0):
+		Transitioned.emit(self, "down")
 
 func enter():
 	anim_player = player.get_animation_player()	

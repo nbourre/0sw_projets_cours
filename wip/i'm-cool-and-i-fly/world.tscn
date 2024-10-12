@@ -5,4 +5,4 @@
 [node name="world" type="Node2D"]
 
 [node name="Popo" parent="." instance=ExtResource("1_717of")]
-position = Vector2(868, 505)
+position = Vector2(374, 294)
