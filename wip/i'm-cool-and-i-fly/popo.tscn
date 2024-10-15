@@ -140,7 +140,11 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(200, 0)
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_left_margin = 0.25
+drag_right_margin = 0.25
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_cmsqt")
