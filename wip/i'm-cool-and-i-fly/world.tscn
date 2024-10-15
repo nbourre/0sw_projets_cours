@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccoc5umt2s641"]
+[gd_scene load_steps=4 format=3 uid="uid://ccoc5umt2s641"]
 
+[ext_resource type="PackedScene" uid="uid://fnwkxx5f480l" path="res://level.tscn" id="1_6xmuj"]
 [ext_resource type="PackedScene" uid="uid://cokl1wiayvgra" path="res://popo.tscn" id="1_717of"]
+[ext_resource type="Script" path="res://world.gd" id="1_dgpbd"]
 
 [node name="world" type="Node2D"]
+script = ExtResource("1_dgpbd")
+
+[node name="Level" parent="." instance=ExtResource("1_6xmuj")]
 
 [node name="Popo" parent="." instance=ExtResource("1_717of")]
-position = Vector2(374, 294)
+position = Vector2(93, 166)
