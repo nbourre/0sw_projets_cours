@@ -142,6 +142,8 @@ libraries = {
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(200, 0)
 zoom = Vector2(2, 2)
+limit_top = -60
+limit_bottom = 360
 position_smoothing_enabled = true
 drag_left_margin = 0.25
 drag_right_margin = 0.25
