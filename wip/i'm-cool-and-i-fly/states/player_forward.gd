@@ -10,19 +10,21 @@ func manage_input() -> Vector2:
 	var dir : Vector2 = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	if (dir.length() == 0):
-		Transitioned.emit(self, "idle")		
-
+		Transitioned.emit(self, "idle")
+		
+	if (dir.x == 0 ):
+		if (dir.y < 0):
+			Transitioned.emit(self, "up")
+		if (dir.y > 0):
+			Transitioned.emit(self, "down")
 	if (dir.x < 0):
 		Transitioned.emit(self, "backward")
-	if (dir.y < 0):
-		Transitioned.emit(self, "up")
-	if (dir.y > 0):
-		Transitioned.emit(self, "down")
 		
 	return dir
 
 func enter():
-	anim_player = player.get_animation_player()	
+	anim_player = player.get_animation_player()
+	
 	
 func update(delta: float) -> void:
 	if not anim_player :

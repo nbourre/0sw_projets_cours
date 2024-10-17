@@ -14,10 +14,11 @@ func manage_input() -> Vector2:
 	if (dir.x > 0):
 		Transitioned.emit(self, "forward")
 
-	if (dir.y < 0):
-		Transitioned.emit(self, "up")
-	if (dir.y > 0):
-		Transitioned.emit(self, "down")
+	if (dir.x == 0) :
+		if (dir.y < 0):
+			Transitioned.emit(self, "up")
+		if (dir.y > 0):
+			Transitioned.emit(self, "down")
 	
 	return dir
 

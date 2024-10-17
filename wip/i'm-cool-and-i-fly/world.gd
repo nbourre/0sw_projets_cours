@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var player : Player = $Player
+@onready var level : LevelOne = $Level
 
 func is_on_arcade() -> bool:
 	return OS.get_executable_path().to_lower().contains("retropie")
@@ -13,11 +15,14 @@ func manage_end_game() -> void:
 			get_tree().quit()
 
 
+func manage_limits() -> void:
+	player.position.y = clamp(player.position.y, level.top, level.bottom)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	manage_end_game()
+	manage_limits()

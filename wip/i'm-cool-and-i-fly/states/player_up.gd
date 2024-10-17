@@ -36,3 +36,4 @@ func physics_update(delta: float) -> void:
 	if not anim_player : return
 		
 	anim_player.play("up")
+	

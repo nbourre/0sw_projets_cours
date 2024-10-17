@@ -8,6 +8,7 @@
 script = ExtResource("1_dgpbd")
 
 [node name="Level" parent="." instance=ExtResource("1_6xmuj")]
+position = Vector2(16, 386)
 
-[node name="Popo" parent="." instance=ExtResource("1_717of")]
+[node name="Player" parent="." instance=ExtResource("1_717of")]
 position = Vector2(93, 166)
