@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="c07_platformer_fsm"
+config/name="c09_platformer_raycast"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.3", "C#")
 config/icon="res://assets/img/icon.png"

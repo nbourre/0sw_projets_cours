@@ -1,12 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlr76ouxshr5g"]
+[gd_scene load_steps=17 format=3 uid="uid://dlr76ouxshr5g"]
 
-[ext_resource type="Script" path="res://Player/JumpState.cs" id="1"]
-[ext_resource type="Script" path="res://Player/FallState.cs" id="2"]
-[ext_resource type="Script" path="res://Player/Player.cs" id="3"]
-[ext_resource type="Texture2D" uid="uid://outd0k1obemr" path="res://assets/img/viking2.png" id="4"]
-[ext_resource type="Script" path="res://StateMachine.cs" id="5"]
-[ext_resource type="Script" path="res://Player/RunState.cs" id="6"]
-[ext_resource type="Script" path="res://Player/IdleState.cs" id="7"]
+[ext_resource type="Script" path="res://characters/Player/JumpState.cs" id="1"]
+[ext_resource type="Script" path="res://characters/Player/FallState.cs" id="2"]
+[ext_resource type="Shader" path="res://characters/Player/Player.gdshader" id="2_l1hvl"]
+[ext_resource type="Script" path="res://characters/Player/Player.cs" id="3"]
+[ext_resource type="Texture2D" uid="uid://outd0k1obemr" path="res://assets/img/viking/viking2.png" id="4"]
+[ext_resource type="Script" path="res://utils/StateMachine.cs" id="5"]
+[ext_resource type="Script" path="res://characters/Player/RunState.cs" id="6"]
+[ext_resource type="Script" path="res://characters/Player/IdleState.cs" id="7"]
+[ext_resource type="Script" path="res://characters/Player/HitState.cs" id="8_nwmk0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvmkf"]
+resource_local_to_scene = true
+shader = ExtResource("2_l1hvl")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 7.0
@@ -84,14 +92,15 @@ _data = {
 "Run": SubResource("5")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fvmkf")
 texture = ExtResource("4")
 hframes = 9
 vframes = 6
-frame = 13
+frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -120,3 +129,6 @@ script = ExtResource("2")
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("1")
+
+[node name="Hit" type="Node" parent="StateMachine"]
+script = ExtResource("8_nwmk0")
