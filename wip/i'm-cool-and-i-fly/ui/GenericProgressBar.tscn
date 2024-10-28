@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://gpphkbvxkjus"]
+
+[ext_resource type="Texture2D" uid="uid://btnaxns75m0xn" path="res://assets/ui/healthbarUnder.png" id="1_urp3b"]
+[ext_resource type="Texture2D" uid="uid://ck2uwqpwomrio" path="res://assets/ui/healthbarProgress.png" id="2_217ik"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+offset_right = 64.0
+offset_bottom = 10.0
+value = 33.0
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 5
+stretch_margin_right = 6
+stretch_margin_bottom = 5
+texture_under = ExtResource("1_urp3b")
+texture_progress = ExtResource("2_217ik")
