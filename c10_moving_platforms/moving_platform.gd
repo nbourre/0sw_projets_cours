@@ -10,7 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func start_tween():
-	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS) as Tween
+	tween.set_trans(Tween.TRANS_SPRING)
 	tween.set_loops().set_parallel(false)
 	tween.tween_property(anim_body, "position", offset, duration / 2)
 	tween.tween_property(anim_body, "position", Vector2.ZERO, duration)
