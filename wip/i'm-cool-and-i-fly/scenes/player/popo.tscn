@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://cokl1wiayvgra"]
 
 [ext_resource type="Texture2D" uid="uid://bdx3rw1sm8e8k" path="res://assets/Popo-AnimationSheet.png" id="1_dk5xq"]
-[ext_resource type="Script" path="res://popo.gd" id="1_p2sg5"]
+[ext_resource type="Script" path="res://scenes/player/popo.gd" id="1_p2sg5"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_cmsqt"]
 [ext_resource type="Script" path="res://states/player_backward.gd" id="3_yp0y0"]
 [ext_resource type="Script" path="res://states/player_idle.gd" id="4_7njsk"]
@@ -141,12 +141,14 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(200, 0)
-zoom = Vector2(2, 2)
 limit_top = -60
 limit_bottom = 360
 position_smoothing_enabled = true
 drag_left_margin = 0.25
 drag_right_margin = 0.25
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(39, -10)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_cmsqt")

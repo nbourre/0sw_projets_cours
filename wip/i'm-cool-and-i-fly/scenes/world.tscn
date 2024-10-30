@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccoc5umt2s641"]
+
+[ext_resource type="PackedScene" uid="uid://fnwkxx5f480l" path="res://scenes/levels/level.tscn" id="1_6xmuj"]
+[ext_resource type="PackedScene" uid="uid://cokl1wiayvgra" path="res://scenes/player/popo.tscn" id="1_717of"]
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_dgpbd"]
+[ext_resource type="PackedScene" uid="uid://gpphkbvxkjus" path="res://ui/GenericProgressBar.tscn" id="4_j8qpf"]
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_dgpbd")
+
+[node name="Level" parent="." instance=ExtResource("1_6xmuj")]
+position = Vector2(16, 386)
+
+[node name="Player" parent="." instance=ExtResource("1_717of")]
+position = Vector2(93, 166)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GenericProgressBar" parent="CanvasLayer" instance=ExtResource("4_j8qpf")]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 155.0
+offset_bottom = 28.0
+scale = Vector2(0.75, 0.75)
+bar_name = "HP"
