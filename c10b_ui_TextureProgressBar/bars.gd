@@ -6,7 +6,7 @@ var health_bar : GenericProgressBar
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_parent().get_node("Player") as Player
-	health_bar = $GenericProgressBar
+	health_bar = $HPProgressBar
 	player.PlayerHit.connect(update_health)
 	
 	update_health(100, 100)
