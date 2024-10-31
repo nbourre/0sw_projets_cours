@@ -20,6 +20,7 @@ stretch_margin_bottom = 5
 texture_under = ExtResource("1_urp3b")
 texture_progress = ExtResource("2_217ik")
 script = ExtResource("3_exuw3")
+bar_name = "TEST"
 
 [node name="BarText" type="Label" parent="."]
 layout_mode = 1
@@ -31,6 +32,6 @@ offset_top = -11.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "BAR TEXT"
+text = "TEST : 100 / 100"
 label_settings = SubResource("LabelSettings_i7pja")
 horizontal_alignment = 1
