@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://cokl1wiayvgra"]
 
 [ext_resource type="Texture2D" uid="uid://bdx3rw1sm8e8k" path="res://assets/Popo-AnimationSheet.png" id="1_dk5xq"]
-[ext_resource type="Script" path="res://scenes/player/popo.gd" id="1_p2sg5"]
+[ext_resource type="Script" path="res://scenes/characters/player/popo.gd" id="1_p2sg5"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_cmsqt"]
 [ext_resource type="Script" path="res://states/player_backward.gd" id="3_yp0y0"]
 [ext_resource type="Script" path="res://states/player_idle.gd" id="4_7njsk"]

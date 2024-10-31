@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://cmypwi124foc6"]
+
+[ext_resource type="Script" path="res://scenes/characters/generic_character.gd" id="1_e8j1n"]
+[ext_resource type="Texture2D" uid="uid://cdy2e1h7yc6cy" path="res://assets/Flappy Bird Assets/Player/StyleBird2/AllBird2.png" id="2_2bcuk"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_0eqg6"]
+[ext_resource type="Script" path="res://scenes/characters/mobs/mob_fly.gd" id="4_thqsn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ai1e"]
+radius = 11.0454
+
+[sub_resource type="Animation" id="Animation_3pqn2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hei58"]
+resource_name = "fly"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_p6n8q"]
+resource_name = "hurt"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dk3kv"]
+_data = {
+"RESET": SubResource("Animation_3pqn2"),
+"fly": SubResource("Animation_hei58"),
+"hurt": SubResource("Animation_p6n8q")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ddly"]
+radius = 13.0384
+
+[node name="Mob" type="CharacterBody2D"]
+script = ExtResource("1_e8j1n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4ai1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_2bcuk")
+hframes = 4
+vframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dk3kv")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2ddly")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_0eqg6")
+initial_state = NodePath("Fly")
+
+[node name="Fly" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
+script = ExtResource("4_thqsn")
+mob = NodePath("../..")
