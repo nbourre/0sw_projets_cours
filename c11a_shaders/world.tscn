@@ -32,7 +32,7 @@ position = Vector2(820, -50)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_u15wj")
 
-[node name="Grass3" type="Sprite2D" parent="."]
+[node name="GrassNoMove" type="Sprite2D" parent="."]
 position = Vector2(735, -50)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_u15wj")
