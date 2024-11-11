@@ -69,7 +69,8 @@ radius = 13.0384
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hb5lg"]
 shader = ExtResource("5_yhq0a")
-shader_parameter/loop = false
+shader_parameter/start = true
+shader_parameter/resolution = Vector2(1, 1)
 shader_parameter/boom_pal1 = Vector3(0.2, 0.15, 0.3)
 shader_parameter/boom_pal2 = Vector3(0.9, 0.15, 0.05)
 shader_parameter/boom_pal3 = Vector3(0.9, 0.5, 0.1)

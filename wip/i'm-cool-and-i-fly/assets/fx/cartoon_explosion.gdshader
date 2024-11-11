@@ -1,11 +1,16 @@
 shader_type canvas_item;
 
 // Define the maximum time for the animation to stop
-#define iTime TIME
+#define iTime (start ? TIME : 0.0)  // Only advance TIME if start is true
 #define iResolution 1.0/SCREEN_PIXEL_SIZE // Screen resolution (inverted for scaling)
 #define fragColor COLOR // Fragment color output
 
-uniform bool loop = false;
+uniform bool start = false;          // Controls whether the animation starts
+//uniform int repetitions = 3;          // Number of times the animation should repeat
+//uniform float max_time = 10.0;            // Total time for each explosion cycle (adjust as needed)
+
+uniform sampler2D storage_texture;    // Texture used for storage across frames
+uniform vec2 resolution = vec2(1.0, 1.0);              // Resolution of the texture (width, height)
 
 // Uniforms for color palettes
 uniform vec3 boom_pal1 = vec3(.2, .15, .3);
@@ -33,6 +38,24 @@ uniform float smoke_bubbles : hint_range(0.0, 10.0, 0.1) = 0.5;
 uniform float smoke_bw : hint_range(0.0, 10.0, 0.1) = 0.75;
 
 uniform vec2 disp = vec2(0.0); // Displacement vector for effect position offset
+
+// Fetch a value from a specific location in the storage texture
+vec4 fetch_variable(ivec2 pixelCoord) {
+    // Convert the pixel coordinate to UV space for texture lookup
+    vec2 uv = vec2(pixelCoord) / resolution;
+    return texture(storage_texture, uv);
+}
+
+// Save a value to a specific location in the storage texture
+vec4 save_variable(ivec2 fragCoord, ivec2 pixelCoord, vec4 valueToStore) {
+    // Only write to the specified pixel coordinate
+    if (fragCoord == pixelCoord) {
+        return valueToStore; // Output the new value at the target location
+    } else {
+        // Preserve the existing value if this fragment isn’t the target location
+        return fetch_variable(fragCoord);
+    }
+}
 
 // Function to generate a random normalized vector based on input position
 vec3 n_rand3(vec3 p) {
@@ -128,6 +151,8 @@ float oct_noise(vec3 pos, float o) {
 
 // Explosion (boom) effect based on position and time
 float boom(vec2 p) {
+    ///float repeat = mod(iTime * boom_repeat, max_time); // Restart at each max_time
+ 	
     float repeat = mod(iTime * boom_repeat, 2.0);
     float shape = 1.0 - pow(distance(vec3(p, 0.0), vec3(0.0)), 2.0) / (repeat * boom_shape) - repeat * 2.0;
     
@@ -141,6 +166,7 @@ float boom(vec2 p) {
 
 // Smoke effect based on position and time
 float smoke(vec2 p) {
+	//float repeat = mod(iTime * boom_repeat, max_time); // Restart at each max_time
     float repeat = mod(iTime * smoke_repeat, 2.0);
     float shape = 1.0 - pow(distance(vec3(p - vec2(0, 2) * pow(repeat / 1.45, 2.0) * 1.5, 0.0), vec3(0.0)), 2.0) / (repeat * smoke_shape) - pow(repeat * 1.5, 0.5);
     
@@ -182,6 +208,14 @@ float posterize(float v, int n) {
 
 // Main fragment function for rendering
 void fragment() {
+	
+	ivec2 repeat_pos = ivec2(5, 5);              // Coordinate to store the variable
+	vec4 repeat_val = fetch_variable(repeat_pos);
+	repeat_val.x++;
+	
+	
+
+	
     // Color palettes for boom and smoke effects
     vec3 boom_pal[4] = { boom_pal1, boom_pal2, boom_pal3, boom_pal4 };
     vec3 smoke_pal[] = { smoke_pal1, smoke_pal2, smoke_pal3 };
@@ -218,4 +252,10 @@ void fragment() {
 
     // Output the final color to the fragment
     fragColor = vec4(result.rgb, alpha);
+	
+	if (mod(repeat_val.x, 10) == 0.0) {
+		fragColor.r = .5;
+	}
+	
+	
 }
