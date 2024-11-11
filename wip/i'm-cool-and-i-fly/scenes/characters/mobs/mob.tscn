@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cmypwi124foc6"]
 
-[ext_resource type="Script" path="res://scenes/characters/generic_character.gd" id="1_e8j1n"]
+[ext_resource type="Script" path="res://scenes/characters/mobs/mob.gd" id="1_e3ohk"]
 [ext_resource type="Texture2D" uid="uid://cdy2e1h7yc6cy" path="res://assets/Flappy Bird Assets/Player/StyleBird2/AllBird2.png" id="2_2bcuk"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_0eqg6"]
 [ext_resource type="Script" path="res://scenes/characters/mobs/mob_fly.gd" id="4_thqsn"]
@@ -67,7 +67,7 @@ _data = {
 radius = 13.0384
 
 [node name="Mob" type="CharacterBody2D"]
-script = ExtResource("1_e8j1n")
+script = ExtResource("1_e3ohk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4ai1e")
@@ -95,3 +95,6 @@ initial_state = NodePath("Fly")
 [node name="Fly" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
 script = ExtResource("4_thqsn")
 mob = NodePath("../..")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
