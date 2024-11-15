@@ -4,7 +4,6 @@ class_name MobFly
 @export var mob : GenericCharacter
 var anim_player : AnimationPlayer
 
-
 func enter():
 	if mob != null :
 		anim_player = mob.get_animation_player()	

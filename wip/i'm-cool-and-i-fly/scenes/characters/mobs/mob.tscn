@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmypwi124foc6"]
+[gd_scene load_steps=13 format=3 uid="uid://cmypwi124foc6"]
 
-[ext_resource type="Script" path="res://scenes/characters/generic_character.gd" id="1_e8j1n"]
+[ext_resource type="Script" path="res://scenes/characters/mobs/mob.gd" id="1_e3ohk"]
 [ext_resource type="Texture2D" uid="uid://cdy2e1h7yc6cy" path="res://assets/Flappy Bird Assets/Player/StyleBird2/AllBird2.png" id="2_2bcuk"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_0eqg6"]
 [ext_resource type="Script" path="res://scenes/characters/mobs/mob_fly.gd" id="4_thqsn"]
+[ext_resource type="Shader" path="res://assets/fx/cartoon_explosion.gdshader" id="5_yhq0a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ai1e"]
 radius = 11.0454
@@ -66,8 +67,33 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ddly"]
 radius = 13.0384
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb5lg"]
+shader = ExtResource("5_yhq0a")
+shader_parameter/start = true
+shader_parameter/resolution = Vector2(1, 1)
+shader_parameter/boom_pal1 = Vector3(0.2, 0.15, 0.3)
+shader_parameter/boom_pal2 = Vector3(0.9, 0.15, 0.05)
+shader_parameter/boom_pal3 = Vector3(0.9, 0.5, 0.1)
+shader_parameter/boom_pal4 = Vector3(0.95, 0.95, 0.35)
+shader_parameter/smoke_pal1 = Vector3(0.2, 0.15, 0.3)
+shader_parameter/smoke_pal2 = Vector3(0.35, 0.3, 0.45)
+shader_parameter/smoke_pal3 = Vector3(0.5, 0.45, 0.6)
+shader_parameter/size = 5.0
+shader_parameter/disperse = 1.0
+shader_parameter/boom_repeat = 1.0
+shader_parameter/boom_shape = 12.0
+shader_parameter/boom_distortion = 0.5
+shader_parameter/boom_bubbles = 0.5
+shader_parameter/boom_bw = 0.5
+shader_parameter/smoke_repeat = 1.0
+shader_parameter/smoke_shape = 16.0
+shader_parameter/smoke_distortion = 1.5
+shader_parameter/smoke_bubbles = 0.5
+shader_parameter/smoke_bw = 0.75
+shader_parameter/disp = Vector2(0, 0)
+
 [node name="Mob" type="CharacterBody2D"]
-script = ExtResource("1_e8j1n")
+script = ExtResource("1_e3ohk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4ai1e")
@@ -95,3 +121,13 @@ initial_state = NodePath("Fly")
 [node name="Fly" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
 script = ExtResource("4_thqsn")
 mob = NodePath("../..")
+
+[node name="Explosion" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hb5lg")
+offset_left = -77.0
+offset_top = -52.0
+offset_right = 80.0
+offset_bottom = 33.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
