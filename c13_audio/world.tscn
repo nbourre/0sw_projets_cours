@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://ih70cajdksae"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_sqp4q"]
+[ext_resource type="AudioStream" uid="uid://5feypqgu7lup" path="res://pickupCoin.wav" id="2_rkexv"]
+[ext_resource type="AudioStream" uid="uid://k1q2qj6qkija" path="res://time_for_adventure.mp3" id="3_wtjfd"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_sqp4q")
+
+[node name="Sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rkexv")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wtjfd")
+
+[node name="PlaySfx" type="Button" parent="."]
+offset_left = 77.0
+offset_top = 60.0
+offset_right = 118.0
+offset_bottom = 91.0
+text = "Play"
+
+[node name="PlayMusic" type="Button" parent="."]
+offset_left = 133.0
+offset_top = 60.0
+offset_right = 182.0
+offset_bottom = 91.0
+text = "Jouer"
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 35.0
+offset_top = 106.0
+offset_right = 235.0
+offset_bottom = 122.0
+max_value = 1.0
+step = 0.01
+
+[connection signal="pressed" from="PlaySfx" to="." method="_on_play_sfx_pressed"]
+[connection signal="pressed" from="PlayMusic" to="." method="_on_play_music_pressed"]
+[connection signal="drag_ended" from="HSlider" to="." method="_on_h_slider_drag_ended"]

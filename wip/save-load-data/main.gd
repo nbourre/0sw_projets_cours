@@ -30,6 +30,5 @@ func _on_change_health_pressed() -> void:
 	playerData.change_health(-5)
 	update_label()
 
-
 func _on_add_button_pressed() -> void:
 	playerData.add_item_to_inventory("Apple")
