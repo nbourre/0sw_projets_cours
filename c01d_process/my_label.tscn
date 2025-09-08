@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bycyhklah6rrx"]
 
-[ext_resource type="Script" path="res://MyLabel.cs" id="1_kkfu3"]
+[ext_resource type="Script" uid="uid://x3r8p562fsa5" path="res://MyLabel.cs" id="1_kkfu3"]
 
 [node name="MyLabel" type="Label"]
 anchors_preset = 15
