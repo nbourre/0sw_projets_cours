@@ -12,7 +12,7 @@ config_version=5
 
 config/name="c01e_signals"
 run/main_scene="res://ExempleTimer.tscn"
-config/features=PackedStringArray("4.1", "C#")
+config/features=PackedStringArray("4.4", "C#")
 config/icon="res://icon.png"
 
 [dotnet]
