@@ -14,8 +14,8 @@ public partial class ExempleTimer : Node2D
 	}
 
 	private void OnTimerTimeout() {
-	    var sprite = GetNode<Sprite2D>("Sprite2D");
-        sprite.Visible = !sprite.Visible;
+		var sprite = GetNode<Sprite2D>("Sprite2D");
+	    sprite.Visible = !sprite.Visible;
   
 	}
 }

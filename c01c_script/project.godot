@@ -6,13 +6,18 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="c01c_script"
 run/main_scene="res://Panel.tscn"
+config/features=PackedStringArray("4.4", "C#")
 config/icon="res://icon.png"
+
+[dotnet]
+
+project/assembly_name="c01c_script"
 
 [gui]
 

@@ -1,13 +1,14 @@
 using Godot;
 using System;
 
-public class TestPanel : Panel
+public partial class TestPanel : Panel
 {
 
     public override void _Ready()
     {
         GD.Print($"{nameof(TestPanel)} ready");
-        GetNode("Button").Connect("pressed", this, nameof(OnButtonPressed));
+        
+        GetNode<Button>("Button").Pressed += OnButtonPressed;
     }
 
     public override void _EnterTree()
@@ -16,7 +17,7 @@ public class TestPanel : Panel
     }
 
     bool test = true;
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if (test) {
             GD.Print($"{nameof(TestPanel)} process");
