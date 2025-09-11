@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dtgvvlcvdvq7j"]
 
 [ext_resource type="Texture2D" uid="uid://dermr3kua3hjk" path="res://assets/flying_toaster_fix.png" id="1_7aexq"]
-[ext_resource type="Script" path="res://mob.gd" id="1_ex8eq"]
+[ext_resource type="Script" uid="uid://bxj3fi0bin30s" path="res://mob.gd" id="1_ex8eq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rje5"]
 atlas = ExtResource("1_7aexq")
