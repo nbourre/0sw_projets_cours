@@ -45,7 +45,7 @@ func adjust_boids():
 func add_boids(count: int):
 	for i in range(count):
 		var boid_instance = boid_scene.instantiate()
-		boid_instance.position = Vector2(randi_range(0, get_viewport_rect().size.x), randi_range(0, get_viewport_rect().size.y))
+		boid_instance.position = Vector2(randf_range(0.0, get_viewport_rect().size.x), randf_range(0.0, get_viewport_rect().size.y))
 		add_child(boid_instance)
 
 # Retirer aléatoirement les boids en excès
@@ -81,6 +81,7 @@ func manage_inputs() -> void :
 	if (Input.is_action_just_pressed("quit")):
 		get_tree().quit()
 	
+	# ALT + D pour basculer le mode débogage
 	if (Input.is_action_just_pressed("toggle_debug")):
 		debugging = !debugging
 
