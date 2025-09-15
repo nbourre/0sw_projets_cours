@@ -101,8 +101,8 @@ func wrap_around_screen():
 
 # Calcul de la force de séparation (éviter les collisions avec d'autres boids)
 func separation(boids: Array) -> Vector2:
-	var steer = Vector2()
-	var total = 0
+	var steer : Vector2 = Vector2()
+	var total : int = 0
 	
 	for other in boids:
 		var distance = location.distance_to(other.position)
@@ -110,10 +110,12 @@ func separation(boids: Array) -> Vector2:
 			var diff = location - other.position
 			diff = diff.normalized() / distance  # Inverser la direction de la force d'évitement
 			steer += diff
-			total += 1
+			total += 1 # Compter le nombre de boids voisins
 			
 		if total > max_neighbor - 1 :
+			# Limiter le nombre de voisins pris en compte pour la séparation
 			break
+
 	if total > 0:
 		steer /= total  # Moyenne de toutes les forces
 		steer = steer.normalized() * top_speed - velocity  # Calcul du vecteur de direction
