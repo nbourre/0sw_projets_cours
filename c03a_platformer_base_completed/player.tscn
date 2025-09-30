@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctarmpurc12tu"]
 
-[ext_resource type="Script" path="res://player.cs" id="1_lbfqh"]
+[ext_resource type="Script" uid="uid://b37f2mdi2mr5q" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cxaitdbek2mry" path="res://assets/img/viking2.png" id="2_wwdrb"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
@@ -75,15 +75,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3xkku"]
 _data = {
-"Idle": SubResource("2"),
-"Run": SubResource("3"),
-"fall": SubResource("4"),
-"jump": SubResource("5")
+&"Idle": SubResource("2"),
+&"Run": SubResource("3"),
+&"fall": SubResource("4"),
+&"jump": SubResource("5")
 }
 
 [node name="player" type="CharacterBody2D"]
-position = Vector2(503, 184)
-script = ExtResource("1_lbfqh")
+script = ExtResource("1_onrkg")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -101,5 +100,5 @@ position_smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3xkku")
+&"": SubResource("AnimationLibrary_3xkku")
 }
