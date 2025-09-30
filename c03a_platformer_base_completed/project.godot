@@ -12,12 +12,8 @@ config_version=5
 
 config/name="c03a_platformer_base_completed"
 run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.5", "C#")
+config/features=PackedStringArray("4.5")
 config/icon="res://assets/img/icon.png"
-
-[display]
-
-window/size/mode=3
 
 [dotnet]
 

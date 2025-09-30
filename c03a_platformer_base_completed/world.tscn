@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://pbgf46rcs4md"]
 
 [ext_resource type="Texture2D" uid="uid://lpq7tse8jrby" path="res://assets/img/tilesheet_complete_2X.png" id="1_ewenr"]
-[ext_resource type="Script" path="res://world.gd" id="1_k83bu"]
+[ext_resource type="Script" uid="uid://dutafrhi6d1js" path="res://world.gd" id="1_k83bu"]
 [ext_resource type="PackedScene" uid="uid://ctarmpurc12tu" path="res://player.tscn" id="2_7ldhd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ert32"]
@@ -303,3 +303,4 @@ tile_map_data = PackedByteArray("AAAMAAgAAAACAAAAAAANAAgAAAACAAAAAAAOAAgAAAACAAA
 tile_set = SubResource("TileSet_w7ah6")
 
 [node name="player" parent="." instance=ExtResource("2_7ldhd")]
+position = Vector2(491, 150)
