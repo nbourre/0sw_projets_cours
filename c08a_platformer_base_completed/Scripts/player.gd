@@ -53,7 +53,6 @@ func _physics_process(delta : float) -> void :
 	else:
 		# Ralentissement progressif quand aucune touche n'est pressée
 		motion.x = lerp(motion.x, 0.0, 0.2)
-		#motion = motion.lerp(Vector2.ZERO, 0.2)
 		anim_player.play("Idle")
 	
 	
