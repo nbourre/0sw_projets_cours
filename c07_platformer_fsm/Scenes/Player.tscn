@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://dlr76ouxshr5g"]
 
-[ext_resource type="Script" path="res://Player/JumpState.cs" id="1"]
-[ext_resource type="Script" path="res://Player/FallState.cs" id="2"]
-[ext_resource type="Script" path="res://Player/Player.cs" id="3"]
+[ext_resource type="Script" uid="uid://b1psdaj0pweln" path="res://Scripts/JumpState.cs" id="1"]
+[ext_resource type="Script" uid="uid://dlm2yhol2w4c1" path="res://Scripts/FallState.cs" id="2"]
+[ext_resource type="Script" uid="uid://dubqergndyl17" path="res://Scripts/Player.cs" id="3"]
 [ext_resource type="Texture2D" uid="uid://outd0k1obemr" path="res://assets/img/viking2.png" id="4"]
-[ext_resource type="Script" path="res://StateMachine.cs" id="5"]
-[ext_resource type="Script" path="res://Player/RunState.cs" id="6"]
-[ext_resource type="Script" path="res://Player/IdleState.cs" id="7"]
+[ext_resource type="Script" uid="uid://c0mwph6tpxxgu" path="res://Scripts/StateMachine.cs" id="5"]
+[ext_resource type="Script" uid="uid://dv145w7qvimt3" path="res://Scripts/RunState.cs" id="6"]
+[ext_resource type="Script" uid="uid://bxiibh3dj7pnm" path="res://Scripts/IdleState.cs" id="7"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 7.0
@@ -78,10 +78,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bk51h"]
 _data = {
-"Fall": SubResource("2"),
-"Idle": SubResource("3"),
-"Jump": SubResource("4"),
-"Run": SubResource("5")
+&"Fall": SubResource("2"),
+&"Idle": SubResource("3"),
+&"Jump": SubResource("4"),
+&"Run": SubResource("5")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -102,7 +102,7 @@ position_smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_bk51h")
+&"": SubResource("AnimationLibrary_bk51h")
 }
 
 [node name="StateMachine" type="Node" parent="."]

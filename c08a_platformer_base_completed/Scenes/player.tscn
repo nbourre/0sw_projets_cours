@@ -1,7 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctarmpurc12tu"]
 
-[ext_resource type="Script" uid="uid://b37f2mdi2mr5q" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://b37f2mdi2mr5q" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cxaitdbek2mry" path="res://assets/img/viking2.png" id="2_wwdrb"]
+
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 7.5
