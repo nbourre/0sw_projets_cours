@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="c08_platformer_base_completed"
+config/name="c08_platformer_base"
 run/main_scene="res://Scenes/world.tscn"
 config/features=PackedStringArray("4.5")
 config/icon="res://assets/img/icon.png"
