@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://c1ox1m6mn761a"]
 
-[ext_resource type="Script" path="res://dino.gd" id="1_a63g5"]
+[ext_resource type="Script" uid="uid://dh77yauh164nh" path="res://Scripts/dino.gd" id="1_a63g5"]
 [ext_resource type="Texture2D" uid="uid://bxuokio8vu5ic" path="res://assets/DinoSprites - doux.png" id="2_vjnlw"]
-[ext_resource type="Script" path="res://state_machine.gd" id="3_kdati"]
-[ext_resource type="Script" path="res://States/enemy_follow.gd" id="4_22dim"]
-[ext_resource type="Script" path="res://States/enemy_idle.gd" id="4_gc34d"]
+[ext_resource type="Script" uid="uid://vkitg2nseg2y" path="res://Scripts/state_machine.gd" id="3_kdati"]
+[ext_resource type="Script" uid="uid://0j6nswu8vgnq" path="res://Scripts/States/enemy_follow.gd" id="4_22dim"]
+[ext_resource type="Script" uid="uid://pychutork7n1" path="res://Scripts/States/enemy_idle.gd" id="4_gc34d"]
 
 [sub_resource type="Animation" id="Animation_l18vf"]
 length = 0.001
@@ -57,9 +57,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q8wu1"]
 _data = {
-"RESET": SubResource("Animation_l18vf"),
-"idle": SubResource("Animation_04opq"),
-"run": SubResource("Animation_s57qr")
+&"RESET": SubResource("Animation_l18vf"),
+&"idle": SubResource("Animation_04opq"),
+&"run": SubResource("Animation_s57qr")
 }
 
 [node name="DinoEnemy" type="CharacterBody2D"]
@@ -74,7 +74,7 @@ hframes = 24
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_q8wu1")
+&"": SubResource("AnimationLibrary_q8wu1")
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

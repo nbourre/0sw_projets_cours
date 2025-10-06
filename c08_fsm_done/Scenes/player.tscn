@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://ecmfm72w1g48"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_ks6ak"]
+[ext_resource type="Script" uid="uid://ckuu5i04w26ky" path="res://Scripts/player.gd" id="1_ks6ak"]
 [ext_resource type="Texture2D" uid="uid://cywxl88g25e1l" path="res://assets/Basic Charakter Spritesheet.png" id="1_mvlga"]
-[ext_resource type="Script" path="res://States/player_walk.gd" id="3_470bd"]
-[ext_resource type="Script" path="res://state_machine.gd" id="3_gabnm"]
-[ext_resource type="Script" path="res://States/player_idle.gd" id="4_dqjwm"]
+[ext_resource type="Script" uid="uid://61wow5kqltsp" path="res://Scripts/States/player_walk.gd" id="3_470bd"]
+[ext_resource type="Script" uid="uid://vkitg2nseg2y" path="res://Scripts/state_machine.gd" id="3_gabnm"]
+[ext_resource type="Script" uid="uid://glfwe0t3d4mq" path="res://Scripts/States/player_idle.gd" id="4_dqjwm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ei22g"]
 radius = 6.0
