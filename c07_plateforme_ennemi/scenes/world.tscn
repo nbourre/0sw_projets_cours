@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=4 uid="uid://c766fl78o0cjk"]
+[gd_scene load_steps=14 format=4 uid="uid://c766fl78o0cjk"]
 
 [ext_resource type="PackedScene" uid="uid://df3en0sggbpcc" path="res://scripts/killzone.tscn" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://co806t5p15df4" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://bniqp8n4vihvg" path="res://scenes/world.gd" id="1_qfnet"]
 [ext_resource type="Texture2D" uid="uid://c0gkr0u00vmyq" path="res://assets/sprites/world_tileset.png" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://bkom7s8nvuv5j" path="res://scenes/plateforme.tscn" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://b71rtbjxrxp8m" path="res://scenes/coin.tscn" id="5_71j4m"]
@@ -215,6 +216,7 @@ _data = {
 }
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_qfnet")
 
 [node name="KillzoneBottom" parent="." instance=ExtResource("1_k0juu")]
 position = Vector2(1, 102)
