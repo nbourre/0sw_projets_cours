@@ -1,0 +1,18 @@
+[remap]
+
+importer="iseesharp83.kenney.spritesheet.importer"
+type="Resource"
+uid="uid://bc1wgdran35rj"
+path="res://.godot/imported/fullTiles.png-37f672cbd737727c8ad5da79fcad6d26.res"
+
+[deps]
+
+files=["res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileAutumn.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileAutumn_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileDirt.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileDirt_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileGrass.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileGrass_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileLava.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileLava_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileMagic.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileMagic_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileRock.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileRock_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSand.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSand_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSnow.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSnow_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileStone.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileStone_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileWater.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileWater_full.tres"]
+
+source_file="res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles.png"
+dest_files=["res://.godot/imported/fullTiles.png-37f672cbd737727c8ad5da79fcad6d26.res", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileAutumn.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileAutumn_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileDirt.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileDirt_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileGrass.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileGrass_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileLava.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileLava_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileMagic.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileMagic_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileRock.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileRock_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSand.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSand_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSnow.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileSnow_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileStone.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileStone_full.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileWater.tres", "res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles/tileWater_full.tres"]
+
+[params]
+
+spritesheet_xml_file="res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles.xml"
+destination_folder="res://assets/kenney_hexagon-tiles/Spritesheet/fullTiles"

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=4 uid="uid://d2m57c5j2esxh"]
+
+[ext_resource type="TileSet" uid="uid://d2etjkd3wi35n" path="res://tiles.tres" id="1_go701"]
+[ext_resource type="PackedScene" uid="uid://dlr76ouxshr5g" path="res://Scenes/Player.tscn" id="2_5a7ea"]
+
+[node name="world" type="Node2D"]
+
+[node name="Level" type="TileMapLayer" parent="."]
+use_parent_material = true
+position = Vector2(52, 1)
+scale = Vector2(0.25, 0.25)
+tile_map_data = PackedByteArray("AAAKAAQABwAAAAUAAAALAAQABwAAAAQAAAAMAAQABwAAAAMAAAANAAQABwAAAAMAAAAOAAQABwAAAAUAAAAPAAQABwAAAAMAAAAQAAQABwAAAAUAAAARAAQABwAAAAQAAAASAAQABwAAAAMAAAAPAAMABwACAAMAAAAQAAMABwACAAMAAAARAAMABwACAAMAAAASAAMABwACAAMAAAAOAAMABwACAAMAAAATAAMABwAIAAQAAAANAAMABwACAAMAAAAMAAMABwACAAMAAAALAAMABwACAAMAAAAKAAMABwACAAMAAAAJAAMABwACAAMAAAAJAAQABwAAAAMAAAAIAAMABwAHAAQAAAA=")
+tile_set = ExtResource("1_go701")
+
+[node name="Player" parent="." instance=ExtResource("2_5a7ea")]
+position = Vector2(414, 25)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 438.0
+offset_top = -3.0
+offset_right = 718.0
+offset_bottom = 20.0
+text = "Conversion d'un projet 4.3 mono vers 4.5"
