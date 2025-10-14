@@ -11,39 +11,45 @@
 scroll_scale = Vector2(0, 0)
 repeat_size = Vector2(336, 0)
 repeat_times = 4
-ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky"]
 texture = ExtResource("1_oabld")
 centered = false
-offset = Vector2(-8, 0)
-
-[node name="Water" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0, 0)
-repeat_size = Vector2(336, 0)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Water"]
-texture = ExtResource("2_cbsqf")
-centered = false
-offset = Vector2(-8, 0)
 
 [node name="Clouds" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.3, 0.3)
+scroll_scale = Vector2(0.1, 0)
 repeat_size = Vector2(336, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds"]
 texture = ExtResource("3_wisxt")
 centered = false
-offset = Vector2(-8, 0)
+
+[node name="Water" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0)
+repeat_size = Vector2(336, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Water"]
+texture = ExtResource("2_cbsqf")
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="Water"]
+offset_top = 192.0
+offset_right = 336.0
+offset_bottom = 252.0
+color = Color(0.16862746, 0.6431373, 0.654902, 1)
 
 [node name="Mountains" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.4, 0.4)
+scroll_scale = Vector2(0.15, 0)
 repeat_size = Vector2(336, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Mountains"]
 texture = ExtResource("4_wax1t")
 centered = false
-offset = Vector2(-8, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Mountains"]
+position = Vector2(118, 117)
+texture = ExtResource("4_wax1t")
+centered = false
