@@ -19,6 +19,7 @@ centered = false
 [node name="Clouds" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.1, 0)
 repeat_size = Vector2(336, 0)
+autoscroll = Vector2(2, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds"]
