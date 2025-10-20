@@ -1,13 +1,13 @@
 [gd_scene load_steps=17 format=3 uid="uid://cokl1wiayvgra"]
 
 [ext_resource type="Texture2D" uid="uid://bdx3rw1sm8e8k" path="res://assets/Popo-AnimationSheet.png" id="1_dk5xq"]
-[ext_resource type="Script" path="res://popo.gd" id="1_p2sg5"]
-[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_cmsqt"]
-[ext_resource type="Script" path="res://states/player_backward.gd" id="3_yp0y0"]
-[ext_resource type="Script" path="res://states/player_idle.gd" id="4_7njsk"]
-[ext_resource type="Script" path="res://states/player_forward.gd" id="5_6o10n"]
-[ext_resource type="Script" path="res://states/player_up.gd" id="5_74d5i"]
-[ext_resource type="Script" path="res://states/player_down.gd" id="6_shn26"]
+[ext_resource type="Script" uid="uid://bj3l7eqcg7fli" path="res://scripts/popo.gd" id="1_p2sg5"]
+[ext_resource type="Script" uid="uid://tews4e7yc10f" path="res://scripts/state_machine/state_machine.gd" id="3_cmsqt"]
+[ext_resource type="Script" uid="uid://bd3toetxdibjm" path="res://scripts/states/player_backward.gd" id="3_yp0y0"]
+[ext_resource type="Script" uid="uid://c2n7qrykf2xko" path="res://scripts/states/player_idle.gd" id="4_7njsk"]
+[ext_resource type="Script" uid="uid://doem6ha7wjq8u" path="res://scripts/states/player_forward.gd" id="5_6o10n"]
+[ext_resource type="Script" uid="uid://8p504pb4ocx8" path="res://scripts/states/player_up.gd" id="5_74d5i"]
+[ext_resource type="Script" uid="uid://bg0m38o34fty7" path="res://scripts/states/player_down.gd" id="6_shn26"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_se188"]
 radius = 15.0
@@ -114,12 +114,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1udvi"]
 _data = {
-"RESET": SubResource("Animation_tj1pq"),
-"backward": SubResource("Animation_e5y7w"),
-"down": SubResource("Animation_wr4x7"),
-"forward": SubResource("Animation_42dpp"),
-"idle": SubResource("Animation_wc6nl"),
-"up": SubResource("Animation_tv7de")
+&"RESET": SubResource("Animation_tj1pq"),
+&"backward": SubResource("Animation_e5y7w"),
+&"down": SubResource("Animation_wr4x7"),
+&"forward": SubResource("Animation_42dpp"),
+&"idle": SubResource("Animation_wc6nl"),
+&"up": SubResource("Animation_tv7de")
 }
 
 [node name="Popo" type="CharacterBody2D"]
@@ -136,7 +136,7 @@ vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1udvi")
+&"": SubResource("AnimationLibrary_1udvi")
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
