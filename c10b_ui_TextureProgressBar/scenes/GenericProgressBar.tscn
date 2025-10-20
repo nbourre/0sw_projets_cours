@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://btnaxns75m0xn" path="res://assets/ui/healthbarUnder.png" id="1_urp3b"]
 [ext_resource type="Texture2D" uid="uid://ck2uwqpwomrio" path="res://assets/ui/healthbarProgress.png" id="2_217ik"]
-[ext_resource type="Script" path="res://ui/generic_progress_bar.gd" id="3_3mbnm"]
+[ext_resource type="Script" uid="uid://btg3xh4bbkk3m" path="res://scripts/generic_progress_bar.gd" id="3_3mbnm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kcmvi"]
 font_size = 24
