@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://ih70cajdksae"]
 
-[ext_resource type="Script" path="res://world.gd" id="1_sqp4q"]
+[ext_resource type="Script" uid="uid://d3qy06mcuhfpl" path="res://world.gd" id="1_sqp4q"]
 [ext_resource type="AudioStream" uid="uid://5feypqgu7lup" path="res://pickupCoin.wav" id="2_rkexv"]
-[ext_resource type="AudioStream" uid="uid://k1q2qj6qkija" path="res://time_for_adventure.mp3" id="3_wtjfd"]
+[ext_resource type="PackedScene" uid="uid://cq7tsjiwgmq28" path="res://music.tscn" id="3_tlwt5"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_sqp4q")
 
 [node name="Sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_rkexv")
+bus = &"SFX"
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_wtjfd")
+[node name="Music" parent="." instance=ExtResource("3_tlwt5")]
+bus = &"Music"
 
 [node name="PlaySfx" type="Button" parent="."]
 offset_left = 77.0
