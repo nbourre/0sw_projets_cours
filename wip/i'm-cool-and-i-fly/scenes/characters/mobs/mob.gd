@@ -12,7 +12,7 @@ func _ready() -> void:
 	sprite = $Sprite2D
 	anim_player.play("fly")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if velocity.x > 0 :
 		sprite.flip_h = false
 	elif velocity.x < 0 :
