@@ -1,13 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://cokl1wiayvgra"]
+[gd_scene load_steps=19 format=3 uid="uid://cokl1wiayvgra"]
 
-[ext_resource type="Texture2D" uid="uid://bdx3rw1sm8e8k" path="res://assets/Popo-AnimationSheet.png" id="1_dk5xq"]
-[ext_resource type="Script" path="res://scenes/characters/player/popo.gd" id="1_p2sg5"]
-[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_cmsqt"]
-[ext_resource type="Script" path="res://states/player_backward.gd" id="3_yp0y0"]
-[ext_resource type="Script" path="res://states/player_idle.gd" id="4_7njsk"]
-[ext_resource type="Script" path="res://states/player_forward.gd" id="5_6o10n"]
-[ext_resource type="Script" path="res://states/player_up.gd" id="5_74d5i"]
-[ext_resource type="Script" path="res://states/player_down.gd" id="6_shn26"]
+[ext_resource type="Script" uid="uid://dulbnrfns7tt6" path="res://scripts/popo.gd" id="1_p2sg5"]
+[ext_resource type="Texture2D" uid="uid://d1ucidvyvxxxo" path="res://assets/SuperPopo-AnimationSheet.png" id="2_6fqnc"]
+[ext_resource type="Script" uid="uid://cppfgojj1eah2" path="res://scripts/state_machine/state_machine.gd" id="3_cmsqt"]
+[ext_resource type="Script" uid="uid://cn452r3eccvg6" path="res://scripts/states/player_backward.gd" id="3_yp0y0"]
+[ext_resource type="Script" uid="uid://ci6a7hl3i3wk8" path="res://scripts/states/player_idle.gd" id="4_7njsk"]
+[ext_resource type="Script" uid="uid://hc6naeh0pad1" path="res://scripts/states/player_forward.gd" id="5_6o10n"]
+[ext_resource type="Script" uid="uid://dq231lw6qil31" path="res://scripts/states/player_up.gd" id="5_74d5i"]
+[ext_resource type="Script" uid="uid://cdne7jmpci33t" path="res://scripts/states/player_down.gd" id="6_shn26"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_se188"]
 radius = 15.0
@@ -45,6 +45,22 @@ tracks/0/keys = {
 "values": [20, 21, 22]
 }
 
+[sub_resource type="Animation" id="Animation_e75sy"]
+resource_name = "die"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [60, 66]
+}
+
 [sub_resource type="Animation" id="Animation_wr4x7"]
 resource_name = "down"
 length = 0.4
@@ -77,6 +93,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_6fqnc"]
+resource_name = "hit"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [50, 52]
 }
 
 [sub_resource type="Animation" id="Animation_wc6nl"]
@@ -114,12 +147,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1udvi"]
 _data = {
-"RESET": SubResource("Animation_tj1pq"),
-"backward": SubResource("Animation_e5y7w"),
-"down": SubResource("Animation_wr4x7"),
-"forward": SubResource("Animation_42dpp"),
-"idle": SubResource("Animation_wc6nl"),
-"up": SubResource("Animation_tv7de")
+&"RESET": SubResource("Animation_tj1pq"),
+&"backward": SubResource("Animation_e5y7w"),
+&"die": SubResource("Animation_e75sy"),
+&"down": SubResource("Animation_wr4x7"),
+&"forward": SubResource("Animation_42dpp"),
+&"hit": SubResource("Animation_6fqnc"),
+&"idle": SubResource("Animation_wc6nl"),
+&"up": SubResource("Animation_tv7de")
 }
 
 [node name="Popo" type="CharacterBody2D"]
@@ -130,13 +165,13 @@ position = Vector2(6, 0)
 shape = SubResource("CapsuleShape2D_se188")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_dk5xq")
+texture = ExtResource("2_6fqnc")
 hframes = 10
-vframes = 5
+vframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1udvi")
+&"": SubResource("AnimationLibrary_1udvi")
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]

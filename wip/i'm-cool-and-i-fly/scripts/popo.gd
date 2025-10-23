@@ -2,6 +2,8 @@ class_name Player
 extends GenericCharacter
 
 signal PlayerHit(value : int, max_value : int)
+signal PlayerDied
+
 var hp : int = 100
 var max_hp : int = 100
 
