@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://fnwkxx5f480l" path="res://scenes/levels/level.tscn" id="1_6xmuj"]
 [ext_resource type="PackedScene" uid="uid://cokl1wiayvgra" path="res://scenes/characters/player/popo.tscn" id="1_717of"]
 [ext_resource type="Script" uid="uid://bfysmyggmjvje" path="res://scenes/world.gd" id="1_dgpbd"]
-[ext_resource type="PackedScene" uid="uid://gpphkbvxkjus" path="res://ui/GenericProgressBar.tscn" id="4_j8qpf"]
+[ext_resource type="PackedScene" uid="uid://gpphkbvxkjus" path="res://scenes/ui/GenericProgressBar.tscn" id="4_j8qpf"]
 [ext_resource type="PackedScene" uid="uid://cmypwi124foc6" path="res://scenes/characters/mobs/mob.tscn" id="5_mevo0"]
 
 [node name="world" type="Node2D"]
