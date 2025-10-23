@@ -16,6 +16,6 @@ func update_value (new_value : int, max : int):
 	value = new_value
 	text.text = str(bar_name, " : ", int(value), " / ", int (max))
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		text.text = str(bar_name, " : 100 / 100")
