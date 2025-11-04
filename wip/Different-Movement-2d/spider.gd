@@ -18,8 +18,8 @@ var animation_idx : int = 0
 var animation_slices : float = 1.0
 var previous_animation_idx : int = -1
 
-@onready var body_sprite : Sprite2D = $Walking/Body
-@onready var shadow_sprite : Sprite2D = $Walking/Shadow
+@onready var body_sprite : Sprite2D = $Body
+@onready var shadow_sprite : Sprite2D = $Shadow
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
@@ -74,13 +74,10 @@ func get_frame_for_angle(angle: float) -> Texture2D:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-
 	var debug : bool = false
 
 	if not animation_frames.size():
 		return
-
-	current_animation = "walk"
 
 	# Récupère la position de la souris par rapport au spider
 	var mouse = get_local_mouse_position()
@@ -96,12 +93,14 @@ func _physics_process(delta: float) -> void:
 	animation_idx = get_closest_angle_index(rad_to_deg(angle))
 
 
-	if (Input.is_action_pressed("left_mouse") and mouse.length() > 10):
+	if (Input.is_action_pressed("left_mouse") and mouse.length() > 50):
 		position += mouse.normalized() * speed * delta
 		move_and_slide()
 
 	if animation_idx != previous_animation_idx:
 		previous_animation_idx = animation_idx
+		print("Animation frames size: ", animation_frames.size())
+		print("Updating animation to index: ", animation_idx)
 
 		# Met à jour les textures des sprites en fonction de l'index calculé
 		body_sprite.texture = animation_frames[animation_idx]
