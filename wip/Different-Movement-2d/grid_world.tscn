@@ -10,3 +10,6 @@ position = Vector2(612, 93)
 
 [node name="Block" parent="." instance=ExtResource("2_j8ttx")]
 position = Vector2(192, 192)
+
+[node name="Block2" parent="." instance=ExtResource("2_j8ttx")]
+position = Vector2(192, 64)

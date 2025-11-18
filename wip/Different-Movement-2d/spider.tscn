@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bu5gruwfpr6sa"]
 
-[ext_resource type="Texture2D" uid="uid://cuv01y51pws08" path="res://assets/spritesheets/spider/Walk/Walk_Body_0.png" id="1_k3kcl"]
-[ext_resource type="Texture2D" uid="uid://c0nr34ewvqj4p" path="res://assets/spritesheets/spider/Walk/Walk_Shadow_0.png" id="1_qrebf"]
+[ext_resource type="Texture2D" uid="uid://cuv01y51pws08" path="res://assets/isometric/spider/Walk/Walk_Body_0.png" id="1_k3kcl"]
+[ext_resource type="Texture2D" uid="uid://c0nr34ewvqj4p" path="res://assets/isometric/spider/Walk/Walk_Shadow_0.png" id="1_qrebf"]
 
 [sub_resource type="Animation" id="Animation_1yt70"]
 length = 0.001
