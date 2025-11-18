@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://do0pqoimtqwlu"]
 
-[ext_resource type="PackedScene" uid="uid://btu101560rweb" path="res://isometric_world.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://by6en6ryt7f6w" path="res://grid_world.tscn" id="1_f3sb7"]
 
 [node name="World" type="Node2D"]
 
-[node name="IsometricWorld" parent="." instance=ExtResource("1_f3sb7")]
+[node name="GridWorld" parent="." instance=ExtResource("1_f3sb7")]

@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu5gruwfpr6sa"]
+[gd_scene load_steps=7 format=3 uid="uid://bu5gruwfpr6sa"]
 
-[ext_resource type="Script" uid="uid://bd5mmmp58vfbj" path="res://spider.gd" id="1_1yt70"]
 [ext_resource type="Texture2D" uid="uid://cuv01y51pws08" path="res://assets/spritesheets/spider/Walk/Walk_Body_0.png" id="1_k3kcl"]
 [ext_resource type="Texture2D" uid="uid://c0nr34ewvqj4p" path="res://assets/spritesheets/spider/Walk/Walk_Shadow_0.png" id="1_qrebf"]
 
@@ -72,7 +71,6 @@ _data = {
 }
 
 [node name="Spider" type="CharacterBody2D"]
-script = ExtResource("1_1yt70")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("1_qrebf")
