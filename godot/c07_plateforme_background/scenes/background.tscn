@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://btkyh2xk3jjkf"]
+
+[ext_resource type="Texture2D" uid="uid://8klw7bg4c4h6" path="res://assets/sprites/Legacy-Fantasy-VL.3 - Purple Bay/Background/Background-1.png" id="1_oabld"]
+[ext_resource type="Texture2D" uid="uid://sho3bf37iysa" path="res://assets/sprites/Legacy-Fantasy-VL.3 - Purple Bay/Background/Background-2.png" id="2_cbsqf"]
+[ext_resource type="Texture2D" uid="uid://d0fiqkx6chrgf" path="res://assets/sprites/Legacy-Fantasy-VL.3 - Purple Bay/Background/Background-3.png" id="3_wisxt"]
+[ext_resource type="Texture2D" uid="uid://dw2q0g0kinn7v" path="res://assets/sprites/Legacy-Fantasy-VL.3 - Purple Bay/Background/Background-4.png" id="4_wax1t"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Sky" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(336, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky"]
+texture = ExtResource("1_oabld")
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0)
+repeat_size = Vector2(336, 0)
+autoscroll = Vector2(2, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
+texture = ExtResource("3_wisxt")
+centered = false
+
+[node name="Water" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0)
+repeat_size = Vector2(336, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Water"]
+texture = ExtResource("2_cbsqf")
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="Water"]
+offset_top = 192.0
+offset_right = 336.0
+offset_bottom = 252.0
+color = Color(0.16862746, 0.6431373, 0.654902, 1)
+
+[node name="Mountains" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.15, 0)
+repeat_size = Vector2(336, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountains"]
+texture = ExtResource("4_wax1t")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Mountains"]
+position = Vector2(118, 117)
+texture = ExtResource("4_wax1t")
+centered = false

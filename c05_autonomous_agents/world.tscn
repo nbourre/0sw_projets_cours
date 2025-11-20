@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ju4wnqefhbe3"]
-
-[ext_resource type="Script" uid="uid://dlyrfqtsv10f6" path="res://world.gd" id="1_hak15"]
-
-[node name="World" type="Node2D"]
-script = ExtResource("1_hak15")
-num_boids = 21

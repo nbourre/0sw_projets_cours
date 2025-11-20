@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0uagyo8q582e"]
+
+[ext_resource type="Script" path="res://generator.gd" id="1_cms2n"]
+[ext_resource type="Texture2D" uid="uid://tytdypyrw788" path="res://assets/single_tile_tileset.png" id="2_j1vt0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8mv4h"]
+texture = ExtResource("2_j1vt0")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8byx7"]
+tile_size = Vector2i(10, 10)
+sources/1 = SubResource("TileSetAtlasSource_8mv4h")
+
+[node name="Generator" type="Node"]
+script = ExtResource("1_cms2n")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_8byx7")
+cell_quadrant_size = 12
+format = 2
+layer_0/tile_data = PackedInt32Array(196608, 1, 0, 131073, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 131076, 1, 0, 196612, 1, 0, 262148, 1, 0, 262147, 1, 0, 327683, 1, 0, 393219, 1, 0, 458755, 1, 0, 524291, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 524297, 1, 0, 524298, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 524302, 1, 0, 524303, 1, 0)

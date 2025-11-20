@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://0j25ygnwgraj"]
+
+[node name="lblHello" type="Label"]
+offset_right = 40.0
+offset_bottom = 14.0
+text = "Bonjour le monde"

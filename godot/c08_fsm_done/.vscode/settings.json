@@ -1,0 +1,9 @@
+{
+    "godotTools.editorPath.godot4": "C:\\Users\\nbourre\\AppData\\Local\\Godot\\.editor_config\\demo_state_machine\\Godot_v4.5.1-stable_win64.exe",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/*.gd.uid": true
+    }
+}

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0lffcsjf1ivp"]
+
+[ext_resource type="Texture2D" uid="uid://xqukwfljquwg" path="res://assets/isometric/spider/Idle_Nervous/Idle_Nervous_Shadow_0.png" id="1_bttnf"]
+[ext_resource type="Texture2D" uid="uid://by5edsjyku6ek" path="res://assets/isometric/spider/Idle_Nervous/Idle_Nervous_Body_0.png" id="2_dpxvr"]
+
+[node name="Idle" type="Node"]
+
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_bttnf")
+hframes = 6
+vframes = 4
+
+[node name="Body" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_dpxvr")
+hframes = 6
+vframes = 4

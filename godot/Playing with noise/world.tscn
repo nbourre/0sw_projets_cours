@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyktfmeeetqm7"]
+
+[ext_resource type="Script" path="res://World.cs" id="1_kc3r8"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_kc3r8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Info" type="Label" parent="."]
+offset_left = 13.0
+offset_top = -210.0
+offset_right = 70.0
+offset_bottom = -187.0
+text = "Points :"

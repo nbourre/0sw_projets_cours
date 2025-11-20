@@ -1,0 +1,133 @@
+[gd_scene load_steps=13 format=3 uid="uid://cmypwi124foc6"]
+
+[ext_resource type="Script" uid="uid://cfieb3o34mw7x" path="res://scripts/mob.gd" id="1_e3ohk"]
+[ext_resource type="Texture2D" uid="uid://cdy2e1h7yc6cy" path="res://assets/Flappy Bird Assets/Player/StyleBird2/AllBird2.png" id="2_2bcuk"]
+[ext_resource type="Script" uid="uid://cppfgojj1eah2" path="res://scripts/state_machine/state_machine.gd" id="3_0eqg6"]
+[ext_resource type="Script" uid="uid://rxlawthnteyu" path="res://scripts/mob_fly.gd" id="4_thqsn"]
+[ext_resource type="Shader" uid="uid://cpo23n550donm" path="res://assets/fx/cartoon_explosion.gdshader" id="5_yhq0a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ai1e"]
+radius = 11.0454
+
+[sub_resource type="Animation" id="Animation_3pqn2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hei58"]
+resource_name = "fly"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_p6n8q"]
+resource_name = "hurt"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dk3kv"]
+_data = {
+&"RESET": SubResource("Animation_3pqn2"),
+&"fly": SubResource("Animation_hei58"),
+&"hurt": SubResource("Animation_p6n8q")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ddly"]
+radius = 13.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb5lg"]
+shader = ExtResource("5_yhq0a")
+shader_parameter/start = true
+shader_parameter/resolution = Vector2(1, 1)
+shader_parameter/boom_pal1 = Vector3(0.2, 0.15, 0.3)
+shader_parameter/boom_pal2 = Vector3(0.9, 0.15, 0.05)
+shader_parameter/boom_pal3 = Vector3(0.9, 0.5, 0.1)
+shader_parameter/boom_pal4 = Vector3(0.95, 0.95, 0.35)
+shader_parameter/smoke_pal1 = Vector3(0.2, 0.15, 0.3)
+shader_parameter/smoke_pal2 = Vector3(0.35, 0.3, 0.45)
+shader_parameter/smoke_pal3 = Vector3(0.5, 0.45, 0.6)
+shader_parameter/size = 5.0
+shader_parameter/disperse = 1.0
+shader_parameter/boom_repeat = 1.0
+shader_parameter/boom_shape = 12.0
+shader_parameter/boom_distortion = 0.5
+shader_parameter/boom_bubbles = 0.5
+shader_parameter/boom_bw = 0.5
+shader_parameter/smoke_repeat = 1.0
+shader_parameter/smoke_shape = 16.0
+shader_parameter/smoke_distortion = 1.5
+shader_parameter/smoke_bubbles = 0.5
+shader_parameter/smoke_bw = 0.75
+shader_parameter/disp = Vector2(0, 0)
+
+[node name="Mob" type="CharacterBody2D"]
+script = ExtResource("1_e3ohk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4ai1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_2bcuk")
+hframes = 4
+vframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dk3kv")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2ddly")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_0eqg6")
+initial_state = NodePath("Fly")
+
+[node name="Fly" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
+script = ExtResource("4_thqsn")
+mob = NodePath("../..")
+
+[node name="Explosion" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hb5lg")
+offset_left = -77.0
+offset_top = -52.0
+offset_right = 80.0
+offset_bottom = 33.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

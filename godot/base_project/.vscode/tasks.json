@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "nugetrestore",
+            "type": "shell",
+            "command": "nuget.exe",
+            "args": [
+                "restore"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "c:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/amd64/MSBuild.exe",
+            "args": [
+                "/p:Configuration=Tools;Platform=Any CPU;GenerateFullPaths=true",
+                "/t:Build;",
+                "/property:GenerateTargetFrameworkAttribute=false"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

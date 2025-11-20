@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://do0pqoimtqwlu"]
-
-[ext_resource type="PackedScene" uid="uid://bgymnc8fm6abl" path="res://top_down_world.tscn" id="1_f3sb7"]
-
-[node name="World" type="Node2D"]
-
-[node name="TopDownWorld" parent="." instance=ExtResource("1_f3sb7")]
