@@ -7,8 +7,9 @@ var move_speed : float = 10;
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton :
-		var j = (event as InputEventJoypadButton)		
-		label.text = j.as_text()
+		var j = (event as InputEventJoypadButton)
+		var device_id :=	event.device
+		label.text = "Device id : " + str(device_id) + " -- " + j.as_text()
 
 	if event.is_action_pressed("hotkey") :
 		label.text = "hotkey"
