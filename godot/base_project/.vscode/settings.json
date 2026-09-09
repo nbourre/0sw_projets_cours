@@ -12,5 +12,13 @@
         "System.StackOverflowException": "always",
         "System.SystemException": "always",
         "System.TypeInitializationException": "always"
+    },
+    "godotTools.editorPath.godot4": "/Users/nbourre/Godot/Editors/.editor_config/base_project/Godot_mono.app",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/*.gd.uid": true,
+        "**/*.cs.uid": true
     }
 }

@@ -28,6 +28,15 @@
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Godot: Build (VS Code)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
