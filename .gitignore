@@ -48,3 +48,5 @@ mono_crash.*.json
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,godot,visualstudiocode
 .vscode/settings.json
+
+.DS_Store
