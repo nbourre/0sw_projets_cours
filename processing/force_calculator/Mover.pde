@@ -10,14 +10,20 @@ class Mover extends GraphicObject {
   
   float angle = 0;
   float angleAcceleration = 0;
+  
+  // Type de vérification des bordures
+  // 0 = Aucune, 1 = Rebond, 2 = Réapparition
+  int checkEdgeType = 0;
     
   Mover () {
     
-    this.location = new PVector (random (width), random (height));    
+    
     this.velocity = new PVector (0, 0);
     this.acceleration = new PVector (0 , 0);
     
     setMass(1.0);
+    
+    this.location = new PVector (random (radius, width - radius), random (radius, height - radius));
   }
   
   Mover (PVector loc, PVector vel) {
@@ -48,6 +54,10 @@ class Mover extends GraphicObject {
     fillColor = c;
   }
   
+  void setCheckEdgeType (int _type) {
+    checkEdgeType = _type;
+  }
+  
   
   private void updateRadius() {
     this.diameter = mass * radiusFactor;
@@ -56,6 +66,7 @@ class Mover extends GraphicObject {
   
   
   void update (int deltaTime) {
+    checkEdges();
     velocity.add (acceleration);
     location.add (velocity);
 
@@ -81,22 +92,27 @@ class Mover extends GraphicObject {
   }
   
   void checkEdges() {
-    if (location.x + radius > width) {
-      location.x = width - radius;
-      velocity.x *= -1;
-    } else if (location.x < radius) {
-      velocity.x *= -1;
-      location.x = radius;
+    boolean depasseDroite = location.x + radius > width;
+    boolean depasseGauche = location.x - radius < 0;
+    
+    if (depasseDroite || depasseGauche) {
+      if (checkEdgeType == 1) {
+        velocity.x = -velocity.x;
+      } else if (checkEdgeType == 2) {
+        location.x = depasseDroite ? radius : width - radius;
+      }
     }
     
-    if (location.y + radius > height) {
-      if (abs(velocity.y) > 0.05) {
-        velocity.y *= -elasticity;
-      } else {
-        velocity.y = 0;
+    boolean depasseBas = location.y + radius > height;
+    boolean depasseHaut = location.y - radius < 0;
+
+    
+    if (depasseBas || depasseHaut) {
+      if (checkEdgeType == 1) {
+        velocity.y = -velocity.y;
+      } else if (checkEdgeType == 2) {
+        location.y = depasseBas ? radius : height - radius;
       }
-        
-      location.y = height - radius;
     }
   }
   
@@ -106,19 +122,5 @@ class Mover extends GraphicObject {
    
     this.acceleration.add(f);
   }
-  
-  // Voir : https://natureofcode.com/book/chapter-2-forces/#chapter02_section9
-  PVector attractionForce(Mover m) {
-    PVector force = PVector.sub(location, m.location);
-    float distance = force.mag();
-    distance = constrain (distance, 5.0, 25.0);
-    
-    // Vecteur unitaire 'r'
-    force.normalize();
-    
-    float strength = (.1 * mass * m.mass) / (distance * distance);
-    force.mult(strength);
-    
-    return force;
-  }
+
 }
