@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://qtt0cfx4dl50"]
+[gd_scene format=3 uid="uid://qtt0cfx4dl50"]
 
-[ext_resource type="Script" path="res://player_animation_player.gd" id="1_ej4t7"]
-[ext_resource type="Texture2D" uid="uid://cun8iec7g2es1" path="res://2d_animation_player-run.webp" id="2_auj4u"]
+[ext_resource type="Script" uid="uid://b00g5fjf8xjwf" path="res://player_animation_player.gd" id="1_ej4t7"]
+[ext_resource type="Texture2D" uid="uid://cun8iec7g2es1" path="res://assets/2d_animation_player-run.webp" id="2_auj4u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rc2x1"]
 

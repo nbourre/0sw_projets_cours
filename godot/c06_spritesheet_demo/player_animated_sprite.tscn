@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cek50y8p62krl"]
+[gd_scene format=3 uid="uid://cek50y8p62krl"]
 
-[ext_resource type="Texture2D" uid="uid://dg0v2flmyfqou" path="res://Run-Sheet.png" id="1_kx5un"]
-[ext_resource type="Script" path="res://player_animated_sprite.gd" id="1_n5h02"]
+[ext_resource type="Texture2D" uid="uid://dg0v2flmyfqou" path="res://assets/Run-Sheet.png" id="1_kx5un"]
+[ext_resource type="Script" uid="uid://cf86gnj0hmglt" path="res://player_animated_sprite.gd" id="1_n5h02"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rc2x1"]
 
@@ -64,19 +64,18 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_24gc8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=527869230]
 script = ExtResource("1_n5h02")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1159935415]
 shape = SubResource("CapsuleShape2D_rc2x1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=754331045]
 sprite_frames = SubResource("SpriteFrames_07iqi")
 animation = &"run"
 frame_progress = 0.1922
