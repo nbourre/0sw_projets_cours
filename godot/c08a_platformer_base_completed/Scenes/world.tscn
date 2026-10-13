@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://pbgf46rcs4md"]
+[gd_scene format=4 uid="uid://pbgf46rcs4md"]
 
 [ext_resource type="Texture2D" uid="uid://lpq7tse8jrby" path="res://assets/img/tilesheet_complete_2X.png" id="1_ewenr"]
 [ext_resource type="Script" uid="uid://dutafrhi6d1js" path="res://Scripts/world.gd" id="1_k83bu"]
-[ext_resource type="PackedScene" uid="uid://ctarmpurc12tu" path="res://Scenes/player.tscn" id="2_7ldhd"]
+[ext_resource type="PackedScene" uid="uid://ctarmpurc12tu" path="res://Scenes/player/player.tscn" id="2_7ldhd"]
+[ext_resource type="Script" uid="uid://85j1mr5cbou" path="res://Scenes/player/player.cs" id="4_8j60k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ert32"]
 texture = ExtResource("1_ewenr")
@@ -293,14 +294,15 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ert32")
 
-[node name="world" type="Node2D"]
+[node name="world" type="Node2D" unique_id=375281807]
 script = ExtResource("1_k83bu")
 
-[node name="Map" type="TileMapLayer" parent="."]
+[node name="Map" type="TileMapLayer" parent="." unique_id=485447852]
 use_parent_material = true
 scale = Vector2(0.25, 0.25)
 tile_map_data = PackedByteArray("AAAMAAgAAAACAAAAAAANAAgAAAACAAAAAAAOAAgAAAACAAAAAAAPAAgAAAACAAAAAAAQAAgAAAACAAAAAAARAAgAAAACAAAAAAASAAgAAAACAAAAAAATAAgAAAACAAAAAAAUAAgAAAADAAAAAAALAAgAAAACAAAAAAAVAAkAAAACAAAAAAAWAAkAAAACAAAAAAAXAAkAAAACAAAAAAAYAAkAAAACAAAAAAAZAAkAAAADAAAAAAAUAAkAAAACAAAAAAATAAkAAAACAAAAAAASAAkAAAACAAAAAAARAAkAAAACAAAAAAAQAAkAAAACAAAAAAAPAAkAAAABAAAAAAAaAAoAAAAAAAIAAAAaAAkAAAAAAAIAAAAaAAgAAAAAAAIAAAAaAAcAAAAAAAIAAAAaAAYAAAAAAAIAAAAaAAUAAAABAAAAAAAbAAUAAAADAAAAAAAbAAYAAAAAAAAAAAAbAAcAAAAAAAAAAAAbAAgAAAAAAAAAAAAbAAkAAAAAAAAAAAAbAAoAAAAAAAAAAAAMAAcAAAACAAAAAAANAAcAAAACAAAAAAAOAAcAAAADAAAAAAALAAcAAAACAAAAAAAKAAgAAAACAAAAAAAJAAgAAAACAAAAAAAIAAgAAAACAAAAAAAKAAcAAAACAAAAAAAJAAcAAAACAAAAAAAIAAcAAAACAAAAAAAHAAcAAAABAAAAAAAGAAgAAAABAAAAAAAHAAgAAAACAAAAAAAJAAYAAAACAAAAAAAKAAYAAAACAAAAAAALAAYAAAACAAAAAAAMAAYAAAACAAAAAAANAAYAAAADAAAAAAAIAAYAAAABAAAAAAAJAAUAAAABAAAAAAAKAAUAAAACAAAAAAALAAUAAAACAAAAAAAMAAUAAAADAAAAAAAZAAgAAAAAAAAAAAAZAAcAAAACAAAAAAAYAAcAAAABAAAAAAAYAAgAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_w7ah6")
 
-[node name="player" parent="." instance=ExtResource("2_7ldhd")]
+[node name="player" parent="." unique_id=398787684 instance=ExtResource("2_7ldhd")]
 position = Vector2(491, 150)
+script = ExtResource("4_8j60k")

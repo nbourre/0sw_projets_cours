@@ -1,3 +1,11 @@
 {
-    "godot_tools.editor_path": "c:\\_data\\outils\\Godot_v3.3.3-stable_mono_win64\\Godot_v3.3.3-stable_mono_win64.exe"
+    "godot_tools.editor_path": "c:\\_data\\outils\\Godot_v3.3.3-stable_mono_win64\\Godot_v3.3.3-stable_mono_win64.exe",
+    "godotTools.editorPath.godot4": "/Users/nbourre/Godot/Editors/.editor_config/c08_platformer_base/Godot_mono.app",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/*.gd.uid": true,
+        "**/*.cs.uid": true
+    }
 }
