@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Godot: Play (VS Code)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Godot: Build (VS Code)",
+            "program": "/Users/nbourre/Godot/Editors/.editor_config/c08_parallax/Godot_mono.app/Contents/MacOS/Godot",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "launchSettingsProfile": "",
+            "checkForDevCert": false
+        }
+    ]
+}

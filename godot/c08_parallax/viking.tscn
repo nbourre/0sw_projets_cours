@@ -1,7 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://dhot5j6kmtm5d"]
+[gd_scene format=3 uid="uid://dhot5j6kmtm5d"]
 
 [ext_resource type="Texture2D" uid="uid://cd0kgtludqw" path="res://assets/spritesheets/viking2.png" id="1"]
-[ext_resource type="Script" path="res://viking.cs" id="2"]
+[ext_resource type="Script" uid="uid://c2rv6vibu47mt" path="res://viking.gd" id="1_rpebc"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 7.5
@@ -151,15 +151,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q3xuu"]
 _data = {
-"attack1": SubResource("2"),
-"attack2": SubResource("3"),
-"attack_sequence": SubResource("4"),
-"death": SubResource("5"),
-"falling": SubResource("6"),
-"idle": SubResource("7"),
-"jumping": SubResource("8"),
-"running": SubResource("9"),
-"shield": SubResource("10")
+&"attack1": SubResource("2"),
+&"attack2": SubResource("3"),
+&"attack_sequence": SubResource("4"),
+&"death": SubResource("5"),
+&"falling": SubResource("6"),
+&"idle": SubResource("7"),
+&"jumping": SubResource("8"),
+&"running": SubResource("9"),
+&"shield": SubResource("10")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wnm8y"]
@@ -274,25 +274,23 @@ states/run/position = Vector2(469, -11.7709)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lchm8"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_y6mjv"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_0sun7"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_2byrc"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_t3mj2"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_72sfx"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_awfub"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_jfx0x"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_opf3v"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_0sbmv"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_faq0p"), "idle", "attack_sequence", SubResource("AnimationNodeStateMachineTransition_iqr40"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_p8q5f"), "attack_sequence", "idle", SubResource("AnimationNodeStateMachineTransition_55i7a"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_8ef6h"), "death", "End", SubResource("AnimationNodeStateMachineTransition_j7l8n")]
 graph_offset = Vector2(-136, -94.771)
 
-[node name="viking" type="CharacterBody2D"]
-script = ExtResource("2")
+[node name="viking" type="CharacterBody2D" unique_id=1566245428]
+script = ExtResource("1_rpebc")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2059350836]
 texture = ExtResource("1")
 hframes = 9
 vframes = 6
-frame = 2
+frame = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=328256354]
 position = Vector2(2.5, 6.5)
 shape = SubResource("1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_q3xuu")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2120872754]
+libraries/ = SubResource("AnimationLibrary_q3xuu")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=995799196]
 tree_root = SubResource("AnimationNodeStateMachine_g4mj8")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/isFalling = false
