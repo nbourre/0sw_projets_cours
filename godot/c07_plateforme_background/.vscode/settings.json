@@ -1,0 +1,10 @@
+{
+    "godotTools.editorPath.godot4": "/Users/nbourre/Godot/Editors/.editor_config/c07_plateforme_background/Godot.app",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/*.gd.uid": true,
+        "**/*.cs.uid": true
+    }
+}
