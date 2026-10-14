@@ -50,3 +50,4 @@ mono_crash.*.json
 .vscode/settings.json
 
 .DS_Store
+**/.DS_Store
