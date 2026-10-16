@@ -1,0 +1,11 @@
+{
+    "godot_tools.editor_path": "c:\\Users\\nicol\\AppData\\Local\\Godot\\Godot_v3.5-stable_mono_win64.exe",
+    "godotTools.editorPath.godot4": "/Users/nbourre/Godot/Editors/.editor_config/c09_platformer_raycast/Godot_mono.app",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/*.gd.uid": true,
+        "**/*.cs.uid": true
+    }
+}

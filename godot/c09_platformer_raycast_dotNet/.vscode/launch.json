@@ -36,6 +36,18 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
+        },
+        {
+            "name": "Godot: Play (VS Code)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Godot: Build (VS Code)",
+            "program": "/Users/nbourre/Godot/Editors/.editor_config/c09_platformer_raycast/Godot_mono.app/Contents/MacOS/Godot",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "launchSettingsProfile": "",
+            "checkForDevCert": false
         }
     ]
 }

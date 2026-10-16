@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="c09_platformer_raycast"
+config/name="c09_platformer_raycast_dotNet"
 run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.5", "C#")
+config/features=PackedStringArray("4.7", "C#")
 config/icon="res://assets/img/icon.png"
 
 [display]
