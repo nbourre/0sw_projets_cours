@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cumaif1yfkblh"]
+
+[ext_resource type="Texture2D" uid="uid://dundl7kt5ijjo" path="res://assets/combat_image.jpeg" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://b2xmp32812tsk" path="res://scripts/world.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://bj1dvr1f1stmn" path="res://scenes/menus/pause_menu.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://b5beqcsifsyd" path="res://scenes/menus/options_menu.tscn" id="4_k0juu"]
+
+[node name="World" type="Node2D" unique_id=1948593546]
+script = ExtResource("1_rwgxs")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1244517353]
+offset_right = 1376.0
+offset_bottom = 768.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+texture = ExtResource("1_nnsk1")
+
+[node name="PauseMenu" parent="." unique_id=297643604 instance=ExtResource("3_4wyf3")]
+visible = false
+
+[node name="OptionsMenu" parent="." unique_id=465040879 instance=ExtResource("4_k0juu")]
+unique_name_in_owner = true
+visible = false
