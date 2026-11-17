@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://0qq61xur6c2"]
+[gd_scene format=3 uid="uid://0qq61xur6c2"]
 
-[ext_resource type="Shader" path="res://blink_shader.gdshader" id="1_70g4d"]
-[ext_resource type="Script" path="res://world.gd" id="1_y02ei"]
+[ext_resource type="Shader" uid="uid://cr78dsa8wbhxx" path="res://blink_shader.gdshader" id="1_70g4d"]
+[ext_resource type="Script" uid="uid://dqx80e23m245" path="res://world.gd" id="1_y02ei"]
 [ext_resource type="Texture2D" uid="uid://cjmayu3371jh3" path="res://icon.svg" id="2_4yy7m"]
-[ext_resource type="Shader" path="res://grass.gdshader" id="4_p2yk5"]
+[ext_resource type="Shader" uid="uid://ccra1q5fvuisd" path="res://grass.gdshader" id="4_p2yk5"]
 [ext_resource type="Texture2D" uid="uid://081ensrrm8gq" path="res://grass_2.png" id="5_u15wj"]
+[ext_resource type="Shader" uid="uid://cktxbfvldcqni" path="res://trees.gdshader" id="6_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://bbejokhxsx11n" path="res://TestTree.png" id="7_gbfbk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_spseg"]
 resource_local_to_scene = true
@@ -15,26 +17,49 @@ shader_parameter/flash_modifier = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lt5hy"]
 shader = ExtResource("4_p2yk5")
 
-[node name="World" type="Node2D"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_12yc6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aq70s"]
+noise = SubResource("FastNoiseLite_12yc6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdlqt"]
+shader = ExtResource("6_pkg7o")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_aq70s")
+shader_parameter/amplitude = 0.2
+shader_parameter/time_scale = 0.04
+shader_parameter/noise_scale = 0.001
+shader_parameter/rotation_strength = 1.0
+shader_parameter/rotation_pivot = Vector2(0.5, 1)
+
+[node name="World" type="Node2D" unique_id=1622681841]
 script = ExtResource("1_y02ei")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="." unique_id=1257897331]
 material = SubResource("ShaderMaterial_spseg")
 position = Vector2(492, 200)
 texture = ExtResource("2_4yy7m")
 
-[node name="Flashtimer" type="Timer" parent="."]
+[node name="Flashtimer" type="Timer" parent="." unique_id=719656337]
 wait_time = 0.075
 
-[node name="Grass2" type="Sprite2D" parent="."]
+[node name="Grass2" type="Sprite2D" parent="." unique_id=1207610994]
 material = SubResource("ShaderMaterial_lt5hy")
 position = Vector2(820, -50)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_u15wj")
 
-[node name="GrassNoMove" type="Sprite2D" parent="."]
+[node name="GrassNoMove" type="Sprite2D" parent="." unique_id=1102732180]
 position = Vector2(735, -50)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_u15wj")
+
+[node name="TestTree" type="Sprite2D" parent="." unique_id=149372519]
+material = SubResource("ShaderMaterial_kdlqt")
+position = Vector2(187, 326)
+texture = ExtResource("7_gbfbk")
+
+[node name="TestTree2" type="Sprite2D" parent="." unique_id=407498280]
+position = Vector2(134, 326)
+texture = ExtResource("7_gbfbk")
 
 [connection signal="timeout" from="Flashtimer" to="." method="_on_flashtimer_timeout"]
